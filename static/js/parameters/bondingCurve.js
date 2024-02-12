@@ -19,22 +19,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 borderWidth: 1
             },
                 {
-                    label: 'Constant Sum AMM',
+                    label: 'Current Position',
                     data: [],
-                    borderColor: 'green',
-                    backgroundColor: 'transparent',
-                    pointRadius: 0,
-                    fill: false,
-                    borderWidth: 1
-                },
-                {
-                    label: 'Constant Product AMM',
-                    data: [],
+                    backgroundColor: 'red',
                     borderColor: 'red',
-                    backgroundColor: 'transparent',
-                    pointRadius: 0,
+                    pointRadius: 5,
                     fill: false,
-                    borderWidth: 1
+                    type: 'bubble'
                 }
             ]
         },
@@ -55,6 +46,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     },
                     beginAtZero: true
                 }
+            }
+        },
+
+        plugins: {
+            legend: {
+                display: false // This line hides the legend
             }
         }
     });
@@ -82,36 +79,10 @@ document.addEventListener('DOMContentLoaded', function() {
         bondingChart.data.datasets[0].data = data;
         aValueBond.textContent = A;
 
-        let k_sum = x1 + x2;
-        let k_product = x1 * x2;
+        let dotY = getY(A, 0, 1, x1, xp);
 
-        let constantSumData = xs.map(x => ({x: x, y: k_sum - x + D}));
-        console.log("XS", xs);
-        let constantProductData = xs.map(x => ({x: x, y: k_product / x + D}));
-        bondingChart.data.datasets[1].data = constantSumData;
-        bondingChart.data.datasets[2].data = constantProductData;
+        bondingChart.data.datasets[1].data = [{x: x1, y: dotY}];
 
-        let maxX = Math.max(...xs);
-        let maxY = Math.max(...ys);
-
-        bondingChart.options.scales.x = {
-            type: 'linear',
-            min: 0,
-            max: maxX,
-            title: {
-                display: true,
-                text: 'X value'
-            }
-        };
-
-        bondingChart.options.scales.y = {
-            min: 0,
-            max: maxY,
-            title: {
-                display: true,
-                text: 'Y value'
-            },
-        };
 
         bondingChart.update();
 

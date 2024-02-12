@@ -25,11 +25,14 @@ $A n^n \sum{x_i} + D = A n^n D + \frac{D^{n+1}}{(n^n \prod{x_i})}$
 
 <style>
     #bondingChartContainer {
-        width: 400px;
+        width: 800px;
         height: 400px;
     }
     #aSliderBond {
         width: 92%;
+    }
+    input[type="number"] {
+        width: 20%;
     }
 </style>
 
@@ -40,7 +43,7 @@ $A n^n \sum{x_i} + D = A n^n D + \frac{D^{n+1}}{(n^n \prod{x_i})}$
 <input type="number" id="x2InputBond" value="8000" min="0">
 <br>
 <label for="aSliderBond">A:</label>
-<input type="range" id="aSliderBond" value="20" min="0" max="200">
+<input type="range" id="aSliderBond" value="20" min="1" max="500">
 <span id="aValueBond">100</span>
 <div id="bondingChartContainer">
     <canvas id="bondingChart"></canvas>
