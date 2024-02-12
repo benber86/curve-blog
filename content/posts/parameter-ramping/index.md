@@ -1,13 +1,15 @@
 ---
-title: "Markdown Cheat Sheet"
+title: "Parameter Ramping"
 draft: false
-date: 2022-08-27T09:16:45.000Z
-description: "Markdown is a powerful tool for creating rich text using a plain text editor. This cheatsheet is a quick reference for Markdown syntax."
+date: 2024-02-11T09:16:45.000Z
+description: "Why aren't parameter changes on Curve pools applied instantly? This post dwelves into the reasons behind gradual paramater changes."
 categories:
-  - Hello
+  - Parameters
+  - Pools
 tags:
-  - Hello
-  - WhatsApp
+  - Stableswap
+  - Invariant
+  - Parameters
 ---
 
 This Markdown cheat sheet **provides** a quick overview of all the Markdown syntax elements. It can’t cover every edge case, so if you need more information about any of these elements, refer to the reference guides for basic _syntax_ and extended syntax.
@@ -33,15 +35,6 @@ This Markdown cheat sheet **provides** a quick overview of all the Markdown synt
 ---
 
 Emphasis, aka italics, with asterisks or underscores. **Strong emphasis**, aka bold, with asterisks or underscores. Combined emphasis with asterisks and underscores. ~~Strikethrough~~ with two tildes. **_Bold and nested italic_**. **_All bold and italic_**. **_*Bold and italic nested*_**.
-
-# Images
-
----
-
-{{< img
-  src="cat.jpg"
-  alt="Cat"
-  caption="This is the default position of a figcaption, but it can be centered or at the end." >}}
 
 # Lists
 

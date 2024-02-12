@@ -2,13 +2,13 @@
 isSinglePage = true
 
 # Meta Config
-description = "Hello"
+description = "Curve Contributors' Blog"
 
 # Header Configuration
-avatar = "img/profile-picture.jpg"
+avatar = "img/profile-picture.png"
 
 #favicon
-favicon = "icons/favicon.ico"
+favicon = "icons/favicon.png"
 
 # disqus is a comment system. see https://disqus.com
 disqusShortname = ""
