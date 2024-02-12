@@ -12,12 +12,134 @@ tags:
   - Parameters
 ---
 
-This Markdown cheat sheet **provides** a quick overview of all the Markdown syntax elements. It can’t cover every edge case, so if you need more information about any of these elements, refer to the reference guides for basic _syntax_ and extended syntax.
+<script src="../../js/parameters/poolsim.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-# Headings
+## A quick refresher on Curve's Stableswap
+
+$A n^n \sum{x_i} + D = A n^n D + \frac{D^{n+1}}{(n^n \prod{x_i})}$
+
+
+<script src="../../js/parameters/bondingCurve.js"></script>
+
+
+<style>
+    #bondingChartContainer {
+        width: 400px;
+        height: 400px;
+    }
+    #aSliderBond {
+        width: 92%;
+    }
+</style>
+
+
+<label for="x1InputBond">x1:</label>
+<input type="number" id="x1InputBond" value="5000" min="0">
+<label for="x2InputBond">x2:</label>
+<input type="number" id="x2InputBond" value="8000" min="0">
+<br>
+<label for="aSliderBond">A:</label>
+<input type="range" id="aSliderBond" value="20" min="0" max="200">
+<span id="aValueBond">100</span>
+<div id="bondingChartContainer">
+    <canvas id="bondingChart"></canvas>
+</div>
+
+## What else happens when we change A ?
+
+
+We already saw above how A alters the AMM's bounding curve... 
 
 ---
 
+<style>
+    #container {
+        width: 600px;
+        margin: auto;
+    }
+    .dValueDisplay {
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 20px;
+    }
+    input[type="number"], input[type="range"] {
+        width: 25%;
+        border: 1px;
+        margin: 10px 0; /* Small margin for vertical spacing */
+    }
+    #aSlider {
+        width: 85%;
+        text-align: center;
+    }
+</style>
+
+<div id="container">
+    <label for="x2Input">Token A ($x_1$):</label>
+    <input type="number" id="x1Input" min="0" max="10000" value="1000">
+    &nbsp; <!-- Non-breaking space for simple spacing -->
+    <label for="x2Input">Token B ($x_2$):</label>
+    <input type="number" id="x2Input" min="0" max="10000" value="5000">
+    <br>
+    <label for="aSlider">A:</label>
+    <input type="range" id="aSlider" min="0" max="200" value="100">
+    <span id="aValue">100</span>
+    <div class="dValueDisplay" id="dValue">D: </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const x1Input = document.getElementById('x1Input');
+        const x2Input = document.getElementById('x2Input');
+        const aSlider = document.getElementById('aSlider');
+        const aValue = document.getElementById('aValue');
+        const dValueDisplay = document.getElementById('dValue');
+
+        function updateDValue() {
+            const xp = [parseInt(x1Input.value), parseInt(x2Input.value)];
+            const A = parseInt(aSlider.value);
+            const D = calculateD(xp, A);
+            dValueDisplay.textContent = 'D: ' + D.toFixed(2);
+        }
+
+        x1Input.addEventListener('input', updateDValue);
+        x2Input.addEventListener('input', updateDValue);
+        aSlider.addEventListener('input', () => {
+            aValue.textContent = aSlider.value;
+            updateDValue();
+        });
+
+        updateDValue();
+    });
+</script>
+
+<style>
+    #chartContainer {
+        width: 600px;
+        height: 300px;
+    }
+    input[type="range"] {
+        width: 60%;
+    }
+</style>
+
+<label for="x1Slider">Token A ($x_1$):</label>
+<input type="range" id="x1Slider" min="1" max="10000" value="1000">
+<span id="x1Value">2000</span>
+<br>
+<label for="x2Slider">Token B ($x_2$):</label>
+<input type="range" id="x2Slider" min="1" max="10000" value="5000">
+<span id="x2Value">5000</span>
+<br>
+<div id="chartContainer">
+    <canvas id="ammChart"></canvas>
+</div>
+
+<script src="../../js/parameters/dChart.js"></script>
+
+
+---
 # Heading 1
 
 ## Heading 2

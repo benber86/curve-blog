@@ -3,7 +3,7 @@ copyright = "{year}" # To make 2007 - 2022. Just add before {year} example: 2007
 languageCode = 'en-US'
 defaultContentLanguage = 'en'
 theme = 'lowkey'
-title = 'Curve Contributors Blog'
+title = "Curve Contributors' Blog"
 enableRobotsTXT = true
 summaryLength = 15
 paginate = 5
@@ -27,3 +27,6 @@ paginate = 5
     noHl = false
     style = 'dracula'
     tabWidth = 4
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
