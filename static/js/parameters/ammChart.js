@@ -80,13 +80,13 @@ document.addEventListener('DOMContentLoaded', function () {
         let start = 0.01;
         let end = 30;
 
-        let resolution = 1000;
+        let resolution = 500;
         let xs = Array.from({length: resolution}, (_, i) =>
             (start + (i / (resolution - 1)) * (end - start)))
+        // Handle JS float precision issue by working in 1e4 units since not doing units of D
+        let ys = xs.map(x => getY(A, i, j, x * 1000, xp.map(x => x * 1000)));
 
-        let ys = xs.map(x => getY(A, i, j, x, xp));
-
-        data = xs.map((x, index) => ({x: x, y: ys[index]}));
+        data = xs.map((x, index) => ({x: x, y: ys[index] / 1000}));
         ammChart.data.datasets[0].data = data;
         let k_sum = x1 + x2;
         let k_product = x1 * x2;
