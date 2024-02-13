@@ -184,10 +184,16 @@ Changes to $D$ thus directly affect LP's profitability. If $D$ increases, whethe
 Conversely, if $D$ decreases, in the case of a reduction in $A$ for instance, then LP's profitability will be negatively impacted.
 
 The gradual parameter changes act as a way to mitigate these effects.
-When $A$ increases, the gradual changes prevent the risk of someone taking advantage of the sudden rise in virtual price by depositing right before the parameter change and withdrawing right after once the virtual price has increased.
-The future prospect of a higher $A$ also incentivizes trades that will rebalance the pool over time.
-Arbitrageurs can buy the abundant, cheaper asset now knowing they will be able to sell it at a better rate (closer to 1:1) once the full parameter change is enacted.
-In doing so, the arbitrageurs will not only help bring the pool closer to its desired state, but they will also increase LP profitability through the fees paid for executing the trades.
-Conversely when $A$ decreases, arbitrageurs are incentivized to trade and pay fees to sell the abundant asset, thus softening the blow of a direct reduction in virtual price from the decrease in $D$.
+When $A$ is due to increases, arbitrageurs can buy the abundant, cheaper asset before the increase knowing they will be able to sell it at a better rate (closer to 1:1) once the full parameter change is enacted.
+Or they might take advantage of the sudden rise in virtual price caused by the higher $A$ by depositing liquidity right before the parameter change and withdrawing right after once the virtual price has increased.
+These behaviors are not necessarily bad, and in fact, arbitrage trades  will not only help bring the pool closer to its desired state, but they will also increase LP profitability through the fees paid for executing the trades.
+However, the delay allows to lengthen the timeframe of the arbitrage or increase liquidity over the ramp period. 
+Conversely, when $A$ decreases, arbitrageurs are incentivized to trade and pay fees to sell the abundant asset, thus softening the blow of a direct reduction in virtual price from the decrease in $D$.
+
+
+To conclude, let's illustrate this with an example. Let's assume that on the [crvUSD/TUSD pool](https://etherscan.io/address/0x34d655069f4cac1547e4c8ca284ffff5ad4a8db0#code), 1 **TUSD** trades for 0.981 **crvUSD** and 1 **crvUSD** trades for 1.018 **TUSD** with an $A$ parameter of 500.
+If $A$ increased to 1500, 1 **TUSD** would trade for 0.998 **crvUSD** and 1 **crvUSD** for 1.002 **TUSD**.
+Before $A$ increases, a trader could buy 1,007,314 **TUSD** with 1 million **crvUSD** at an average price of 0.992.
+After the increase, they can sell the **TUSD** back for 1,005,705 **crvUSD**, netting a 5,700 **crvUSD** profit and fees for the pool. 
 
 
