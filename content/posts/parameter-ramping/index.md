@@ -15,46 +15,64 @@ tags:
 <script src="../../js/parameters/poolsim.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+If you have ever looked at Curve pool contracts or followed the aftermath of a [DAO parameter vote](https://curvemonitor.com/#/dao/proposals), you have certainly noticed that changes in pool parameters are not immediately applied. Instead, the change happens gradually over a certain period of time. While the minimum is technically 24h, in practice the parameter ramp periods are usually longer. 
+Most of the increases in A for the 3pool, for instance, [were done over a week](https://etherscan.io/tx/0x46a054105e5519c06ef81e18616aac06c454eb6235c802e22fae62a641863750).
+
+This delayed process can cause some confusion or even frustration if the parameter change is perceived as an emergency measure for a pool at risk of depegging. This post will highlight some of the reasons behind the delayed parameter change mechanics. 
+
+
 ## A quick refresher on Curve's Stableswap
 
-$A n^n \sum{x_i} + D = A n^n D + \frac{D^{n+1}}{(n^n \prod{x_i})}$
+This post will focus on StableSwap pools and the amplification parameter $A$, but many of the points highlighted also apply to CryptoSwap pools and their additional parameters. 
+As a reminder, Curve's StableSwap pools operate as a hybrid of a Constant Sum Market Maker (CSMM, assets can always be traded without price impact, but liquidity can easily be drained) and a Constant Product Market Maker (CPMM, price impact increases as liquidity becomes imbalanced):
 
-
-<script src="../../js/parameters/bondingCurve.js"></script>
-
+<script src="../../js/parameters/ammChart.js"></script>
 
 <style>
-    #bondingChartContainer {
-        width: 800px;
+    #ammChartContainer {
+        width: 770px;
         height: 400px;
     }
-    #aSliderBond {
-        width: 92%;
-    }
-    input[type="number"] {
-        width: 20%;
+
+    #aSliderComp {
+        width: 93%;
     }
 </style>
-
-
-<label for="x1InputBond">x1:</label>
-<input type="number" id="x1InputBond" value="5000" min="0">
-<label for="x2InputBond">x2:</label>
-<input type="number" id="x2InputBond" value="8000" min="0">
-<br>
-<label for="aSliderBond">A:</label>
-<input type="range" id="aSliderBond" value="20" min="1" max="500">
-<span id="aValueBond">100</span>
-<div id="bondingChartContainer">
-    <canvas id="bondingChart"></canvas>
+<div style="text-align: center;">
+<div id="ammChartContainer">
+    <canvas id="ammCompChart"></canvas>
 </div>
+<label for="aSliderComp">A:</label>
+<input type="range" id="aSliderComp" value="5" min="1" max="20">
+<span id="aValueComp">5</span>
+<br>
+<br>
+</div>
+
+
+This hybridity allows Curve pools to behave more like CSMM and offer low price impact trades even when a pool is imbalanced. 
+Just how much the pool can get imbalanced before it behaves more like a CPMM with higher price impact depends on $A$, the amplification parameter. 
+The higher value of $A$, the more a pool will be allowed to become imbalanced while maintaining a near 1:1 rate for its assets.
+
+You can get a graphical intuition for this behavior by increasing or decreasing the value of A on the chart above and see the bonding curve get closer to that of a CPMM when $A$ is low, and closer to that of a CSMM when $A$ is high.
+
 
 ## What else happens when we change A ?
 
+Increasing or reducing the value of pool's invariant comes with a number of long term risks and trade-offs for liquidy providers (LPs), traders and asset issuers. 
+Those are however beyond the purview of this post, as we will instead focus solely on the more immediate effects of parameter changes.
 
-We already saw above how A alters the AMM's bounding curve... 
+To understand the direct impact of changing $A$, let's recall the StableSwap formula from the [whitepaper](https://curve.fi/files/stableswap-paper.pdf):
+<div style="text-align: center;">
+$A n^n \sum{x_i} + D = A n^n D + \frac{D^{n+1}}{(n^n \prod{x_i})}$
+<br>
+<br>
+</div>
 
----
+Parameter changes do not directly affect the balances of the pool ($x_i$), nor the number of assets traded ($n$), which means that $D$ is our dependent variable, shifting in value to offset the changes to $A$ and balance the equation (_i.e._ maintain the invariant).
+
+You can see for yourself how $D$ is affected by changes to $A$ for fixed values of $x_i$ and $n=2$ by moving the slider below:
+
 
 <style>
     #container {
@@ -116,10 +134,14 @@ We already saw above how A alters the AMM's bounding curve...
         updateDValue();
     });
 </script>
+<br> 
+Or, graphically, by plotting the value of $D$ for different values of $A$ given $x_i$ pool balances:
+<br>
+<br>
 
 <style>
     #chartContainer {
-        width: 600px;
+        width: 770px;
         height: 300px;
     }
     input[type="range"] {
@@ -127,6 +149,7 @@ We already saw above how A alters the AMM's bounding curve...
     }
 </style>
 
+<div style="text-align: center;">
 <label for="x1Slider">Token A ($x_1$):</label>
 <input type="range" id="x1Slider" min="1" max="10000" value="1000">
 <span id="x1Value">2000</span>
@@ -135,174 +158,36 @@ We already saw above how A alters the AMM's bounding curve...
 <input type="range" id="x2Slider" min="1" max="10000" value="5000">
 <span id="x2Value">5000</span>
 <br>
+<br>
 <div id="chartContainer">
     <canvas id="ammChart"></canvas>
+</div>
 </div>
 
 <script src="../../js/parameters/dChart.js"></script>
 
+As we can see, $D$ increases when $A$ increases and decreases when $A$ decreases. When the pool is balanced ($x_1 = x_2$), changes in $A$ have no effect on $D$.
+This is hard to prove mathematically as the relationship is not linear, yet it makes sense intuitively. 
+$D$ is described in the whitepaper as the "total amount of coins when they have an equal price".
+This amount is not denominated in dollars, but in an abstract, "virtual", numeraire that values the assets in the pool in a common unit.
 
----
-# Heading 1
+Since increasing $A$ increases how much of an unbalanced asset can be traded at a 1:1 ratio, the valuation of the pool assets in terms of $D$ also naturally increases.
+Put differently, increasing $A$ increases the value of the more abundant asset in the pool since more of them can be traded at par with the rarer asset, thus increasing the "value" of pool assets represented by $D$.
+Conversely, when $A$ decreases, the more abundant asset becomes worth less (as there is now a greater price impact to trade them), thus decreasing the value of $D$.
 
-## Heading 2
+## Why the delay then ?
 
-### Heading 3
+We have to keep in mind, however, that $D$ is also used to keep track of profits accrued by LPs. While $D$ is often referred to as an _invariant_, similarly to the $k$ of Uniswap v2's $xy = k$, its value actually varies constantly.
+Adding or removing liquidity from the pool will of course affect $D$ as can be easily inferred from the StableSwap equation, but so will trades as they generate fees which are redistributed to LPs... by increasing the invariant.
 
-#### Heading 4
+Changes to $D$ thus directly affect LP's profitability. If $D$ increases, whether as a result of parameter changes or accrued fees, so will the virtual price of the LP Token (calculated as $\frac{D}{LP\ token\ supply}$) and therefore the amount of the pool's assets a LP can redeem for a single token.
+Conversely, if $D$ decreases, in the case of a reduction in $A$ for instance, then LP's profitability will be negatively impacted.
 
-##### Heading 5
+The gradual parameter changes act as a way to mitigate these effects.
+When $A$ increases, the gradual changes prevent the risk of someone taking advantage of the sudden rise in virtual price by depositing right before the parameter change and withdrawing right after once the virtual price has increased.
+The future prospect of a higher $A$ also incentivizes trades that will rebalance the pool over time.
+Arbitrageurs can buy the abundant, cheaper asset now knowing they will be able to sell it at a better rate (closer to 1:1) once the full parameter change is enacted.
+In doing so, the arbitrageurs will not only help bring the pool closer to its desired state, but they will also increase LP profitability through the fees paid for executing the trades.
+Conversely when $A$ decreases, arbitrageurs are incentivized to trade and pay fees to sell the abundant asset, thus softening the blow of a direct reduction in virtual price from the decrease in $D$.
 
-###### Heading 6
 
-# Emphasis
-
----
-
-Emphasis, aka italics, with asterisks or underscores. **Strong emphasis**, aka bold, with asterisks or underscores. Combined emphasis with asterisks and underscores. ~~Strikethrough~~ with two tildes. **_Bold and nested italic_**. **_All bold and italic_**. **_*Bold and italic nested*_**.
-
-# Lists
-
----
-
-## Ordered:
-
-1. First ordered list item
-2. Another item
-3. Actual numbers don't matter, just that it's a number
-   1. 1st.
-   1. 2nd.
-   1. 3rd.
-
-## Unordered:
-
-- This is a list item
-  - This is a nested list item
-    - This is a nested list item
-  - This is another list item
-- This is another list item
-
-## Task:
-
-{{< task-list >}}
-
-- [x] Write the press release
-- [ ] Update the website
-- [ ] Contact the media
-
-# Links
-
----
-
-[This is a link](https://www.example.com).
-
-[This link](https://www.example.com "Link Title") has a title attribute.
-
-# Tables
-
----
-
-| Syntax    | Description |
-| --------- | ----------- |
-| Header    | Title       |
-| Paragraph | Text        |
-
-# Blockquotes
-
----
-
-> Blockquotes are very handy in email to emulate reply text. This line is part of the same quote.
-
-You can reference a footnote like this.
-
-> All generalizations are false, including this one. — Mark Twain. [^1]
-
-[^1]: https://www.brainyquote.com/quotes/mark_twain_137872.
-
-# Code
-
----
-
-Inline `code` has `back-ticks around` it.
-
-```javascript
-var s = "JavaScript syntax highlighting";
-alert(s);
-```
-
-```python
-s = "Python syntax highlighting"
-print(s)
-```
-
-```plain
-No language indicated, so no syntax highlighting.
-But let's throw in a <b>tag</b>.
-```
-
-You can remove line numbers, change the highlighting theme, and more. See [Syntax Highlighting](https://gohugo.io/content-management/syntax-highlighting/) and [Highlight](https://gohugo.io/getting-started/configuration-markup/#highlight/).
-
-```c {lineNos=false}
-#include <stdio.h>
-
-int main()
-{
-    printf("Hello, World!\n");
-    return 0;
-}
-```
-
-# Alerts
-
----
-
-{{< alert info "Optional title" >}}
-This is an info alert.
-{{< /alert >}}
-
-{{< alert warning "Optional title" >}}
-This is a warning alert.
-{{< /alert >}}
-
-{{< alert error "Optional title" >}}
-This is an error alert.
-{{< /alert >}}
-
-{{< alert success "Optional title" >}}
-This is a success alert.
-{{< /alert >}}
-
-# Math
-
----
-
-You can use LaTeX-style math with `$` and `$$` delimiters. For example, `$x^2$` renders as $x^2$, and `$$\frac{x}{y}$$` renders as: $$\frac{x}{y}$$
-
-We can throw this scary-looking equation at you:
-
-$$
-\frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\ldots} } } }
-$$
-
-# Horizontal Rules
-
----
-
-Three or more... Hyphens `---`, Asterisks `***`, or Underscores `___`.
-
----
-
----
-
----
-
-# Miscellaneous
-
----
-
-Tailwind lets you conditionally apply utility classes in different states using variant modifiers. For example, use `hover:scroll-auto` to only ~~The world is flat.~~
-apply the scroll-auto utility on hover.
-
-term
-: definition
-: another definition

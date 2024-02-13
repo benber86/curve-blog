@@ -24,13 +24,13 @@ let ammChart = new Chart(ctx, {
             x: {
                 title: {
                     display: true,
-                    text: 'Amplification Coefficient (A)'
+                    text: 'A (Amplification Coefficient)'
                 }
             },
             y: {
                 title: {
                     display: true,
-                    text: 'Invariant (D)'
+                    text: 'D ("Invariant")'
                 },
                 beginAtZero: true
             }

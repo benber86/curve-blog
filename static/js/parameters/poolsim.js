@@ -22,19 +22,21 @@ function getY(A, i, j, x, xp) {
     let xx = [...xp];
     xx[i] = x;
     let filteredXp = xx.filter((_, index) => index !== j);
+
     let c = D;
     filteredXp.forEach(y => {
-        c = c * D / (y * n);
+        c = Math.floor(c * D / (y * n));
     });
-    c = c * D / (Ann * n);
-    let b = filteredXp.reduce((acc, curr) => acc + curr, 0) + D / Ann - D;
+    c = Math.floor(c * D / (Ann * n));
+
+    let b = filteredXp.reduce((acc, curr) => acc + curr, 0) + Math.floor(D / Ann) - D;
+
     let yPrev = 0;
     let y = D;
 
     do {
         yPrev = y;
-        y = ((y ** 2 + c) / (2 * y + b - D))
+        y = ((y ** 2 + c) / (2 * y + b));
     } while (Math.abs(y - yPrev) > 1);
-
-    return Math.floor(y);
+    return y;
 }
