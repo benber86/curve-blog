@@ -27,5 +27,5 @@
 [[social]]
     identifier = "rss"
     name = "RSS"
-    url = "http://localhost:1313/index.xml"
+    url = "/index.xml"
     weight = 2
