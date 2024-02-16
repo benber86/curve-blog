@@ -8,6 +8,8 @@ enableRobotsTXT = true
 summaryLength = 15
 paginate = 5
 
+[outputs]
+  home = ['html', 'rss']
 
 [params]
   mainSections = ["posts"]
