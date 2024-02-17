@@ -23,9 +23,3 @@
     name = "GitHub"
     url = "https://github.com/curvefi"
     weight = 1
-
-[[social]]
-    identifier = "rss"
-    name = "RSS"
-    url = "/about"
-    weight = 2
