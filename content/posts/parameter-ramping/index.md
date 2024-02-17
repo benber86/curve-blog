@@ -2,12 +2,12 @@
 title: "Parameter Ramping"
 draft: false
 date: 2024-02-11T09:16:45.000Z
-description: "Why aren't parameter changes on Curve pools applied instantly? This post dwelves into the reasons behind gradual paramater changes."
+description: "Why aren't parameter changes on Curve pools applied instantly? This post dwelves into the reasons behind gradual parameter changes."
 categories:
   - Parameters
   - Pools
 tags:
-  - Stableswap
+  - StableSwap
   - Invariant
   - Parameters
 ---
@@ -15,15 +15,15 @@ tags:
 <script src="../../js/parameters/poolsim.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-If you have ever looked at Curve pool contracts or followed the aftermath of a [DAO parameter vote](https://curvemonitor.com/#/dao/proposals), you have certainly noticed that changes in pool parameters are not immediately applied. Instead, the change happens gradually over a certain period of time. While the minimum is technically 24h, in practice the parameter ramp periods are usually longer. 
-Most of the increases in A for the 3pool, for instance, [were done over a week](https://etherscan.io/tx/0x46a054105e5519c06ef81e18616aac06c454eb6235c802e22fae62a641863750).
+If you have ever looked at Curve pool contracts or followed the aftermath of a [DAO parameter vote](https://curvemonitor.com/#/dao/proposals), you have certainly noticed that changes in pool parameters are not immediately applied. Instead, the change happens gradually over a certain period of time. While the minimum time is technically 24h, in practice the parameter ramp periods are usually longer. 
+Most of the increases in A for the 3pool, for instance, [took place over a week](https://etherscan.io/tx/0x46a054105e5519c06ef81e18616aac06c454eb6235c802e22fae62a641863750).
 
-This delayed process can cause some confusion or even frustration if the parameter change is perceived as an emergency measure for a pool at risk of depegging. This post will highlight some of the reasons behind the delayed parameter change mechanics. 
+This delay in applying parameter changes can confuse or frustrate users, especially if the change is perceived as an emergency measure for a pool at risk of losing its peg. This post will explore the rationale behind the mechanics of delayed parameter changes.
 
 
-## A quick refresher on Curve's Stableswap
+## A quick refresher on Curve's StableSwap
 
-This post will focus on StableSwap pools and the amplification parameter $A$, but many of the points highlighted also apply to CryptoSwap pools and their additional parameters. 
+While this post focuses on StableSwap pools, the points highlighted also apply to CryptoSwap pools and their additional parameters. 
 As a reminder, Curve's StableSwap pools operate as a hybrid of a Constant Sum Market Maker (CSMM, assets can always be traded without price impact, but liquidity can easily be drained) and a Constant Product Market Maker (CPMM, price impact increases as liquidity becomes imbalanced):
 
 <script src="../../js/parameters/ammChart.js"></script>
@@ -59,8 +59,8 @@ You can get a graphical intuition for this behavior by increasing or decreasing 
 
 ## What else happens when we change A ?
 
-Increasing or reducing the value of pool's invariant comes with a number of long term risks and trade-offs for liquidy providers (LPs), traders and asset issuers. 
-Those are however beyond the purview of this post, as we will instead focus solely on the more immediate effects of parameter changes.
+Increasing or reducing the value of the pool's invariant comes with a number of long term risks and trade-offs for liquidity providers (LPs), traders and asset issuers. 
+However, those are beyond the purview of this post, as we will instead focus solely on the more immediate effects of parameter changes.
 
 To understand the direct impact of changing $A$, let's recall the StableSwap formula from the [whitepaper](https://curve.fi/files/stableswap-paper.pdf):
 <div style="text-align: center;">
@@ -135,7 +135,7 @@ You can see for yourself how $D$ is affected by changes to $A$ for fixed values 
     });
 </script>
 <br> 
-Or, graphically, by plotting the value of $D$ for different values of $A$ given $x_i$ pool balances:
+Alternatively, you can visualize this by plotting the value of $D$ for different values of $A$ given $x_i$ pool balances:
 <br>
 <br>
 
@@ -175,13 +175,13 @@ Since increasing $A$ increases how much of an unbalanced asset can be traded at 
 Put differently, increasing $A$ increases the value of the more abundant asset in the pool since more of them can be traded at par with the rarer asset, thus increasing the "value" of pool assets represented by $D$.
 Conversely, when $A$ decreases, the more abundant asset becomes worth less (as there is now a greater price impact to trade them), thus decreasing the value of $D$.
 
-## Why the delay then ?
+## Why the delay then?
 
 We have to keep in mind, however, that $D$ is also used to keep track of profits accrued by LPs. While $D$ is often referred to as an _invariant_, similarly to the $k$ of Uniswap v2's $xy = k$, its value actually varies constantly.
 Adding or removing liquidity from the pool will of course affect $D$ as can be easily inferred from the StableSwap equation, but so will trades as they generate fees which are redistributed to LPs... by increasing the invariant.
 
-Changes to $D$ thus directly affect LP's profitability. If $D$ increases, whether as a result of parameter changes or accrued fees, so will the virtual price of the LP Token (calculated as $\frac{D}{LP\ token\ supply}$) and therefore the amount of the pool's assets a LP can redeem for a single token.
-Conversely, if $D$ decreases, in the case of a reduction in $A$ for instance, then LP's profitability will be negatively impacted.
+Changes to $D$ thus directly affect LPs' profitability. If $D$ increases, whether as a result of parameter changes or accrued fees, so will the virtual price of the LP Token (calculated as $\frac{D}{LP\ token\ supply}$) and therefore the amount of the pool's assets a LP can redeem for a single token.
+Conversely, if $D$ decreases, in the case of a reduction in $A$ for instance, then LPs' profitability will be negatively impacted.
 
 The gradual parameter changes act as a way to mitigate these effects.
 When $A$ is due to increases, arbitrageurs can buy the abundant, cheaper asset before the increase knowing they will be able to sell it at a better rate (closer to 1:1) once the full parameter change is enacted.
