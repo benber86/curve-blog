@@ -55,11 +55,16 @@ def _dynamic_fee(xpi: uint256, xpj: uint256, _fee: uint256) -> uint256:
     )
 ```
 
-or, in a slightly more readable mathematical notation: $\frac{fee * offpeg\\_fee\\_multiplier}{\frac{(offpeg\\_fee\\_multiplier - 10^{10}) * 4 * xp_i * xp_j}{(xp_i + xp_j)^2} + 10^{10}}$
+Or, in a slightly more readable mathematical notation: $\frac{fee * offpeg\\_fee\\_multiplier}{\frac{(offpeg\\_fee\\_multiplier - 10^{10}) * 4 * xp_i * xp_j}{(xp_i + xp_j)^2} + 10^{10}}$
 
-where `fee` is the pool's base fee, `offpeg_fee_multiplier` is the multiplier and `FEE_DENOMINATOR` is a constant equal to $10^{10}$ used to handle the fees' precision. The variables ${xp_i}$ and ${xp_j}$ are the balances of the tokens of the pool adjusted for decimals and the pool's internal rates. 
+Where `fee` is the pool's base fee, `offpeg_fee_multiplier` is the multiplier and `FEE_DENOMINATOR` is a constant equal to $10^{10}$ used to handle the fees' precision. The variables ${xp_i}$ and ${xp_j}$ are the balances of the tokens of the pool adjusted for decimals and the pool's internal rates. 
 For instance, if one of the pool's tokens uses rates from an external oracle like wstETH or is an ERC-4626 vault token with a share to asset ratio, these rates will be applied to the pools' balances before computing the dynamic fee. 
 
+You can use the controls below to further visualize how the dynamic fee behaves in response to imbalances.
+The bar chart on the left shows the pools balances, with the pool being balanced when both bars are of equal height.
+The line chart on the right shows how much the dynamic fee applied would be at different ratio of pool balances for the currently selected ${fee}$ and ${multiplier}$.
+As you can see, the curve is a parabola meaning that the fee rises as imbalances become more severe but stabilizes at the level of the base fee when the pool is imbalanced. 
+The red dot show where the dynamic fee is at the currently selected liquidity balances.
 
 <script src="../../js/ng-mev/dynamicFee.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -79,19 +84,19 @@ For instance, if one of the pool's tokens uses rates from an external oracle lik
 
 
 <div class="widget-container">
-<label for="xpiSlider">xpi:</label>
+<label for="xpiSlider">${xp_i}$:</label>
 <input type="range" id="xpiSlider" min="1" max="100" value="50">
 <input type="number" id="xpiNumber" min="1" max="100" value="50">
 <br>
-<label for="xpjSlider">xpj:</label>
+<label for="xpjSlider">${xp_j}$:</label>
 <input type="range" id="xpjSlider" min="1" max="100" value="50">
 <input type="number" id="xpjNumber" min="1" max="100" value="50">
 <br>
-<label for="feeSlider">Fee:</label>
+<label for="feeSlider">${fee}$:</label>
 <input type="range" id="feeSlider" min="0" max="10000000" step="100000" value="4000000">
 <input type="number" id="feeNumber" min="0" max="10000000" step="100000" value="4000000">
 <br>
-<label for="offpegSlider">Offpeg Multiplier:</label>
+<label for="offpegSlider">${multiplier}$:</label>
 <input type="range" id="offpegSlider" min="0" max="100000000000" step="1000000000" value="20000000000">
 <input type="number" id="offpegNumber" min="0" max="100000000000" step="1000000000" value="20000000000"><br>
 </div>
@@ -103,3 +108,15 @@ For instance, if one of the pool's tokens uses rates from an external oracle lik
 <div class="chart-container">
     <canvas id="lineChart" height="280px"></canvas>
 </div>
+
+## MEV Activity
+
+### Methodology
+
+
+**Data collection:** We collected one month worth of data in 2024, from January 26th to Feburary 26th.
+We opted to focus on a single, recent month as the number of NG pools was still limited until the end of 2023, as was trading and MEV activity.
+We collected the pool addresses by querying the Stableswap and Stableswap-NG factory's contracts, yielding 375 Stableswap pools and 105 Stableswap NG pools.
+We used the pools' `TokenExchange` and `TokenExchangeUnderlying` events as well as all the pools' liqudity events to retrieve transactions, which we then parsed and analyzed for MEV activity.
+
+**MEV detection:** 
