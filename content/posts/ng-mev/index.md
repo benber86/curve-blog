@@ -120,3 +120,14 @@ We collected the pool addresses by querying the Stableswap and Stableswap-NG fac
 We used the pools' `TokenExchange` and `TokenExchangeUnderlying` events as well as all the pools' liqudity events to retrieve transactions, which we then parsed and analyzed for MEV activity.
 
 **MEV detection:** 
+
+
+## Observations
+
+<script src="../../js/ng-mev/mev.js"></script>
+<select id="dataSelect">
+    <option value="% Sandwich">% Sandwich</option>
+    <option value="% Atomic Arb">% Atomic Arb</option>
+    <option value="% MEV">% MEV</option>
+</select>
+<canvas id="mevChart"></canvas>
