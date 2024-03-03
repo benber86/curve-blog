@@ -85,7 +85,6 @@ document.addEventListener('DOMContentLoaded', function () {
             data.push(dynamicFee(i , (100 - i), feeSlider.value, offpegSlider.value));
         }
         const xpSum = Number(xpiSlider.value) + Number(xpjSlider.value)
-        console.log(xpSum)
         const userXpi = Math.round((xpiSlider.value / xpSum) * 100)
         const userXpj = Math.round((xpjSlider.value / xpSum) * 100)
         const userDynamicFee = dynamicFee(userXpi, userXpj, feeSlider.value, offpegSlider.value);
@@ -93,7 +92,6 @@ document.addEventListener('DOMContentLoaded', function () {
             x: `${userXpi}:${userXpj}`,
             y: userDynamicFee
         });
-        console.log(userValue)
 
         if (lineChart) {
             lineChart.data.labels = labels;

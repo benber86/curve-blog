@@ -9,17 +9,28 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('slippageSlider2').addEventListener('input', e => document.getElementById('slippageNumber2').value = e.target.value);
     document.getElementById('slippageNumber2').addEventListener('input', e => document.getElementById('slippageSlider2').value = e.target.value);
 
+    document.getElementById('aSlider').addEventListener('input', e => document.getElementById('aValue').value = e.target.value);
+    document.getElementById('aValue').addEventListener('input', e => document.getElementById('aSlider').value = e.target.value);
+
     let fixedFeesMEVChart, dynamicFeesMEVChart, fixedFeesChart, dynamicFeesChart;
 
     document.getElementById('tvlSlider2').addEventListener('change', updateCharts);
     document.getElementById('feeSlider2').addEventListener('change', updateCharts);
     document.getElementById('offpegSlider2').addEventListener('change', updateCharts);
     document.getElementById('slippageSlider2').addEventListener('change', updateCharts);
+    document.getElementById('aSlider').addEventListener('change', updateCharts);
+
+    document.getElementById('tvlNumber2').addEventListener('change', updateCharts);
+    document.getElementById('feeNumber2').addEventListener('change', updateCharts);
+    document.getElementById('offpegNumber2').addEventListener('change', updateCharts);
+    document.getElementById('slippageNumber2').addEventListener('change', updateCharts);
+    document.getElementById('aValue').addEventListener('change', updateCharts);
 
     function updateCharts() {
         const tvl = parseInt(document.getElementById('tvlNumber2').value, 10);
         const fee = parseInt(document.getElementById('feeNumber2').value, 10);
         const feeMul = parseInt(document.getElementById('offpegNumber2').value, 10);
+        const A = parseInt(document.getElementById('aValue').value, 10);
         const slippage = parseFloat(document.getElementById('slippageNumber2').value);
 
         const balances = [tvl / 2, tvl / 2];
@@ -29,17 +40,22 @@ document.addEventListener('DOMContentLoaded', function () {
         let dataDynamic = { tradeSizes: [], mev: [], fees: [], profits: [] };
 
         victimTrades.forEach(trade => {
-            let poolFixed = new CurvePool(200, [...balances], 2, fee);
+            let poolFixed = new CurvePool(A, [...balances], 2, fee);
             let originalBalanceFixed = solveForSlippage(trade, fee, null, slippage, 0.0001, balances);
-            poolFixed.exchange(1, 0, originalBalanceFixed);
-            let [receivedFixed, feesFixed] = poolFixed.exchange(1, 0, trade);
-            let mevFixed = receivedFixed - originalBalanceFixed;
+            let [frontRun, frontRunFixedFees] = poolFixed.exchange(1, 0, originalBalanceFixed);
+            poolFixed.exchange(1, 0, trade);
+            let [backRun, backRunFixedFees] = poolFixed.exchange(0, 1, frontRun);
+            let mevFixed = backRun - originalBalanceFixed;
+            let feesFixed = frontRunFixedFees + backRunFixedFees
 
-            let poolDynamic = new CurvePool(200, [...balances], 2, fee, feeMul);
+            let poolDynamic = new CurvePool(A, [...balances], 2, fee, feeMul);
             let originalBalanceDynamic = solveForSlippage(trade, fee, feeMul, slippage, 0.0001, balances);
-            poolDynamic.exchange(1, 0, originalBalanceDynamic);
-            let [receivedDynamic, feesDynamic] = poolDynamic.exchange(1, 0, trade);
-            let mevDynamic = receivedDynamic - originalBalanceDynamic;
+            let [frontRunDyn, frontRunDynFees] = poolDynamic.exchange(1, 0, originalBalanceDynamic);
+            poolDynamic.exchange(1, 0, trade);
+            let [backRunDyn, backRunDynFees] = poolFixed.exchange(0, 1, frontRunDyn);
+
+            let mevDynamic = backRunDyn - originalBalanceDynamic;
+            let feesDynamic = frontRunDynFees + backRunDynFees
 
             dataFixed.tradeSizes.push(trade);
             dataFixed.mev.push(mevFixed);
@@ -67,7 +83,6 @@ document.addEventListener('DOMContentLoaded', function () {
             return value.toString(); // Handle values less than 1000
         };
         const tradeSizesFormatted = dataFixed.tradeSizes.map(tradeSize => formatWithAbbreviations(tradeSize));
-        console.log('Updated trade sizes:', tradeSizesFormatted);
         if (fixedFeesMEVChart) fixedFeesMEVChart.destroy();
         fixedFeesMEVChart = new Chart(document.getElementById('fixedFeesMEVChart'), {
             type: 'bar',

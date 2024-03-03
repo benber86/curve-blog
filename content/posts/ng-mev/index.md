@@ -115,6 +115,10 @@ How do dynamic fees interact with MEV? We suppose...
 <script src="../../js/ng-mev/mevsim.js"></script>
 
 <div>
+    <label for="aSlider">${A}$:</label>
+    <input type="range" id="aSlider" min="50" max="500" value="200">
+    <input type="number" id="aValue" min="50" max="500" step="50" value="200">
+    <br>
     <label for="tvlSlider2">${TVL}$:</label>
     <input type="range" id="tvlSlider2" min="10000000" max="200000000" step="1000000" value="100000000">
     <input type="number" id="tvlNumber2" min="10000000" max="200000000" step="1000000" value="100000000">
