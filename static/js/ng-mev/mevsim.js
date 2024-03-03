@@ -102,6 +102,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 scales: {
                     y: {beginAtZero: false,
                         ticks: {callback: formatWithAbbreviations}},
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Trade Size'
+                        },
+                    }
                 }
             }
         });
@@ -125,6 +131,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 scales: {
                     y: {beginAtZero: false,
                         ticks: {callback: formatWithAbbreviations}},
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Trade Size'
+                        },
+                    }
                 }
             }
         });
@@ -152,9 +164,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 scales: {
                     y: {
-                        beginAtZero: true,
+                        beginAtZero: false,
                         ticks: {callback: formatWithAbbreviations}
                     },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Trade Size'
+                        },
+                    }
                 }
             }
         });
@@ -182,9 +200,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 scales: {
                     y: {
-                        beginAtZero: true,
+                        beginAtZero: false,
                         ticks: {callback: formatWithAbbreviations}
                     },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Trade Size'
+                        },
+                    }
                 }
             }
         });

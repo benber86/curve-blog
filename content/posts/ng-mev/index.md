@@ -141,19 +141,19 @@ How do dynamic fees interact with MEV? We suppose...
 <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
     <div>
         <h3>Fixed: MEV and Profits</h3>
-        <canvas id="fixedFeesMEVChart" height="250px"></canvas>
+        <canvas id="fixedFeesMEVChart" height="300px"></canvas>
     </div>
     <div>
         <h3>Dynamic: MEV and Profits</h3>
-        <canvas id="dynamicFeesMEVChart" height="250px"></canvas>
+        <canvas id="dynamicFeesMEVChart" height="300px"></canvas>
     </div>
     <div>
         <h3>Fixed: Fees Cost</h3>
-        <canvas id="fixedFeesChart" height="250px"></canvas>
+        <canvas id="fixedFeesChart" height="300px"></canvas>
     </div>
     <div>
         <h3>Dynamic: Fees Cost</h3>
-        <canvas id="dynamicFeesChart" height="250px"></canvas>
+        <canvas id="dynamicFeesChart" height="300px"></canvas>
     </div>
 </div>
 
