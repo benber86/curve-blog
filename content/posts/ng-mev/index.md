@@ -109,7 +109,51 @@ The red dot show where the dynamic fee is at the currently selected liquidity ba
     <canvas id="lineChart" height="280px"></canvas>
 </div>
 
-## MEV Activity
+How do dynamic fees interact with MEV? We suppose...
+
+<script src="../../js/ng-mev/poolsim.js"></script>
+<script src="../../js/ng-mev/mevsim.js"></script>
+
+<div>
+    <label for="tvlSlider2">${TVL}$:</label>
+    <input type="range" id="tvlSlider2" min="10000000" max="200000000" step="1000000" value="100000000">
+    <input type="number" id="tvlNumber2" min="10000000" max="200000000" step="1000000" value="100000000">
+    <br>
+    <label for="feeSlider2">${fee}$:</label>
+    <input type="range" id="feeSlider2" min="0" max="10000000" step="100000" value="4000000">
+    <input type="number" id="feeNumber2" min="0" max="10000000" step="100000" value="4000000">
+    <br>
+    <label for="offpegSlider2">${multiplier}$:</label>
+    <input type="range" id="offpegSlider2" min="0" max="100000000000" step="1000000000" value="20000000000">
+    <input type="number" id="offpegNumber2" min="0" max="100000000000" step="1000000000" value="20000000000">
+    <br>
+    <label for="slippageSlider2">${slippage \, \%}$:</label>
+    <input type="range" id="slippageSlider2" min="0.001" max="0.025" step="0.001" value="0.01">
+    <input type="number" id="slippageNumber2" min="0.001" max="0.025" step="0.001" value="0.01">
+    <br>
+
+</div>
+<br>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+    <div>
+        <h3>Fixed: MEV and Profits</h3>
+        <canvas id="fixedFeesMEVChart" height="250px"></canvas>
+    </div>
+    <div>
+        <h3>Dynamic: MEV and Profits</h3>
+        <canvas id="dynamicFeesMEVChart" height="250px"></canvas>
+    </div>
+    <div>
+        <h3>Fixed: Fees Cost</h3>
+        <canvas id="fixedFeesChart" height="250px"></canvas>
+    </div>
+    <div>
+        <h3>Dynamic: Fees Cost</h3>
+        <canvas id="dynamicFeesChart" height="250px"></canvas>
+    </div>
+</div>
+
+## Empirical MEV Activity
 
 ### Methodology
 
