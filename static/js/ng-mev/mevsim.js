@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let originalBalanceDynamic = solveForSlippage(trade, fee, feeMul, slippage, 0.0001, balances);
             let [frontRunDyn, frontRunDynFees] = poolDynamic.exchange(1, 0, originalBalanceDynamic);
             poolDynamic.exchange(1, 0, trade);
-            let [backRunDyn, backRunDynFees] = poolFixed.exchange(0, 1, frontRunDyn);
+            let [backRunDyn, backRunDynFees] = poolDynamic.exchange(0, 1, frontRunDyn);
 
             let mevDynamic = backRunDyn - originalBalanceDynamic;
             let feesDynamic = frontRunDynFees + backRunDynFees
