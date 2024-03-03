@@ -26,7 +26,7 @@ In a sandwich attack, the attacker first notices a pending transaction for a tra
 
 For example, if a large buy order for Asset A is detected by an attacker, they may first buy a substantial amount of Asset A, driving up its price. After the original large buy order is executed, further increasing the price, the attacker then sells their Asset A at this inflated rate, profiting from the price discrepancy caused by their initial purchase and the subsequent large order.
 <div style="text-align: center;">
-    <img src="/images/ng-mev/sandwich-monitor.png#center" alt="Sandwich attack">
+    <img src="../../images/ng-mev/sandwich-monitor.png#center" alt="Sandwich attack">
     <div style="font-size: 14px; italic;">Example of a sandwich attack spotted by <a href="https://t.me/curve_monitor_backup">Curvemonitor's sandwich monitoring bot</a> on Telegram. The attacker executed a large trade to manipulate the price of USDC, resulting in a loss of approximately 20 thousand dollars for the user.</div>
     <br>
 </div>
