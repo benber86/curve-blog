@@ -109,7 +109,19 @@ The red dot show where the dynamic fee is at the currently selected liquidity ba
     <canvas id="lineChart" height="280px"></canvas>
 </div>
 
-How do dynamic fees interact with MEV? We suppose...
+How do dynamic fees affect MEV profits? 
+To compare the effect of dynamic fees and fixed fees on sandwiching profits we can set up a small simulation of both scenarios.
+In a typical sandwich, the sandwiching bot will first artificially inflate the price of an asset, the trader then buys the asset at an inflated price before the bot deflates the price again to secure a profit.
+The trader's loss is the bot's gain. The maximum amount a trader can lose will be limited by their slippage settings.
+
+We therefore define the extractable value from a trade as the difference between the original value of the trade's output and the minimum acceptable value set by the trader through their slippage setting. 
+We assume that the bot will sandwich everytime and capture this difference.
+The bot's profits is defined as the value extracted from the sandwich minus the fees paid to the pool. We disregard gas costs.
+Finally, we assume that the pool is perfectly balanced at the moment of the trade so that input and output assets are on a perfect 1:1 peg.
+
+For different trade sizes, we estimate numerically the amount the bot would have to trade to push the price up and capture the traders' acceptable slippage loss.
+We use this to calculate the fees paid to the pool under a fixed and dynamic configuration. 
+You can simulate this scenario under different pool parameters and trader slippage settings using the sliders below:
 
 <script src="../../js/ng-mev/poolsim.js"></script>
 <script src="../../js/ng-mev/mevsim.js"></script>
