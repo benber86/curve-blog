@@ -115,15 +115,15 @@ The red dot show where the dynamic fee is at the currently selected liquidity ba
 
 How do dynamic fees affect MEV profits? 
 To compare the effect of dynamic fees and fixed fees on sandwiching profits we can set up a small simulation of both scenarios.
-In a typical sandwich, the sandwiching bot will first artificially inflate the price of an asset, the trader then buys the asset at an inflated price before the bot deflates the price again to secure a profit.
-The trader's loss is the bot's gain. The maximum amount a trader can lose will be limited by their slippage settings.
+In a typical sandwich, a searcher, via an MEV bot, will first artificially inflate the price of an asset, the trader then buys the asset at an inflated price before the searcher deflates the price again to secure a profit.
+The trader's loss is the searcher's gain. The maximum amount a trader can lose will be limited by their slippage settings.
 
 We therefore define the extractable value from a trade as the difference between the original value of the trade's output and the minimum acceptable value set by the trader through their slippage setting. 
-We assume that the bot will sandwich everytime and capture this difference.
-The bot's profits is defined as the value extracted from the sandwich minus the fees paid to the pool. We disregard gas costs.
+We assume that a searcher will sandwich everytime and capture this difference.
+The searcher's profits is defined as the value extracted from the sandwich minus the fees paid to the pool. We disregard gas costs.
 Finally, we assume that the pool is perfectly balanced at the moment of the trade so that input and output assets are on a perfect 1:1 peg.
 
-For different trade sizes, we estimate numerically the amount the bot would have to trade to push the price up and capture the traders' acceptable slippage loss.
+For different trade sizes, we estimate numerically the amount the search would have to trade to push the price up and capture the traders' acceptable slippage loss.
 We use this to calculate the fees paid to the pool under a fixed and dynamic configuration. 
 You can simulate this scenario under different pool parameters and trader slippage settings using the sliders below:
 
@@ -181,7 +181,7 @@ We also notice that fees go down as trade size increases.
 Again this is to be expected as larger trades will imbalance the pool more and make it cheaper to manipulate the price.
 
 Finally, we can also notice that the difference between fixed and dynamic fees ranges from a few hundred to a few thousand dollars.
-This may not seem significant, but MEV is a low margin business and bots will often only turn in 2 or 3 digits worth of profits, if not less.
+This may not seem significant, but MEV is a low margin business and searchers will often only turn in 2 or 3 digits worth of profits, if not less.
 Indeed, looking at 2023 for instance, the median profit for sandwiches on  all of Curve's Stableswap pools amounted to
 $285 USD. 
 The full distribution was as follows:
