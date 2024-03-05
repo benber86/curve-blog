@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const slippage = parseFloat(document.getElementById('slippageNumber2').value);
 
         const balances = [tvl / 2, tvl / 2];
-        const victimTrades = [100000, 1000000, 2000000, 5000000, 7500000, 9000000, 10000000, 20000000]; // Example trade sizes
+        const victimTrades = [100000, 500000, 750000, 1000000, 1500000, 2000000, 2500000]; // Example trade sizes
 
         let dataFixed = { tradeSizes: [], mev: [], fees: [], profits: [] };
         let dataDynamic = { tradeSizes: [], mev: [], fees: [], profits: [] };
@@ -72,17 +72,19 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function drawCharts(dataFixed, dataDynamic) {
-        const formatWithAbbreviations = (value) => {
+        const formatWithAbbreviations = (value, precision=1) => {
             if (Math.abs(value) >= 1e9) {
-                return (value / 1e9).toFixed(0) + 'b';
+                return (value / 1e9).toFixed(precision) + 'b';
             } else if (Math.abs(value) >= 1e6) {
-                return (value / 1e6).toFixed(0) + 'm';
+                return (value / 1e6).toFixed(precision) + 'm';
             } else if (Math.abs(value) >= 1e3) {
-                return (value / 1e3).toFixed(0) + 'k';
+                return (value / 1e3).toFixed(precision) + 'k';
             }
             return value.toString(); // Handle values less than 1000
         };
-        const tradeSizesFormatted = dataFixed.tradeSizes.map(tradeSize => formatWithAbbreviations(tradeSize));
+        const formatWithAbbreviationsFloored = (value) => {return formatWithAbbreviations(value, 0)}
+        const formatWithAbbreviationsNormal = (value) => {return formatWithAbbreviations(value, 1)}
+        const tradeSizesFormatted = dataFixed.tradeSizes.map(tradeSize => formatWithAbbreviations(tradeSize, 1));
         if (fixedFeesMEVChart) fixedFeesMEVChart.destroy();
         fixedFeesMEVChart = new Chart(document.getElementById('fixedFeesMEVChart'), {
             type: 'bar',
@@ -101,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
             options: {
                 scales: {
                     y: {beginAtZero: false,
-                        ticks: {callback: formatWithAbbreviations}},
+                        ticks: {callback: formatWithAbbreviationsFloored}},
                     x: {
                         title: {
                             display: true,
@@ -130,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
             options: {
                 scales: {
                     y: {beginAtZero: false,
-                        ticks: {callback: formatWithAbbreviations}},
+                        ticks: {callback: formatWithAbbreviationsFloored}},
                     x: {
                         title: {
                             display: true,
@@ -165,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 scales: {
                     y: {
                         beginAtZero: false,
-                        ticks: {callback: formatWithAbbreviations}
+                        ticks: {callback: formatWithAbbreviationsNormal}
                     },
                     x: {
                         title: {
@@ -201,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 scales: {
                     y: {
                         beginAtZero: false,
-                        ticks: {callback: formatWithAbbreviations}
+                        ticks: {callback: formatWithAbbreviationsNormal}
                     },
                     x: {
                         title: {

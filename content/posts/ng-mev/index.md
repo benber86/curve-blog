@@ -73,6 +73,10 @@ The red dot show where the dynamic fee is at the currently selected liquidity ba
         width: 45%;
         display: inline-block;
     }
+    .full-chart {
+        width: 100%;
+        display: inline-block;
+    }
     .widget-container {
         text-align: left;
     }
@@ -132,8 +136,8 @@ You can simulate this scenario under different pool parameters and trader slippa
     <input type="number" id="aValue" min="50" max="500" step="50" value="200">
     <br>
     <label for="tvlSlider2">${TVL}$:</label>
-    <input type="range" id="tvlSlider2" min="10000000" max="200000000" step="1000000" value="100000000">
-    <input type="number" id="tvlNumber2" min="10000000" max="200000000" step="1000000" value="100000000">
+    <input type="range" id="tvlSlider2" min="1000000" max="100000000" step="1000000" value="30000000">
+    <input type="number" id="tvlNumber2" min="1000000" max="100000000" step="1000000" value="30000000">
     <br>
     <label for="feeSlider2">${fee}$:</label>
     <input type="range" id="feeSlider2" min="0" max="10000000" step="100000" value="4000000">
@@ -144,8 +148,8 @@ You can simulate this scenario under different pool parameters and trader slippa
     <input type="number" id="offpegNumber2" min="0" max="100000000000" step="1000000000" value="20000000000">
     <br>
     <label for="slippageSlider2">${slippage \, \%}$:</label>
-    <input type="range" id="slippageSlider2" min="0.001" max="0.025" step="0.001" value="0.01">
-    <input type="number" id="slippageNumber2" min="0.001" max="0.025" step="0.001" value="0.01">
+    <input type="range" id="slippageSlider2" min="0.001" max="0.1" step="0.001" value="0.015">
+    <input type="number" id="slippageNumber2" min="0.001" max="0.1" step="0.001" value="0.015">
     <br>
 
 </div>
@@ -169,6 +173,28 @@ You can simulate this scenario under different pool parameters and trader slippa
     </div>
 </div>
 
+The charts allow us to see a few things. 
+First, MEV profits are negatively correlated with the amplification coefficient ${A}$ and the amount of TVL. 
+This makes sense as both make it more costly for an MEV actor to affect the price of the pool.
+The {A} factor on its own is already a strong deterrent for sandwiches, explaining why, even for the original Stableswap pools, they are [much less common on Curve than on other DEXes such as Uniswap](https://eigenphi.substack.com/p/10m-revenue-drain-in-5-months-mev). 
+We also notice that fees go down as trade size increases.
+Again this is to be expected as larger trades will imbalance the pool more and make it cheaper to manipulate the price.
+
+Finally, we can also notice that the difference between fixed and dynamic fees ranges from a few hundred to a few thousand dollars.
+This may not seem significant, but MEV is a low margin business and bots will often only turn in 2 or 3 digits worth of profits, if not less.
+Indeed, looking at 2023 for instance, the median profit for sandwiches on  all of Curve's Stableswap pools amounted to
+285 USD. 
+The full distribution was as follows:
+
+<script src="../../js/ng-mev/sandDistrib.js"></script>
+
+
+<div class="full-chart">
+    <canvas id="mevDistribution" height="150px"></canvas>
+</div>
+In practice, therefore, as most sandwiches net less than 1,000 dollars, we can anticipate that the added cost of dynamic fees will reduce their frequency.
+To confirm this intuition, let's now work with actual data collected from recent on-chain activity.
+
 ## Empirical MEV Activity
 
 ### Methodology
@@ -178,6 +204,7 @@ You can simulate this scenario under different pool parameters and trader slippa
 We opted to focus on a single, recent month as the number of NG pools was still limited until the end of 2023, as was trading and MEV activity.
 We collected the pool addresses by querying the Stableswap and Stableswap-NG factory's contracts, yielding 375 Stableswap pools and 105 Stableswap NG pools.
 We used the pools' `TokenExchange` and `TokenExchangeUnderlying` events as well as all the pools' liqudity events to retrieve transactions, which we then parsed and analyzed for MEV activity.
+$${A}
 
 **MEV detection:** 
 
