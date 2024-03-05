@@ -183,7 +183,7 @@ Again this is to be expected as larger trades will imbalance the pool more and m
 Finally, we can also notice that the difference between fixed and dynamic fees ranges from a few hundred to a few thousand dollars.
 This may not seem significant, but MEV is a low margin business and bots will often only turn in 2 or 3 digits worth of profits, if not less.
 Indeed, looking at 2023 for instance, the median profit for sandwiches on  all of Curve's Stableswap pools amounted to
-285 USD. 
+$285 USD. 
 The full distribution was as follows:
 
 <script src="../../js/ng-mev/sandDistrib.js"></script>
@@ -192,8 +192,10 @@ The full distribution was as follows:
 <div class="full-chart">
     <canvas id="mevDistribution" height="150px"></canvas>
 </div>
-In practice, therefore, as most sandwiches net less than 1,000 dollars, we can anticipate that the added cost of dynamic fees will reduce their frequency.
+In practice, therefore, as most sandwiches net less than $1,000, we can anticipate that the added cost of dynamic fees will reduce their frequency.
 To confirm this intuition, let's now work with actual data collected from recent on-chain activity.
+<br>
+<br>
 
 ## Empirical MEV Activity
 
@@ -204,7 +206,7 @@ To confirm this intuition, let's now work with actual data collected from recent
 We opted to focus on a single, recent month as the number of NG pools was still limited until the end of 2023, as was trading and MEV activity.
 We collected the pool addresses by querying the Stableswap and Stableswap-NG factory's contracts, yielding 375 Stableswap pools and 105 Stableswap NG pools.
 We used the pools' `TokenExchange` and `TokenExchangeUnderlying` events as well as all the pools' liqudity events to retrieve transactions, which we then parsed and analyzed for MEV activity.
-$${A}
+
 
 **MEV detection:** 
 
