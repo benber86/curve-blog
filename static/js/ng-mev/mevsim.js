@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     x: {
                         title: {
                             display: true,
-                            text: 'Trade Size'
+                            text: 'Sandwiched Trade Size'
                         },
                     }
                 }
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     x: {
                         title: {
                             display: true,
-                            text: 'Trade Size'
+                            text: 'Sandwiched Trade Size'
                         },
                     }
                 }
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     x: {
                         title: {
                             display: true,
-                            text: 'Trade Size'
+                            text: 'Sandwiched Trade Size'
                         },
                     }
                 }
@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     x: {
                         title: {
                             display: true,
-                            text: 'Trade Size'
+                            text: 'Sandwiched Trade Size'
                         },
                     }
                 }
