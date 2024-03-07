@@ -219,8 +219,8 @@ We used the pools' `TokenExchange` and `TokenExchangeUnderlying` events as well 
 
 <script src="../../js/ng-mev/mev.js"></script>
 <select id="dataSelect">
-    <option value="% Sandwich">% Sandwich</option>
-    <option value="% Atomic Arb">% Atomic Arb</option>
-    <option value="% MEV">% MEV</option>
+    <option value="Sandwiches">Sandwiches</option>
+    <option value="Atomic Arbitrages">Atomic Arbitrages</option>
+    <option value="Total MEV">Total MEV</option>
 </select>
 <canvas id="mevChart"></canvas>

@@ -9,25 +9,19 @@ const jsonData = {
     "2024-02-25"
 ],
     "Stableswap-OG": {
-    "Volume": [
-        4695280, 4058745, 6348355, 46516745, 7039808, 13992304, 9870587, 16603310, 7318659, 6939458,
-        17600267, 4743589, 9974345, 8686647, 8037865, 4895517, 4005788, 3858734, 6531625, 7401690,
-        7806940, 10214890, 3847567, 4047072, 14125159, 12997006, 18952021, 48304368, 24230646, 18247042,
-        7755561
-    ],
-        "% Sandwich": [
+        "Sandwiches": [
         0.20, 0.71, 0.67, 0.81, 0.34, 0.03, 0.00, 10.24, 0.29, 0.00,
         16.85, 4.23, 0.00, 0.76, 5.42, 0.00, 0.00, 0.00, 0.00, 0.02,
         0.06, 0.00, 0.00, 0.00, 1.90, 0.63, 5.06, 0.25, 0.37, 1.16,
         0.52
     ],
-        "% Atomic Arb": [
+        "Atomic Arbitrages": [
         6.08, 8.53, 3.09, 3.18, 2.59, 2.26, 2.71, 1.71, 3.03, 1.60,
         2.37, 2.98, 2.83, 4.57, 8.33, 3.92, 3.42, 4.78, 7.25, 3.53,
         3.49, 4.08, 8.78, 10.53, 3.08, 1.85, 1.09, 14.76, 0.88, 2.51,
         2.07
     ],
-        "% MEV": [
+        "Total MEV": [
         6.28, 9.33, 4.06, 4.00, 3.10, 2.29, 2.71, 11.95, 3.32, 1.60,
         19.21, 7.20, 2.83, 5.33, 16.45, 3.92, 3.42, 4.78, 7.25, 3.55,
         3.55, 4.08, 8.78, 10.53, 4.97, 2.65, 6.15, 15.00, 1.24, 3.67,
@@ -35,25 +29,19 @@ const jsonData = {
     ]
 },
     "Stableswap-NG": {
-    "Volume": [
-        10042379, 4492024, 8608965, 11345183, 10295397, 8983045, 13812443, 29116344, 7710834, 10422742,
-        11263067, 14007793, 11898025, 15992032, 17504958, 9128216, 12067590, 6650150, 12853076, 12029495,
-        26839816, 71991106, 22813277, 37751417, 96544546, 100815367, 41454264, 70753042, 30336533, 23413670,
-        30149977
-    ],
-        "% Sandwich": [
+        "Sandwiches": [
         0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,
         0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,
         0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,
         0.00
     ],
-        "% Atomic Arb": [
+        "Atomic Arbitrages": [
         1.15, 1.04, 5.48, 3.66, 3.16, 2.93, 6.80, 3.55, 9.10, 8.18,
         5.90, 5.60, 16.57, 6.72, 10.27, 10.62, 15.48, 11.11, 4.07, 0.72,
         4.43, 6.08, 7.91, 4.97, 3.56, 3.16, 3.35, 6.44, 4.15, 3.74,
         8.21
     ],
-        "% MEV": [
+        "Total MEV": [
         1.15, 1.04, 5.48, 3.66, 3.16, 2.93, 6.80, 3.68, 9.10, 8.18,
         5.90, 5.60, 16.57, 6.72, 10.27, 10.62, 15.48, 11.11, 4.07, 0.72,
         4.43, 6.08, 7.93, 4.97, 3.56, 3.16, 3.35, 6.44, 4.15, 3.74,
@@ -69,7 +57,7 @@ const updateChart = (feature) => {
 
     mevChart.data.datasets[0].data = ogData;
     mevChart.data.datasets[1].data = ngData;
-    mevChart.options.plugins.title.text = `Stableswap Comparison - ${feature}`;
+    mevChart.options.plugins.title.text = `Stableswap Comparison - ${feature} as % of total USD volume`;
     mevChart.update();
 };
 
@@ -82,11 +70,11 @@ const mevChart = new Chart(ctx, {
     data: {
         labels: labels, // Add your date labels here
         datasets: [{
-            label: 'OG',
+            label: 'Original Stablewap (Fixed Fees)',
             data: [], // Initial data set empty
             backgroundColor: 'rgba(255, 99, 132, 0.2)'
         }, {
-            label: 'NG',
+            label: 'NG Stableswap (Dynamic Fees)',
             data: [], // Initial data set empty
             backgroundColor: 'rgba(54, 162, 235, 0.2)'
         }]
@@ -94,7 +82,11 @@ const mevChart = new Chart(ctx, {
     options: {
         scales: {
             y: {
-                beginAtZero: true
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: "% of total USD volume"
+                }
             }
         },
         plugins: {
@@ -112,5 +104,5 @@ document.getElementById('dataSelect').addEventListener('change', (event) => {
 });
 
 // Initialize chart with default feature
-updateChart('% Sandwich');
+updateChart('Sandwiches');
 });
