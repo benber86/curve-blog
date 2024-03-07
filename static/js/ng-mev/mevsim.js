@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    document.getElementById('tvlSlider2').addEventListener('input', e => document.getElementById('tvlNumber2').value = e.target.value);
-    document.getElementById('tvlNumber2').addEventListener('input', e => document.getElementById('tvlSlider2').value = e.target.value);
+    document.getElementById('xpiSlider2').addEventListener('input', e => document.getElementById('xpiNumber2').value = e.target.value);
+    document.getElementById('xpiNumber2').addEventListener('input', e => document.getElementById('xpiSlider2').value = e.target.value);
+    document.getElementById('xpjSlider2').addEventListener('input', e => document.getElementById('xpjNumber2').value = e.target.value);
+    document.getElementById('xpjNumber2').addEventListener('input', e => document.getElementById('xpjSlider2').value = e.target.value);
     document.getElementById('feeSlider2').addEventListener('input', e => document.getElementById('feeNumber2').value = e.target.value);
     document.getElementById('feeNumber2').addEventListener('input', e => document.getElementById('feeSlider2').value = e.target.value);
     document.getElementById('offpegSlider2').addEventListener('input', e => document.getElementById('offpegNumber2').value = e.target.value);
@@ -14,26 +16,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let fixedFeesMEVChart, dynamicFeesMEVChart, fixedFeesChart, dynamicFeesChart;
 
-    document.getElementById('tvlSlider2').addEventListener('change', updateCharts);
+    document.getElementById('xpiSlider2').addEventListener('change', updateCharts);
+    document.getElementById('xpjSlider2').addEventListener('change', updateCharts);
     document.getElementById('feeSlider2').addEventListener('change', updateCharts);
     document.getElementById('offpegSlider2').addEventListener('change', updateCharts);
     document.getElementById('slippageSlider2').addEventListener('change', updateCharts);
     document.getElementById('aSlider').addEventListener('change', updateCharts);
 
-    document.getElementById('tvlNumber2').addEventListener('change', updateCharts);
+    document.getElementById('xpiNumber2').addEventListener('change', updateCharts);
+    document.getElementById('xpjNumber2').addEventListener('change', updateCharts);
     document.getElementById('feeNumber2').addEventListener('change', updateCharts);
     document.getElementById('offpegNumber2').addEventListener('change', updateCharts);
     document.getElementById('slippageNumber2').addEventListener('change', updateCharts);
     document.getElementById('aValue').addEventListener('change', updateCharts);
 
     function updateCharts() {
-        const tvl = parseInt(document.getElementById('tvlNumber2').value, 10);
+        const xpi = parseInt(document.getElementById('xpiNumber2').value, 10);
+        const xpj = parseInt(document.getElementById('xpjNumber2').value, 10);
         const fee = parseInt(document.getElementById('feeNumber2').value, 10);
         const feeMul = parseInt(document.getElementById('offpegNumber2').value, 10);
         const A = parseInt(document.getElementById('aValue').value, 10);
         const slippage = parseFloat(document.getElementById('slippageNumber2').value);
 
-        const balances = [tvl / 2, tvl / 2];
+        const balances = [xpi, xpj];
         const victimTrades = [100000, 500000, 750000, 1000000, 1500000, 2000000, 2500000]; // Example trade sizes
 
         let dataFixed = { tradeSizes: [], mev: [], fees: [], profits: [] };

@@ -120,10 +120,10 @@ The trader's loss is the searcher's gain. The maximum amount a trader can lose w
 
 We therefore define the extractable value from a trade as the difference between the original value of the trade's output and the minimum acceptable value set by the trader through their slippage setting. 
 We assume that a searcher will sandwich everytime and capture this difference.
-The searcher's profits is defined as the value extracted from the sandwich minus the fees paid to the pool. We disregard gas costs.
-Finally, we assume that the pool is perfectly balanced at the moment of the trade so that input and output assets are on a perfect 1:1 peg.
+The searcher's profits is defined as the value extracted from the sandwich minus the fees paid to the pool. 
+We disregard gas costs.
 
-For different trade sizes, we estimate numerically the amount the search would have to trade to push the price up and capture the traders' acceptable slippage loss.
+For different trade sizes, we estimate numerically the amount the searcher would have to trade to push the price up and capture the traders' acceptable slippage loss.
 We use this to calculate the fees paid to the pool under a fixed and dynamic configuration. 
 You can simulate this scenario under different pool parameters and trader slippage settings using the sliders below:
 
@@ -135,9 +135,13 @@ You can simulate this scenario under different pool parameters and trader slippa
     <input type="range" id="aSlider" min="50" max="500" value="200">
     <input type="number" id="aValue" min="50" max="500" step="50" value="200">
     <br>
-    <label for="tvlSlider2">${TVL}$:</label>
-    <input type="range" id="tvlSlider2" min="1000000" max="100000000" step="1000000" value="30000000">
-    <input type="number" id="tvlNumber2" min="1000000" max="100000000" step="1000000" value="30000000">
+    <label for="xpiSlider2">${xp_i}$:</label>
+    <input type="range" id="xpiSlider2" min="1000000" max="50000000" step="1000000" value="15000000">
+    <input type="number" id="xpiNumber2" min="1000000" max="50000000" step="1000000" value="15000000">
+    <br>
+    <label for="xpjSlider2">${xp_j}$:</label>
+    <input type="range" id="xpjSlider2" min="1000000" max="50000000" step="1000000" value="15000000">
+    <input type="number" id="xpjNumber2" min="1000000" max="50000000" step="1000000" value="15000000">
     <br>
     <label for="feeSlider2">${fee}$:</label>
     <input type="range" id="feeSlider2" min="0" max="10000000" step="100000" value="4000000">
@@ -211,7 +215,7 @@ We used the pools' `TokenExchange` and `TokenExchangeUnderlying` events as well 
 **MEV detection:** 
 
 
-## Observations
+### Observations
 
 <script src="../../js/ng-mev/mev.js"></script>
 <select id="dataSelect">
