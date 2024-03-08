@@ -72,11 +72,11 @@ const mevChart = new Chart(ctx, {
         datasets: [{
             label: 'Original Stablewap (Fixed Fees)',
             data: [], // Initial data set empty
-            backgroundColor: 'rgba(255, 99, 132, 0.2)'
+            backgroundColor: 'rgba(255, 99, 132, 0.52)'
         }, {
             label: 'NG Stableswap (Dynamic Fees)',
             data: [], // Initial data set empty
-            backgroundColor: 'rgba(54, 162, 235, 0.2)'
+            backgroundColor: 'rgba(54, 162, 235, 0.52)'
         }]
     },
     options: {

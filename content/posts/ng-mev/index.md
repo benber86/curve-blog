@@ -1,7 +1,7 @@
 ---
 title: "Impact of Dynamic Fees on MEV Activity"
 draft: false
-date: 2024-02-11T09:16:45.000Z
+date: 2024-03-06T09:16:45.000Z
 description: "This post compares MEV activity on StableSwap NG pools and pools with the original implementation. It explains dynamic fees and their role in the drastic reduction of certain types of MEV activity on NG pools."
 categories:
   - MEV
@@ -12,6 +12,14 @@ tags:
   - MEV
 ---
 
+# Key Findings
+
+- Dynamic fees reduce the profitability of sandwiches but have little effect on their overall number
+- As of March 1st 2024, there are no searchers running sandwiches on Curve's NG Stableswap pools. In Februrary, traders saved over $7,000 that could otherwise have been sandwiched.
+- On average dynamic fees would have reduced the profitability of individual sandwiches by $2
+
+
+# Introduction
 
 New Generation (NG) pools, [introduced in late 2023](https://etherscan.io/tx/0x2c7c9319d9b9cc067c38000e450a9df09fee9ec6c7dde173deec73d37ae0e15d), are a new iteration over the original Stableswap implementation. 
 Based on the same invariant formula, [NG pools](https://curve.fi/#/ethereum/pools?filter=stableng) introduce a number of new features such as dynamic fees, better oracle integration, transferless swaps, the ability to create pools for up to eight tokens of varying types (rebasing, ERC-4626 tokens, oracle-linked tokens).
@@ -215,7 +223,14 @@ We used the pools' `TokenExchange` and `TokenExchangeUnderlying` events as well 
 **MEV detection:** 
 
 
+
 ### Observations
+
+The results of our data collection are presented in the chart below.
+The most striking finding was that, for the period considered, there was absolutely zero sandwiches detected on NG Stableswap pools.
+Meanwhile sandwiches constituted on average 1.6% of all the USD denominated volume of the regular StableSwap pools, with peaks at 16% and 10%.
+It's not that MEV actors have all failed to notice the new NG pools either. 
+Indeed, the arbitrage activity is higher than on the original Stableswap pools: 
 
 <script src="../../js/ng-mev/mev.js"></script>
 <select id="dataSelect">
@@ -224,3 +239,80 @@ We used the pools' `TokenExchange` and `TokenExchangeUnderlying` events as well 
     <option value="Total MEV">Total MEV</option>
 </select>
 <canvas id="mevChart"></canvas>
+<br>
+<br> 
+
+Suspicious of the results at first, we double, then triple checked by manually crawling through 25,000 transactions to try and find sandwiches, without success.
+There was clearly no sandwiching going on in the NG pools - at least in February 2024. 
+Did this mean that dynamic fees had successfully managed to eradicate sandwiches?
+
+### Where have all the sandwiches gone ?
+
+Another explanation could be that, while arbitrageurs have been quick to integrate the new NG pools, sandwich searchers still haven't done so.
+The NG pools may still be sandwichable, but MEV searchers have been leaving money on the table.
+To verify this hypothesis, we opted to look at potentially sandwichable trades and see how profitable a sandwich would have been. 
+
+For all the trades in our dataset, we estimated the potentially extractable value by calculating the difference between the outcome of the trade (${dy}$, or how much tokens the trader received) and its minimum acceptable output after slippage (${min\\_dy}$, the minimum amount of tokens the trader could have received without the trade reverting).
+We then ran a quick solver to find the amount a searcher would have had to trade to successfully extract this value with a sandwich.
+We simulate the sandwich in both a dynamic fee NG Stableswap pool and a fixed fee original Stableswap pool to be able to compare the impact of each fee regime on sandwich profitability.
+
+In this way we identify 96 trades that would have been potentially profitably sandwichable with dynamic fees against 101 trades that would have been had the pools used a fixed fee. 
+This means that the use of dynamic fees might have prevented about 5% of the sandwiches:
+
+<div style="text-align: center;">
+
+
+| Metric       | Fixed Fees     | Dynamic Fees   |
+|--------------|----------------|----------------|
+| Count        | 101            | 96             |
+| Mean         | 96.250184      | 99.111161      |
+| Standard Dev | 207.459745     | 209.250597     |
+| Min          | 0.015311       | 0.026776       |
+| 25%          | 1.290534       | 1.648859       |
+| 50% (Median) | 7.867945       | 8.173049       |
+| 75%          | 79.650235      | 78.199968      |
+| Max          | 1135.999276    | 1125.083182    |
+
+<div style="font-size: 14px; italic;">Descriptive statistics for sandwiches with positive revenue (before deducting gas costs) assuming fixed and dynamic fees. All values in USD.</div>
+<br>
+</div>
+
+These numbers, however, do not account for gas costs which can often be high enough to render a sandwich unprofitable. 
+To estimate the gas costs of the sandwich attack we simply take the gas costs of the original (sandwichable but not sandwiched) trade, and multiply those by two.
+Once we deduct gas costs, our profitable sandwich number decreases to 31 for both fixed and dynamic fees:
+
+
+<div style="text-align: center;">
+
+| Metric       | Fixed Fees     | Dynamic Fees  |
+|--------------|----------------|---------------|
+| Count        | 31             | 31            |
+| Mean         | 241.394859     | 236.721689    |
+| Standard Dev | 285.449172     | 282.611291    |
+| Min          | 6.844660       | 3.689774      |
+| 25%          | 27.752442      | 25.253399     |
+| 50% (Median) | 96.491908      | 94.022582     |
+| 75%          | 446.941833     | 438.311420    |
+| Max          | 1076.655629    | 1065.739535   |
+
+<div style="font-size: 14px; italic;">Descriptive statistics for sandwiches with positive profit (after deducting gas costs) assuming fixed and dynamic fees. All values in USD.</div>
+<br>
+</div>
+
+After accounting for gas costs, therefore, dynamic fees do not reduce the number of profitable sandwiches. 
+They do, however, reduce the profitability of said sandwiches by a small margin. 
+Dynamic fees lead, on average, to 10% higher revenue for the pool compared to fixed fees.
+However, in absolute values, this only represents a $2 difference -- not enough to make most sandwiches unprofitable.
+We can see how minute the difference is by plotting our profitable sandwiches under each (fixed and dynamic) regime:
+
+<script src="../../js/ng-mev/profitable.js"></script>
+<div style="width:100%">
+    <canvas id="scatterChart" height="200px"></canvas>
+</div>
+
+The total value of the sandwiches adds up to $7338 for the 1 month long period considered.
+This tells us that the absence of sandwiches is more likely to be due to a lack of searchers monitoring the pools and leaving money on the table, rather than to the dissuassive effect of dynamic fees.
+
+# Conclusion: Are Fees Too Low?
+
+
