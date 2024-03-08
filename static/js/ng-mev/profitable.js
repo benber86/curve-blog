@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 y: {
                     title: {
                         display: true,
-                        text: 'Net Profit (USD)'
+                        text: 'Net Sandwich Profit (USD)'
                     },
                     beginAtZero: true
                 }
