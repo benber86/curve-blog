@@ -14,19 +14,21 @@ tags:
 
 # Key Findings
 
-- Dynamic fees reduce the profitability of sandwiches but have little effect on their overall number
-- As of March 1st 2024, there are no searchers running sandwiches on Curve's NG Stableswap pools. Since the pools were launched, traders saved over $7,000 that could otherwise have been sandwiched.
-- The additional cost of dynamic fees for MEV searcher decreases as the size of the sandwiched trade increases
-- On average dynamic fees would have reduced the profitability of individual sandwiches by $2
-- Dynamic fees generated approximately $2,500 more in fees accross all NG pools since inception, compared to if the pools had used a fixed fee.
+- Dynamic fees reduce the profitability of sandwiches but have little effect on their overall frequency
+- The additional cost of dynamic fees for MEV searchers decreases as the size of the sandwiched trade increases
+- As of March 2024, there are no searchers running sandwiches on Curve's NG Stableswap pools
+- In February 2024, over $7,000 could have been extracted from potentially sandwichable trades on NG Stableswap pools
+- Dynamic fees would have reduced the profitability of each sandwich by approximately $2
+- NG Stableswap pools have, since their introduction, generated an additional $2,500 in fee revenue than they would have had they used a fixed fee
 
 # Introduction
 
-New Generation (NG) pools, [introduced in late 2023](https://etherscan.io/tx/0x2c7c9319d9b9cc067c38000e450a9df09fee9ec6c7dde173deec73d37ae0e15d), are a new iteration over the original Stableswap implementation. 
-Based on the same invariant formula, [NG pools](https://curve.fi/#/ethereum/pools?filter=stableng) introduce a number of new features such as dynamic fees, better oracle integration, transferless swaps, the ability to create pools for up to eight tokens of varying types (rebasing, ERC-4626 tokens, oracle-linked tokens).
+Introduced in [late 2023](https://etherscan.io/tx/0x2c7c9319d9b9cc067c38000e450a9df09fee9ec6c7dde173deec73d37ae0e15d), New Generation (NG) Stableswap pools are a new iteration over the original Stableswap implementation. 
+Based on the same invariant formula, [NG pools](https://curve.fi/#/ethereum/pools?filter=stableng) introduce a number of new features such as dynamic fees, better oracle integration, transferless swaps, and the ability to create pools for up to eight tokens of varying types (rebasing, ERC-4626 tokens, oracle-linked tokens).
 
-Among these different enhancements, this article will focus on dynamic fees. While the original Stableswap pools applied a flat fee to all trades, the fee charged by NG pool is a function of its balances and internal rates. 
-This allows pools to charge more when liquidity is imbalanced and assets off-peg. 
+Among these different enhancements, this article will focus on dynamic fees. 
+While the original Stableswap pools applied a flat fee to all trades, the fee charged by NG pool is a function of its balances and internal rates. 
+This approach allows NG pools to charge more when liquidity is imbalanced and assets deviate from their peg. 
 This has the advantage of offering better risk-adjusted returns to LPs: when the pool is imbalanced and they hold more of the risky, depegging asset, they receive a higher compensation through fees. 
 It also improves the stability and security of the pool by making it more expensive to execute trades that significantly imbalance the pool. 
 
@@ -34,6 +36,7 @@ This last type of trades is a staple of so-called ["sandwich attacks"](https://e
 In a sandwich attack, the attacker first notices a pending transaction for a trade within a pool. They then place one order just before the pending transaction, driving up the price (front-run), followed by another order just after the original transaction has been processed, selling off the asset at the new, higher price (back-run).
 
 For example, if a large buy order for Asset A is detected by an attacker, they may first buy a substantial amount of Asset A, driving up its price. After the original large buy order is executed, further increasing the price, the attacker then sells their Asset A at this inflated rate, profiting from the price discrepancy caused by their initial purchase and the subsequent large order.
+
 <div style="text-align: center;">
     <img src="../../images/ng-mev/sandwich-monitor.png#center" alt="Sandwich attack">
     <div style="font-size: 14px; italic;">Example of a sandwich attack spotted by <a href="https://t.me/curve_monitor_backup">Curvemonitor's sandwich monitoring bot</a> on Telegram. The attacker executed a large trade to manipulate the price of USDC, resulting in a loss of approximately 20 thousand dollars for the user.</div>
@@ -41,7 +44,7 @@ For example, if a large buy order for Asset A is detected by an attacker, they m
 </div>
 
 
-Dynamic fees counteract this strategy by increasing the cost of executing trades that significantly skew the pool's balance. After a brief overview of how dynamic fees work on NG pools, we will look at MEV activity to try and assess their actual effect.
+Dynamic fees counteract this strategy by increasing the cost of executing trades that significantly skew the pool's balance. After a brief overview of how dynamic fees work on NG pools, we will look at MEV activity to assess their actual effect.
 
 ## Dynamic Fees
 
@@ -71,9 +74,9 @@ For instance, if one of the pool's tokens uses rates from an external oracle lik
 
 You can use the controls below to further visualize how the dynamic fee behaves in response to imbalances.
 The bar chart on the left shows the pools balances, with the pool being balanced when both bars are of equal height.
-The line chart on the right shows how much the dynamic fee applied would be at different ratio of pool balances for the currently selected ${fee}$ and ${multiplier}$.
-As you can see, the curve is a parabola meaning that the fee rises as imbalances become more severe but stabilizes at the level of the base fee when the pool is imbalanced. 
-The red dot show where the dynamic fee is at the currently selected liquidity balances.
+The line chart on the right shows how much the dynamic fee applied would be at different ratios of pool balances for the currently selected ${fee}$ and ${multiplier}$.
+The curve is a parabola meaning that the fee rises as imbalances become more severe but stabilizes at the level of the base fee when the pool is balanced. 
+The red dot show where the dynamic fee is at the currently selected liquidity balances ${xp_i}$ and ${xp_j}$.
 
 <script src="../../js/ng-mev/dynamicFee.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -124,17 +127,21 @@ The red dot show where the dynamic fee is at the currently selected liquidity ba
 
 How do dynamic fees affect MEV profits? 
 To compare the effect of dynamic fees and fixed fees on sandwiching profits we can set up a small simulation of both scenarios.
-In a typical sandwich, a searcher, via an MEV bot, will first artificially inflate the price of an asset, the trader then buys the asset at an inflated price before the searcher deflates the price again to secure a profit.
-The trader's loss is the searcher's gain. The maximum amount a trader can lose will be limited by their slippage settings.
+In a typical sandwich, a searcher, via an MEV bot, will first artificially inflate the price of an asset in an operation also known as a "front-run".
+The trader then buys the asset at an inflated price. 
+Finally, the searcher deflates the price again by selling off the asset to secure a profit.
+This final part is called the "backrun".
+Sandwiches are zero-sum: the trader's loss is the searcher's gain. 
+The maximum amount a trader can lose will be limited by their slippage settings.
 
-We therefore define the extractable value from a trade as the difference between the original value of the trade's output and the minimum acceptable value set by the trader through their slippage setting. 
-We assume that a searcher will sandwich everytime and capture this difference.
-The searcher's profits is defined as the value extracted from the sandwich minus the fees paid to the pool. 
-We disregard gas costs.
+The extractable value from a trade is defined as the difference between the original value of the trade's output and the minimum acceptable value set by the trader through their slippage setting. 
+The searcher's revenue is defined as the value extracted from the sandwich minus the fees paid to the pool. 
+We disregard gas costs for the time being.
 
 For different trade sizes, we estimate numerically the amount the searcher would have to trade to push the price up and capture the traders' acceptable slippage loss.
-We use this to calculate the fees paid to the pool under a fixed and dynamic configuration. 
-You can simulate this scenario under different pool parameters and trader slippage settings using the sliders below:
+We then calculate the fees the searcher would need to pay for the front and backrun. 
+We run the same simulation on a fixed fee pool and a dynamic fee pool and then compare the outcomes. 
+The sliders below let you change the pool parameters and the trader's slippage settings to compare fees and MEV profitability under different scenarios:
 
 <script src="../../js/ng-mev/poolsim.js"></script>
 <script src="../../js/ng-mev/mevsim.js"></script>
@@ -186,18 +193,17 @@ You can simulate this scenario under different pool parameters and trader slippa
     </div>
 </div>
 
-The charts allow us to see a few things. 
-First, MEV profits are negatively correlated with the amplification coefficient ${A}$ and the amount of TVL. 
+The charts reveal several important insights. 
+First, there is a negative correlation between MEV profits and both the amplification coefficient ${A}$ and the TVL (Total Value Locked). 
 This makes sense as both make it more costly for an MEV actor to affect the price of the pool.
-The ${A}$ factor on its own is already a strong deterrent for sandwiches, explaining why, even for the original Stableswap pools, they are [much less common on Curve than on other DEXes such as Uniswap](https://eigenphi.substack.com/p/10m-revenue-drain-in-5-months-mev). 
-We also notice that fees go down as trade size increases.
-Again this is to be expected as larger trades will imbalance the pool more and make it cheaper to manipulate the price.
+The ${A}$ factor alone already serves as a strong deterrent for sandwiches, explaining why, even for the original Stableswap pools, sandwiches are [much less common on Curve than on other DEXes such as Uniswap](https://eigenphi.substack.com/p/10m-revenue-drain-in-5-months-mev).
+Additionally, we observe that fees decrease as trade size grows.
+This comes from the fact that larger trades tend to imbalance the pool more, making it cheaper for a third-party to manipulate the price.
 
-Finally, we can also notice that the difference between fixed and dynamic fees ranges from a few hundred to a few thousand dollars.
-This may not seem significant, but MEV is a low margin business and searchers will often only turn in 2 or 3 digits worth of profits, if not less.
-Indeed, looking at 2023 for instance, the median profit for sandwiches on  all of Curve's Stableswap pools amounted to
-$285 USD. 
-The full distribution was as follows:
+Finally, the difference between fixed and dynamic fees varies from a few hundred to a few thousand dollars.
+Although this may appear insignificant, MEV is a low margin business and searchers will often only turn in 2 or 3 digits worth of profits, if not less.
+For instance, in 2023, the median profit for sandwiches on  all of Curve's Stableswap pools amounted to $285 USD. 
+The complete distribution is presented below:
 
 <script src="../../js/ng-mev/sandDistrib.js"></script>
 
@@ -215,10 +221,10 @@ To confirm this intuition, let's now work with actual data collected from recent
 ### Methodology
 
 
-**Data collection:** We collected one month worth of data in 2024, from January 26th to Feburary 26th.
+**Data collection:** We collected one month worth of data in 2024, from January 26th to February 26th.
 We opted to focus on a single, recent month as the number of NG pools was still limited until the end of 2023, as was trading and MEV activity.
 We collected the pool addresses by querying the Stableswap and Stableswap-NG factory's contracts, yielding 375 Stableswap pools and 105 Stableswap NG pools.
-We used the pools' `TokenExchange` and `TokenExchangeUnderlying` events as well as all the pools' liqudity events to retrieve transactions, which we then parsed and analyzed for MEV activity.
+We used the pools' `TokenExchange` and `TokenExchangeUnderlying` events as well as all the pools' liquidity events to retrieve transactions, which we then parsed and analyzed for MEV activity.
 
 
 **MEV detection:** 
@@ -243,7 +249,7 @@ Indeed, the arbitrage activity is higher than on the original Stableswap pools:
 <br>
 <br> 
 
-Suspicious of the results at first, we double, then triple checked by manually crawling through 25,000 transactions to try and find sandwiches, without success.
+Suspicious of the results at first, we double-, then triple-checked by manually crawling through 25,000 transactions to try and find sandwiches, without success.
 There was clearly no sandwiching going on in the NG pools - at least in February 2024. 
 Did this mean that dynamic fees had successfully managed to eradicate sandwiches?
 
@@ -312,7 +318,7 @@ We can see how minute the difference is by plotting our profitable sandwiches un
 </div>
 
 The total value of the sandwiches that could have been executed adds up to $7,338.
-This tells us that the absence of sandwiches is more likely to be due to a lack of searchers monitoring the pools and leaving money on the table, rather than to the dissuassive effect of dynamic fees.
+This tells us that the absence of sandwiches is more likely to be due to a lack of searchers monitoring the pools and leaving money on the table, rather than to the dissuasive effect of dynamic fees.
 
 # Conclusion: Are Fee Multipliers Too Low?
 
@@ -321,14 +327,18 @@ When we consider all trades, dynamic fees, on average, increase the fees paid by
 
 In aggregate, if we compare the fees generated by NG pools with a simulation of the fees they would have generated with a fixed fee similar to the original StableSwap pools, the total difference amounts to roughly $2,500.
 This additional revenue is split equally between the DAO and LPs.
-But if dynamic fees, at their current level, can not significantly lower sandwiches and only bring marginally more revenue to the DAO and LPs, isn't this a sign that the fees ought to be raised?
+But if dynamic fees, at their current level, cannot significantly reduce sandwiches and only bring marginally more revenue to the DAO and LPs, is this a sign that fees ought to be raised?
 
 
-The answer to this is "not necessarily". Dynamic fees are not meant to constantly generate additional revenue for Curve, they should only do so when pools are severely imbalanced.
-This has hardly ever been the case so far for the NG pools considered, so the low delta compared to fixed fees might instead be a signal that dynamic fees are working as intended.
+The answer is not straightforward. 
+Dynamic fees are not meant to constantly generate additional revenue for Curve. 
+Rather, they should only do so when pools are severely imbalanced.
+This has hardly ever been the case so far for the NG pools considered.
+The low delta compared to fixed fees might instead indicate that dynamic fees are functioning as intended.
 
-On the other hand, it is true that dynamic fees do not seem like they would be an effective deterrent for sandwiches on Stableswap NG pools.
-Yet raising them may not solve the issue entirely.
-As we can test with the simulator above, for a roughly balanced pool with over 10 million in TVL and an amplification coefficient ${A}$ of 200, the threshold at which a trade becomes profitably sandwichable is over $500,000.
+
+On the other hand, it is true that dynamic fees are presently not an effective deterrent for sandwiches on Stableswap NG pools.
+Yet raising dynamic fees may not solve the issue entirely.
+Using the simulator above, we can test that for a roughly balanced pool with over 10 million in TVL and an amplification coefficient ${A}$ of 200, the threshold at which a trade becomes profitably sandwichable is over $500,000.
 When such large trades are executed, it takes less capital for a searcher to manipulate the price and the brunt of the dynamic fees will be paid by the sandwichable trader.
-If fees become too expensive for large traders, Curve pools could become less competitive and see their volume decrease.
+In turn, if fees become too expensive for large traders, Curve pools could become less competitive and see their volume decrease.
