@@ -14,12 +14,12 @@ tags:
 
 # Key Findings
 
-- Dynamic fees reduce the profitability of sandwiches but have little effect on their overall frequency
-- The additional cost of dynamic fees for MEV searchers decreases as the size of the sandwiched trade increases
-- As of March 2024, there are no searchers running sandwiches on Curve's NG Stableswap pools
-- In February 2024, over $7,000 could have been extracted from potentially sandwichable trades on NG Stableswap pools
-- Dynamic fees would have reduced the profitability of each sandwich by approximately $2
-- NG Stableswap pools have, since their introduction, generated an additional $2,500 in fee revenue than they would have had they used a fixed fee
+- Dynamic fees reduce the profitability of sandwiches but have little effect on their overall frequency.
+- The additional cost of dynamic fees for MEV searchers decreases as the size of the sandwiched trade increases.
+- As of March 2024, there are no searchers running sandwiches on Curve's NG Stableswap pools.
+- In February 2024, over $7,000 could have been extracted from potentially sandwichable swaps on NG Stableswap pools. More value could also have been extracted by sandwiching liquidity additions and removals. 
+- Dynamic fees would have reduced the profitability of each sandwich by approximately $2.
+- NG Stableswap pools have, since their introduction, generated 10% more in fee revenue than they would have had they used a fixed fee.
 
 # Introduction
 
@@ -227,15 +227,19 @@ We collected the pool addresses by querying the Stableswap and Stableswap-NG fac
 We used the pools' `TokenExchange` and `TokenExchangeUnderlying` events as well as all the pools' liquidity events to retrieve transactions, which we then parsed and analyzed for MEV activity.
 
 
-**MEV detection:** 
-
+**MEV detection:** For each block, we check that at least two transactions interact with the pool as there can't be a sandwich otherwise.
+If there are at least 2 transactions, we look for matching transactions to detect a potential sandwich. 
+Matching transactions are transactions that have the same caller, and where tokens A and B are swapped in different directions.
+Once we have found a pair, we look for the sandwiched transaction. 
+Its position in the block should be between that of the two sandwiching transactions.
+The detection algorithm also handles more complex edge cases, such as multiple transactions being sandwiched between the same front- and backrun transactions.
 
 
 ### Observations
 
 The results of our data collection are presented in the chart below.
 The most striking finding was that, for the period considered, there was absolutely zero sandwiches detected on NG Stableswap pools.
-Meanwhile sandwiches constituted on average 1.6% of all the USD denominated volume of the regular StableSwap pools, with peaks at 16% and 10%.
+Meanwhile, sandwiches constituted on average 1.6% of all the USD denominated volume of the regular StableSwap pools, with peaks at 16% and 10%.
 It's not that MEV actors have all failed to notice the new NG pools either. 
 Indeed, the arbitrage activity is higher than on the original Stableswap pools: 
 
@@ -259,7 +263,12 @@ Another explanation could be that, while arbitrageurs have been quick to integra
 The NG pools may still be sandwichable, but MEV searchers have been leaving money on the table.
 To verify this hypothesis, we opted to look at potentially sandwichable trades and see how profitable a sandwich would have been. 
 
-For all the trades in our dataset, we estimated the potentially extractable value by calculating the difference between the outcome of the trade (${dy}$, or how much tokens the trader received) and its minimum acceptable output after slippage (${min\\_dy}$, the minimum amount of tokens the trader could have received without the trade reverting).
+We collected all swap transactions on all NG StableSwap pools that directly called one of the pool's exchange functions. 
+We opted to exclude calls to the pools via contracts (MEV bots, aggregators) as finding out slippage setting is in most cases impossible due to the contracts being unverified or using widely different ABIs.
+We also excluded liquidity events to facilitate the analysis. 
+These can also be sandwiched, so the numbers reported below are a lower bound estimate of the total amount of MEV not extracted from NG pools.
+
+To estimate the potentially extractable value of each swap, we calculated the difference between the outcome of the trade (${dy}$, or how many tokens the trader received) and its minimum acceptable output after slippage (${min\\_dy}$, the minimum amount of tokens the trader could have received without the trade reverting).
 We then ran a quick solver to find the amount a searcher would have had to trade to successfully extract this value with a sandwich.
 We simulate the sandwich in both a dynamic fee NG Stableswap pool and a fixed fee original Stableswap pool to be able to compare the impact of each fee regime on sandwich profitability.
 
@@ -318,6 +327,8 @@ We can see how minute the difference is by plotting our profitable sandwiches un
 </div>
 
 The total value of the sandwiches that could have been executed adds up to $7,338.
+The figure is a lower bound estimate as liquidity events can be an additional source of profitable sandwiches.
+It is also likely to increase in the near future as NG pools gain more adoption.
 This tells us that the absence of sandwiches is more likely to be due to a lack of searchers monitoring the pools and leaving money on the table, rather than to the dissuasive effect of dynamic fees.
 
 # Conclusion: Are Fee Multipliers Too Low?
@@ -325,7 +336,7 @@ This tells us that the absence of sandwiches is more likely to be due to a lack 
 Dynamic fees increase the cost of sandwiches by $2 but sandwiches are generally large transactions and searchers have to pay fees twice: for the front-run and the back-run.
 When we consider all trades, dynamic fees, on average, increase the fees paid by 10¢ compared to fixed fees.
 
-In aggregate, if we compare the fees generated by NG pools with a simulation of the fees they would have generated with a fixed fee similar to the original StableSwap pools, the total difference amounts to roughly $2,500.
+In aggregate, if we compare the fees generated by NG pools with a simulation of the fees they would have generated with a fixed fee similar to the original StableSwap pools, the total difference amounts to roughly $2,500 (an increase of about 10%).
 This additional revenue is split equally between the DAO and LPs.
 But if dynamic fees, at their current level, cannot significantly reduce sandwiches and only bring marginally more revenue to the DAO and LPs, is this a sign that fees ought to be raised?
 
