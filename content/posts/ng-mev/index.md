@@ -20,6 +20,7 @@ tags:
 - In February 2024, over $7,000 could have been extracted from potentially sandwichable swaps on NG Stableswap pools. More value could also have been extracted by sandwiching liquidity additions and removals. 
 - Dynamic fees would have reduced the profitability of each sandwich by approximately $2.
 - NG Stableswap pools have, since their introduction, generated 10% more in fee revenue than they would have had they used a fixed fee.
+- Making dynamic fees more efficient against sandwiches would require a new formula for their calculation, as currently even large increases to the fee multiplier are unlikely to have a significant effect.
 
 # Introduction
 
@@ -331,7 +332,7 @@ The figure is a lower bound estimate as liquidity events can be an additional so
 It is also likely to increase in the near future as NG pools gain more adoption.
 This tells us that the absence of sandwiches is more likely to be due to a lack of searchers monitoring the pools and leaving money on the table, rather than to the dissuasive effect of dynamic fees.
 
-# Conclusion: Are Fee Multipliers Too Low?
+# Are Fee Multipliers Too Low?
 
 Dynamic fees increase the cost of sandwiches by $2 but sandwiches are generally large transactions and searchers have to pay fees twice: for the front-run and the back-run.
 When we consider all trades, dynamic fees, on average, increase the fees paid by 10¢ compared to fixed fees.
@@ -350,6 +351,55 @@ The low delta compared to fixed fees might instead indicate that dynamic fees ar
 
 On the other hand, it is true that dynamic fees are presently not an effective deterrent for sandwiches on Stableswap NG pools.
 Yet raising dynamic fees may not solve the issue entirely.
-Using the simulator above, we can test that for a roughly balanced pool with over 10 million in TVL and an amplification coefficient ${A}$ of 200, the threshold at which a trade becomes profitably sandwichable is over $500,000.
+For a roughly balanced pool with over 10 million in TVL and an amplification coefficient ${A}$ of 200, the threshold at which a trade becomes profitably sandwichable is close to $500,000.
 When such large trades are executed, it takes less capital for a searcher to manipulate the price and the brunt of the dynamic fees will be paid by the sandwichable trader.
 In turn, if fees become too expensive for large traders, Curve pools could become less competitive and see their volume decrease.
+
+With the simulator below, we can see that the impact of using low or high fee multipliers on sandwiches profitability actually tends to decrease as pools get more imbalanced.
+This is because in an imbalanced state, the amount needed to perform a sandwich decreases along with the fees collected by the pool.
+
+<script src="../../js/ng-mev/feesim.js"></script>
+<div>
+  <label for="aSlider3">${A}$:</label>
+  <input type="range" id="aSlider3" min="50" max="500" value="200">
+  <input type="number" id="aValue3" min="50" max="500" step="50" value="200">
+  <br>
+  <label for="xpiSlider3">${xp_i}$:</label>
+  <input type="range" id="xpiSlider3" min="5000000" max="50000000" step="1000000" value="15000000">
+  <input type="number" id="xpiNumber3" min="5000000" max="50000000" step="1000000" value="15000000">
+  <br>
+  <label for="xpjSlider3">${xp_j}$:</label>
+  <input type="range" id="xpjSlider3" min="5000000" max="50000000" step="1000000" value="15000000">
+  <input type="number" id="xpjNumber3" min="5000000" max="50000000" step="1000000" value="15000000">
+  <br>
+  <label for="feeSlider3">${fee}$:</label>
+  <input type="range" id="feeSlider3" min="0" max="10000000" step="100000" value="4000000">
+  <input type="number" id="feeNumber3" min="0" max="10000000" step="100000" value="4000000">
+  <br>
+  <label for="offpegSlider3">${multiplier}$:</label>
+  <input type="range" id="offpegSlider3" min="0" max="100000000000" step="1000000000" value="2000000000">
+  <input type="number" id="offpegNumber3" min="0" max="100000000000" step="1000000000" value="2000000000">
+  <br>
+  <label for="slippageSlider3">${slippage \, \%}$:</label>
+  <input type="range" id="slippageSlider3" min="0.001" max="0.1" step="0.001" value="0.015">
+  <input type="number" id="slippageNumber3" min="0.001" max="0.1" step="0.001" value="0.015">
+  <br>
+</div>
+<br>
+<div style="display: flex; flex-wrap: wrap; width: 100%;">
+    <canvas id="dynamicFeesMultiplierChart" height="200px"></canvas>
+</div>
+
+Another observation we can make with the simulator is that dynamic fees, as they are currently designed, rise almost in parallel to the amount of extractable value. 
+This means that while they could push some of the lowest value sandwiches into unprofitable territory, the dynamic fees' growth curve is not convex enough to catch up to the growth of extractable value.
+
+Here even raising the fee multiplier would not help.
+As we can see, while increasing the fee multiplier by a factor of 5 yields higher fees, an increase of 10 is almost indistinguishable from an increase of 5.
+In other words, there are diminishing returns to increasing the fee multiplier as we simply reach the upper bound of the fee. 
+This suggests that for dynamic fees to help prevent sandwiches, we would need to rethink the way they are calculated as the current formula is too limited.
+
+# Conclusion
+
+Dynamic fees are currently not an effective deterrent against sandwiches on StableSwap pools although they do affect searchers' profitability and create higher revenue for LPs and the DAO.
+A revision of the current formula could make fees a more efficient deterrent, however any such changes need to be weighed against other considerations in terms of competitiveness, stability and security.
+An important aspect to investigate is how dynamic fees fare at preventing pool imbalances, regardless of MEV activity.
