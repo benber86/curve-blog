@@ -23,7 +23,7 @@ tags:
 - In February 2024, over $7,000 could have been extracted from potentially sandwichable swaps on NG Stableswap pools. More value could also have been extracted by sandwiching liquidity additions and removals. 
 - Dynamic fees would have reduced the profitability of each sandwich by approximately $2.
 - NG Stableswap pools have, since their introduction, generated 10% more in fee revenue than they would have had they used a fixed fee.
-- Making dynamic fees more efficient against sandwiches would require a new formula for their calculation, as currently even large increases to the fee multiplier are unlikely to have a significant effect.
+- Making dynamic fees more efficient against sandwiches would require a new formula for their calculation. Currently even large increases to the fee multiplier are unlikely to have a significant effect.
 
 # Introduction
 
