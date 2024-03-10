@@ -5,10 +5,13 @@ date: 2024-03-06T09:16:45.000Z
 description: "This post compares MEV activity on StableSwap NG pools and pools with the original implementation. It explains dynamic fees and their role in the drastic reduction of certain types of MEV activity on NG pools."
 categories:
   - MEV
+  - Research
   - Pools
 tags:
   - StableSwap
   - NG
+  - Fees
+  - Research
   - MEV
 ---
 
