@@ -2,7 +2,7 @@
 title: "Impact of Dynamic Fees on MEV Activity"
 draft: false
 date: 2024-03-06T09:16:45.000Z
-description: "This post compares MEV activity on StableSwap NG pools and pools with the original implementation. It explains dynamic fees and their impact on certain types of MEV activity on NG pools."
+description: "This post compares MEV activity on StableSwap NG pools and pools with the original implementation. It explains dynamic fees and their impact on certain types of MEV activity."
 categories:
   - MEV
   - Research
