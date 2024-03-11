@@ -12,6 +12,9 @@ tags:
   - Parameters
 ---
 
+
+_Author:_ [benny](https://warpcast.com/bennylada)
+
 <script src="../../js/parameters/poolsim.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 

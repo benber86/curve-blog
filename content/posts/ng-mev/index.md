@@ -15,6 +15,8 @@ tags:
   - MEV
 ---
 
+_Authors:_ [Philipp](https://twitter.com/phil_00llama), [benny](https://warpcast.com/bennylada)
+
 # Key Findings
 
 - Dynamic fees reduce the profitability of sandwiches but have little effect on their overall frequency.
