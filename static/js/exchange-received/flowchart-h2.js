@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         interaction: {
             dragNodes: true,
-            dragView: true,
+            dragView: false,
             zoomView: false,
             selectable: false
         }
