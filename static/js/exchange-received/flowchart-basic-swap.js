@@ -2,27 +2,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const nodes = [
         { id: 1, label: '*User*', color: '#FFA384', shape: 'box', x: 200, y: 150, font: { bold: true } },
         { id: 2, label: '*USDC Token*\n*Contract*', color: '#EFE7BC', shape: 'box', x: 300, y: 300, font: { bold: true } },
-        { id: 3, label: '*ETH/USDC*\n*Pool*', color: '#74BDCB', shape: 'box', x: -100, y: 200, font: { bold: true } },
-        { id: 4, label: '*CRV/ETH*\n*Pool*', color: '#E7F2F8', shape: 'box', fixed: { x: true, y: true }, font: { bold: true } }
+        { id: 3, label: '*WETH/USDC*\n*Pool*', color: '#74BDCB', shape: 'box', x: -100, y: 200, font: { bold: true } }
     ];
 
     const edges = [
         { id: 1, from: 1, to: 2, label: '*Approve*', arrows: 'to', width: 3, color: '#333333' },
-        { id: 2, from: 1, to: 3, label: '*1000 USDC*', arrows: 'to', width: 3, color: '#333333' },
-        { id: 3, from: 3, to: 4, label: '*1 ETH*', arrows: 'to', width: 3, color: '#333333' },
-        { id: 4, from: 1, to: 4, label: '*Call*\n*exchange_received*', arrows: 'to', width: 3, color: '#333333' },
-        { id: 5, from: 4, to: 1, label: '*100 CRV*', arrows: 'to', width: 3, color: '#333333' }
+        { id: 2, from: 1, to: 3, label: '*1000 USDC*\ntransferFrom\nvia\nexchange()', arrows: 'to', width: 3, color: '#333333' },
+        { id: 3, from: 3, to: 1, label: '*1 WETH*\ntransfer\nvia\nexchange()', arrows: 'to', width: 3, color: '#333333' }
     ];
 
     const subtitles = [
-        '1. User approves USDC spending by the ETH/USDC pool before the trade',
-        '2. User swaps 1000 USDC for 1 ETH with CRV/ETH pool as the recipient',
-        '3. 1 ETH is transferred from the ETH/USDC pool to the CRV/ETH pool',
-        '4. User calls exchange_received to swap the extra 1 ETH in the CRV/ETH pool to CRV',
-        '5. User receives 100 CRV after calling exchange_received'
+        'User approves the USDC/WETH pool for spending on the USDC contract',
+        'Pool contract transfers 1000 USDC from the user to itself using transferFrom',
+        'Pool executes the swap and transfers 1 WETH to the user'
     ];
 
-    const container = document.getElementById('graph');
+    const container = document.getElementById('graph-b1');
     const data = {
         nodes: nodes,
         edges: []
@@ -71,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
         interaction: {
             dragNodes: true,
             dragView: true,
-            zoomView: true,
+            zoomView: false,
             selectable: false
         }
     };
@@ -113,10 +108,10 @@ document.addEventListener('DOMContentLoaded', function() {
         animateTraffic();
 
         // Update subtitle
-        document.getElementById('subtitle').textContent = subtitle;
+        document.getElementById('subtitle-b1').textContent = subtitle;
 
         // Update step counter
-        document.getElementById('stepCounter').textContent = `Step: ${step + 1}/${edges.length}`;
+        document.getElementById('stepCounter-b1').textContent = `Step: ${step + 1}/${edges.length}`;
     }
 
     function nextStep() {
@@ -156,11 +151,11 @@ document.addEventListener('DOMContentLoaded', function() {
         clearTimeout(trafficTimeout);
     }
 
-    const prevButton = document.getElementById('prevButton');
-    const nextButton = document.getElementById('nextButton');
-    const playPauseButton = document.getElementById('playPauseButton');
-    const playIcon = document.getElementById('playIcon');
-    const pauseIcon = document.getElementById('pauseIcon');
+    const prevButton = document.getElementById('prevButton-b1');
+    const nextButton = document.getElementById('nextButton-b1');
+    const playPauseButton = document.getElementById('playPauseButton-b1');
+    const playIcon = document.getElementById('playIcon-b1');
+    const pauseIcon = document.getElementById('pauseIcon-b1');
 
     prevButton.addEventListener('click', prevStep);
     nextButton.addEventListener('click', nextStep);
@@ -172,13 +167,11 @@ document.addEventListener('DOMContentLoaded', function() {
             playIcon.style.display = 'none';
             pauseIcon.style.display = 'inline';
             if (currentStep == edges.length - 1) {
-
                 currentStep = 0;
                 network.body.data.edges.clear();
                 showStep(currentStep);
                 setTimeout(startAnimation, 3 * 2000);
-            }
-            else {
+            } else {
                 startAnimation();
             }
         }
