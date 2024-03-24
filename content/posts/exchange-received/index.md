@@ -207,6 +207,7 @@ The actual gas amounts for ERC20 functions like `transfer`, `approve` and `trans
 Here we use the same Vyper implementation for all tokens.
 
 #### Regular swap with approval and `exchange()`
+<div style="overflow: auto">
 
 | **Contract**         | **Address**    | **Computation**  | **Gas**    |
 |----------------------|------------|--------------|--------|
@@ -217,6 +218,7 @@ Here we use the same Vyper implementation for all tokens.
 | ERC20.vy  (Token B)  | 0x2cb6bC...| transfer     | 6455   |
 | **Total**            |            |              | **93859**  |
 
+</div>
 A "traditional" swap using the `exchange` function preceded by an approval will cost the user 93,859 gas.
 The user benefits from some gas savings on `transferFrom` as the trades uses up the whole allowance.
 Indeed, swapping for the same amount as the approval sets to zero the storage slot on the token's contract where the allowance amount is saved, [resulting in a 15k refund](https://www.zaryabs.com/clear-storage-and-get-incentivized-by-ethereum-blockchain/).
@@ -230,6 +232,8 @@ This is because we are merely decreasing the amount the contract is allowed to s
 This effectively negates the gas saved from not using an approval transaction in the first place.
 In fact, because the user still had to run an initial transaction to set an infinite approval (about 20k in gas + 21k for the transaction), using infinite approvals turns out to be *more expensive* gas wise than doing a limited approval before every transaction.
 
+<div style="overflow: auto">
+
 | Contract             | Address    | Computation    | Gas   |
 |----------------------|------------|----------------|-------|
 | CurveStableSwapNG.vy | 0xB82216...| exchange       | 80355 |
@@ -238,11 +242,16 @@ In fact, because the user still had to run an initial transaction to set an infi
 | ERC20.vy (Token B)   | 0x2cb6bC...| transfer       | 6455  |
 | **Total**            |            |                | **93703** |
 
+</div>
+
 ### Swap with `exchange_received` and no approvals
 
 Using `exchange_received`, we do not need to run an approval transaction. 
 Instead, we simply use a transfer which is four times cheaper.
 We do not get any gas refunds, but the total cast is about 8k cheaper compared to the regular `exchange` way.
+
+
+<div style="overflow: auto">
 
 | Contract             | Address    | Computation        | Gas   |
 |----------------------|------------|--------------------|-------|
@@ -252,6 +261,7 @@ We do not get any gas refunds, but the total cast is about 8k cheaper compared t
 | ERC20.vy (Token B)   | 0x2cb6bC...| transfer           | 6455  |
 | **Total**            |            |                    | **86026** |
 
+</div>
 
 ## Saving More With Less Transfers
 
@@ -370,6 +380,9 @@ Using boa's [gas profiling](https://try.vyperlang.org/hub/user-redirect/lab/tree
 
 ### Swapping with `exchange` and approvals
 
+
+<div style="overflow: auto">
+
 | Contract             | Address     | Computation  | Gas    |
 |----------------------|-------------|--------------|--------|
 | ERC20.vy (USDC)      | 0x42127D... | approve      | 24056  |
@@ -384,12 +397,16 @@ Using boa's [gas profiling](https://try.vyperlang.org/hub/user-redirect/lab/tree
 | ERC20.vy (CRV)       | 0x548b13... | transfer     | 6455   |
 | **Total**                |             |              | **208550** |
 
----
+</div>
+
 
 Here `transferFrom` again results in gas refunds as it clears the allowance storage (-15k), and in the case of WETH, the balance storage slot as well (another -15k, since we swap all the WETH received, the balance goes to 0).
 However this does not fully offset the added costs of the approvals and additional transfers.
 
 ### Swapping with `exchange_received`
+
+
+<div style="overflow: auto">
 
 | Contract             | Address       | Computation         | Gas     |
 |----------------------| ------------- | ------------------- | ------- |
@@ -401,6 +418,8 @@ However this does not fully offset the added costs of the approvals and addition
 | ERC20.vy (WETH)      | 0xBD228f...   | balanceOf             | 3       |
 | ERC20.vy (CRV)       | 0x548b13...   | transfer            | 6455    |
 | **Total**            |               |                     | **170517**  |
+
+</div>
 
 With `exchange_received`, we save on approvals, extra transfer and the swap operation itself for a total of 38k gas savings compared to `exchange`.
 
