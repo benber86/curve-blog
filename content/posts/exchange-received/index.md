@@ -30,12 +30,12 @@ _Authors:_ [mo](#), [benny](https://warpcast.com/bennylada)
 
 
 The `exchange_received` function introduces a novel approach to exchanging tokens based on balance changes within AMMs, rather than the traditional method based on the transfer of tokens within the same function call. 
-This apporach is particularly targeted at DEX aggregators or arbitrageurs, as it presents two considerable advantages. 
+This approach is particularly targeted at DEX aggregators or arbitrageurs, as it presents two considerable advantages. 
 First, the function eliminates the need for granting approval to the AMM contract, reducing gas costs, or, for users usually giving unlimited approvals, drastically reducing the risk of having their funds stolen if the contract were ever to be compromised.
 Second, for any transaction involving multiple swaps across several pools, the transaction can eliminate one or more ERC-20 transfers, again significantly reducing gas costs.
 
-The function is available for all new generation (ng) pools of Curve, including[Twocrypto-ng](https://github.com/curvefi/twocrypto-ng) pools and [Stableswap-ng pools](https://github.com/curvefi/stableswap-ng) (except for rebasing tokens and underlying trades on metapools).
-However, as of March 2024, it has never been used once.
+The function is available for all new generation (ng) pools of Curve, including [Twocrypto-ng](https://github.com/curvefi/twocrypto-ng) pools and [Stableswap-ng pools](https://github.com/curvefi/stableswap-ng) (except for rebasing tokens and underlying trades on metapools).
+However, as of March 2024, it is hardly ever used.
 This article and the [associated notebooks](https://try.vyperlang.org/hub/user-redirect/lab/tree/shared/mo-anon/hop_exchange_received.ipynb) explain how the function works and how to use it. 
 We start with a high-level overview before delving into the technicals.
 
@@ -43,10 +43,10 @@ We start with a high-level overview before delving into the technicals.
 
 In a traditional swap set-up, a user must first allow the pool to take a certain amount of tokens from their wallet before they can execute a swap and receive the output token.
 This preliminary step is known as an [approval](https://help.1inch.io/en/articles/6147312-token-approvals).
-Once a user has allowed a pool's contract to withdraw tokens from their wallet, they can call the pool's `exchange` function to execute a swap.
+Once a user has allowed a pool's contract to withdraw tokens from their wallet, they can then call the pool's `exchange` function to execute a swap.
 The swap will withdraw from the user's wallet using the `transferFrom` ERC-20 function, execute the swap, and transfer the amount of output token to the user's wallet.
 
-Using an example set up in which a user swaps 1000 USDC for 1 WETH, we can illustrate the process with the following flow chart:
+Using an example setup in which a user swaps 1000 USDC for 1 WETH, we can illustrate the process with the following flow chart:
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
 <script type="text/javascript" src="../../js/exchange-received/vis.animateTraffic.js"></script>
@@ -133,7 +133,7 @@ The pool executes the swap, but this time without `transferFrom` withdrawing tok
 Instead the pool will use the extra 1000 USDC that was just added to its balances.
 After calculating the appropriate amount of output token (in our case 1 WETH), the pool transfers that amount back to the user.
 
-This process is summed up in the flow chart below: 
+This process is summarized in the flow chart below: 
 
 <script src="../../js/exchange-received/flowchart-basic-received.js"></script>
 <style>
@@ -179,34 +179,34 @@ This process is summed up in the flow chart below:
 </div>
 
 
-## What's the Point ?
+## What's the Point?
 
 The advantages of using `exchange_received` may not immediately be obvious.
-After all, just like with the usual `exchange` method, the process requires 2 transactions, so it's not any simpler.
+After all, just like with the usual `exchange` method, the process requires two transactions, so it's not any simpler.
 There are, however, two main advantages to using `exchange_received` over `exchange`: _security_ and _gas costs_.
 
 ### Security
 
-The security benefits of `exchange_received` come from not having to use approvals. 
-If you allow a contract to spend a certain amount of your tokens and the contract is somehow compromised by an attacker, this attacker now potentially has license to use your funds in any way they see fit.
-In the first 2 months of 2024 alone, over $10m was stolen from users who had given infinite approvals to [compromised](https://protos.com/seneca-protocol-hack-highlights-dangers-of-ethereums-token-approval-mechanism/) [contracts](https://cointelegraph.com/news/socket-protocol-loses-3-3-million-confirmed-approval-exploit).
-And in March, [Paraswap](https://twitter.com/paraswap/status/1770313086072742263) ran a whitehat hack to proect over $2m of user funds that were at risk due to infinite approvals to its new Augustus V6 contract.
+The security benefits of `exchange_received` come from not having to grant approvals. 
+If you allow a contract to spend a certain amount of your tokens and the contract is somehow compromised by an attacker, this attacker could potentially have the ability to use your funds in any way they see fit.
+In the first two months of 2024 alone, over $10m was stolen from users who had given infinite approvals to [compromised](https://protos.com/seneca-protocol-hack-highlights-dangers-of-ethereums-token-approval-mechanism/) [contracts](https://cointelegraph.com/news/socket-protocol-loses-3-3-million-confirmed-approval-exploit).
+And in March, [Paraswap](https://twitter.com/paraswap/status/1770313086072742263) ran a whitehat hack to protect over $2m of user funds that were at risk due to infinite approvals to its new Augustus V6 contract.
 With [60% of approval transactions on Ethereum](https://arxiv.org/pdf/2207.01790.pdf) being infinite approvals, this is a real security risk facing most DeFi users.
-It is also particularly dangerous for arbitrageurs who may hold large quantity of a token in their wallet and might need to use infinite approvals to save on gas. 
+It is also particularly dangerous for arbitrageurs who may hold large quantities of a token in their wallet and might need to use infinite approvals to save on gas. 
 
 Of course, it is possible to *not* use infinite approvals.
 A user can simply approve the amount they need and execute their swap.
-This, however, costs more gas as the approval needs to be renewed with every transaction, leading us to our second benefit.
+This, however, costs more gas as the approval needs to be renewed for every transaction, leading us to our second benefit.
 
 ### Gas costs
 
 An approval transaction costs about twice as much as a transfer transaction, making `exchange_received` a naturally cheaper option.
-But to better quantify just how much gas a user can save, we can use boa's gas profiler on different scenario.
+But to better quantify just how much gas a user can save, we can use boa's gas profiler on different scenarios.
 The code used to generate the tables below is available in [this notebook on try.vyperlang.org](https://try.vyperlang.org/hub/user-redirect/lab/tree/Gas%20Profile%20Public%20Variable-Copy1.ipynb)
 The actual gas amounts for ERC20 functions like `transfer`, `approve` and `transferFrom` may vary in practice depending on the token contract's language and implementation.
 Here we use the same Vyper implementation for all tokens.
 
-#### Regular swap with approval and `exchange()`
+#### Regular swap with approval and `exchange`
 <div style="overflow: auto">
 
 | **Contract**         | **Address**    | **Computation**  | **Gas**    |
@@ -220,11 +220,11 @@ Here we use the same Vyper implementation for all tokens.
 
 </div>
 A "traditional" swap using the `exchange` function preceded by an approval will cost the user 93,859 gas.
-The user benefits from some gas savings on `transferFrom` as the trades uses up the whole allowance.
+The user benefits from some gas savings on `transferFrom` as the trade uses up the whole allowance.
 Indeed, swapping for the same amount as the approval sets to zero the storage slot on the token's contract where the allowance amount is saved, [resulting in a 15k refund](https://www.zaryabs.com/clear-storage-and-get-incentivized-by-ethereum-blockchain/).
 If we had only partially spent the allowance, for instance because we used an infinite approval before, we would not have received any refunds.
 
-### Regular swap with `exchange()` only after infinite approval
+### Regular swap with `exchange` only after infinite approval
 
 This scenario of a previous infinite approval results in the gas costs in the table below.
 With an infinite approval, `transferFrom` now goes from giving the user a 15k gas refund to costing the user about 7k.
@@ -248,7 +248,7 @@ In fact, because the user still had to run an initial transaction to set an infi
 
 Using `exchange_received`, we do not need to run an approval transaction. 
 Instead, we simply use a transfer which is four times cheaper.
-We do not get any gas refunds, but the total cast is about 8k cheaper compared to the regular `exchange` way.
+We do not get any gas refunds, but the total cost is about 8k cheaper compared to the regular `exchange` way.
 
 
 <div style="overflow: auto">
@@ -442,11 +442,11 @@ This also means that if a user mistakenly sends the pools tokens, it is possible
 
 ## How does `exchange_received` work under the hood?
 
-To grasp the mechanics behind the `exchange_received` function and its approach to handling transfers, it's essential to initially explore the operational fundamentals of exchanges within Curve pools.
+To understand the mechanics behind the `exchange_received` function and its approach to handling transfers, it's essential to initially explore the operational fundamentals of exchanges within Curve pools.
 
 The `exchange_received` function handles the exchange of two coins within an AMM, much like the standard `exchange` function.
-In fact, both functions share the almost same logic. 
-Looking at the NG pool's [reference implementation](https://github.com/curvefi/stableswap-ng/blob/ec972b331da21d919f78943e00bf9398970eca54/contracts/main/CurveStableSwapNG.vy) we can indeed see that both functions call the same internal `_exchange` function under the hood.
+In fact, both functions share almost the same logic. 
+Looking at the NG pool's [reference implementation](https://github.com/curvefi/stableswap-ng/blob/ec972b331da21d919f78943e00bf9398970eca54/contracts/main/CurveStableSwapNG.vy), we can indeed see that both functions call the same internal `_exchange` function under the hood.
 The only difference is the last argument passed to `_exchange`. 
 Named `expect_optimistic_transfer`, the argument is set to _True_ for `exchange_received` and _False_ for `exchange`:
 
@@ -628,7 +628,7 @@ It only records tokens that were transfered to or withdrawn from the pool throug
 It also keeps track of the fees accumulated by the pool and that will later be withdrawn and redistributed to veCRV holders.
 
 In effect, `stored_balances` is thus equal to the pool's liquidity reserves plus the pool's admin fees pending withdrawal.
-When we access `stored_balnces[0]`, then, we get the amount of coin 0 liquidity plus the amount of fees accrued in coin 0.
+When we access `stored_balances[0]`, then, we get the amount of coin 0 liquidity plus the amount of fees accrued in coin 0.
 By contrast when we call `balanceOf(pool_address)` on coin 0's contract, we get the total amount of coin 0 tokens in the pool.
 
 Those two values are not always equivalent, if someone directly transfers tokens into the pool without adding liquidity or swapping, then `coin0.balanceOf(pool_address)` will be greater than `stored_balances[0]`.
