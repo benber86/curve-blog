@@ -219,9 +219,10 @@ Here we use the same Vyper implementation for all tokens.
 | **Total**            |            |              | **93859**  |
 
 </div>
+
 A "traditional" swap using the `exchange` function preceded by an approval will cost the user 93,859 gas.
 The user benefits from some gas savings on `transferFrom` as the trade uses up the whole allowance.
-Indeed, swapping for the same amount as the approval sets to zero the storage slot on the token's contract where the allowance amount is saved, [resulting in a 15k refund](https://www.zaryabs.com/clear-storage-and-get-incentivized-by-ethereum-blockchain/).
+Indeed, swapping for the same amount as the approval sets to zero the storage slot on the token's contract where the allowance amount is saved resulting in a [15k refund](https://www.zaryabs.com/clear-storage-and-get-incentivized-by-ethereum-blockchain). 
 If we had only partially spent the allowance, for instance because we used an infinite approval before, we would not have received any refunds.
 
 ### Regular swap with `exchange` only after infinite approval
