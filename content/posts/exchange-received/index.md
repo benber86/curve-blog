@@ -1,7 +1,7 @@
 ---
 title: "How to Do Cheaper, Approval-Free Swaps"
 draft: false
-date: 2024-03-19T09:25:45.000Z
+date: 2024-03-24T09:25:45.000Z
 ogimage: "/images/exchange-received/img.png"
 description: "A deep dive into the exchange_received function on NG pools which allows users to trade without approvals and can significantly reduce transaction gas costs."
 categories:
