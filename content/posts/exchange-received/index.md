@@ -34,7 +34,7 @@ This approach is particularly targeted at DEX aggregators or arbitrageurs, as it
 First, the function eliminates the need for granting approval to the AMM contract, reducing gas costs, or, for users usually giving unlimited approvals, drastically reducing the risk of having their funds stolen if the contract were ever to be compromised.
 Second, for any transaction involving multiple swaps across several pools, the transaction can eliminate one or more ERC-20 transfers, again significantly reducing gas costs.
 
-The function is available for all new generation (ng) pools of Curve, including [Twocrypto-ng](https://github.com/curvefi/twocrypto-ng) pools and [Stableswap-ng pools](https://github.com/curvefi/stableswap-ng) (except for rebasing tokens and underlying trades on metapools).
+The function is available for all new generation (ng) pools of Curve, including [Twocrypto-ng](https://github.com/curvefi/twocrypto-ng) pools, [Stableswap-ng pools](https://github.com/curvefi/stableswap-ng) (except for rebasing tokens and underlying trades on metapools) and Tricrypto-ng (with deployment index 1 on non ethereum chains).
 However, as of March 2024, it is hardly ever used.
 This article and the [associated notebooks](https://try.vyperlang.org/hub/user-redirect/lab/tree/shared/mo-anon/hop_exchange_received.ipynb) explain how the function works and how to use it. 
 We start with a high-level overview before delving into the technicals.
