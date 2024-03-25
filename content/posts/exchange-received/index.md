@@ -202,7 +202,7 @@ This, however, costs more gas as the approval needs to be renewed for every tran
 
 An approval transaction costs about twice as much as a transfer transaction, making `exchange_received` a naturally cheaper option.
 But to better quantify just how much gas a user can save, we can use boa's gas profiler on different scenarios.
-The code used to generate the tables below is available in [this notebook on try.vyperlang.org](https://try.vyperlang.org/hub/user-redirect/lab/tree/Gas%20Profile%20Public%20Variable-Copy1.ipynb)
+The code used to generate the tables below is available in [this notebook on try.vyperlang.org](https://try.vyperlang.org/hub/user-redirect/lab/tree/shared/benber86/Gas_Profile_Exchange_Vs_Exchange_Received.ipynb)
 The actual gas amounts for ERC20 functions like `transfer`, `approve` and `transferFrom` may vary in practice depending on the token contract's language and implementation.
 Here we use the same Vyper implementation for all tokens.
 
@@ -237,7 +237,7 @@ In fact, because the user still had to run an initial transaction to set an infi
 | Contract             | Address    | Computation    | Gas   |
 |----------------------|------------|----------------|-------|
 | CurveStableSwapNG.vy | 0xB82216...| exchange       | 80355 |
-| ERC20.vy (Token A)   | 0x0880cf...| unnamed        | 3     |
+| ERC20.vy (Token A)   | 0x0880cf...| balanceOf        | 3     |
 | ERC20.vy (Token A)   | 0x0880cf...| transferFrom   | 6890  |
 | ERC20.vy (Token B)   | 0x2cb6bC...| transfer       | 6455  |
 | **Total**            |            |                | **93703** |
@@ -257,7 +257,7 @@ We do not get any gas refunds, but the total cost is about 8k cheaper compared t
 |----------------------|------------|--------------------|-------|
 | ERC20.vy (Token A)   | 0x0880cf...| transfer           | 6455  |
 | CurveStableSwapNG.vy | 0xB82216...| exchange_received  | 73113 |
-| ERC20.vy (Token A)   | 0x0880cf...| unnamed            | 3     |
+| ERC20.vy (Token A)   | 0x0880cf...| balanceOf            | 3     |
 | ERC20.vy (Token B)   | 0x2cb6bC...| transfer           | 6455  |
 | **Total**            |            |                    | **86026** |
 
@@ -376,7 +376,7 @@ The steps are summed up below:
 </div>
 
 The second workflow is not only simpler it also ends up costing 38k less gas.
-Using boa's [gas profiling](https://try.vyperlang.org/hub/user-redirect/lab/tree/Gas%20Profile%20Multi%20Hop.ipynb) again, we can print out gas usage tables for each of the two process.
+Using boa's [gas profiling](https://try.vyperlang.org/hub/user-redirect/lab/tree/shared/benber86/Gas%20Profile%20Multi%20Hop.ipynb) again, we can print out gas usage tables for each of the two process.
 
 ### Swapping with `exchange` and approvals
 
@@ -636,7 +636,7 @@ Therefore, when we substract `stored_balances` from `_dx` (the pool's total toke
 This "surplus" is then what is used to execute the swap.
 
 This critical distinction between `stored_balances` and `balanceOf` underpins the functionality of exchange_received. 
-To better understand it, [this notebook](https://try.vyperlang.org/user/mo-anon/lab/tree/stored_balances.ipynb) showcases how each changes during the execution of an `exchange_received` trade.
+To better understand it, [this notebook](https://try.vyperlang.org/hub/user-redirect/lab/tree/shared/mo-anon/stored_balances.ipynb) showcases how each changes during the execution of an `exchange_received` trade.
 
 ### Transfer logic with `exchange` (`expect_optimistic_transfer==False`)
 
