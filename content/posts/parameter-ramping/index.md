@@ -2,7 +2,7 @@
 title: "Parameter Ramping"
 draft: false
 date: 2024-02-11T09:16:45.000Z
-ogimage: "/images/parameter-ramping/img.png"
+ogimage: "https://blog.curvemonitor.com/images/parameter-ramping/img.png"
 description: "Why aren't parameter changes on Curve pools applied instantly? This post dwelves into the reasons behind gradual parameter changes."
 categories:
   - Parameters
