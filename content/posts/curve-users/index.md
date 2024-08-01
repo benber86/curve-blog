@@ -1,5 +1,5 @@
 ---
-title: "Who are Curve Users?"
+title: "Who are Curve's Users?"
 draft: false
 date: 2024-07-29T09:25:45.000Z
 ogimage: "https://blog.curvemonitor.com/images/exchange-received/img.png"
@@ -128,4 +128,13 @@ DAO participants, for instance are also active users of all of Curve's products:
 
 Compared to DEX products users, lending products users are more involved in the DAO and more likely to use other Curve products.
 This suggests that current lending users are still mostly people already familiar with the protocol and that more efforts are needed to bring on new users.
+
+The vast majority of users, however, only uses a single product:
+
+<script src="../../js/curve-users/productuse.js"></script>
+<div>
+<span>Select a chain: </span> <select id="chainSelectUsersCount"></select>
+</div>
+<canvas id="userCountChart"></canvas>
+
 
