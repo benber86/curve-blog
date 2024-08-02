@@ -137,4 +137,12 @@ The vast majority of users, however, only uses a single product:
 </div>
 <canvas id="userCountChart"></canvas>
 
+In fact, most users only ever perform a single transaction:
+
+<script src="../../js/curve-users/txhist.js"></script>
+<div>
+    <span>Select a chain: </span><select id="chainSelectTransactionHistogram"></select>
+    <span>Select a product: </span><select id="productSelectTransactionHistogram"></select>
+</div>
+<canvas id="transactionHistogramChart"></canvas>
 
