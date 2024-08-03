@@ -146,3 +146,39 @@ In fact, most users only ever perform a single transaction:
 </div>
 <canvas id="transactionHistogramChart"></canvas>
 
+## Experience
+
+Curve is a complex protocol, but that complexity varies between products.
+Consequently, we might expect that the users of each product will have different levels of DeFi literacy. 
+While such a metric is hard to quantify, we can use each user's wallet age as a proxy for their overall on-chain experience, with the assumption that older wallets will be more familiar with DeFi.
+
+<script src="https://unpkg.com/@sgratzl/chartjs-chart-boxplot@3"></script>
+<script src="../../js/curve-users/violin.js"></script>
+<canvas id="violinChart"></canvas>
+
+
+## Wealth
+
+<script src="../../js/curve-users/wealthviolin.js"></script>
+<canvas id="wealthViolinChart"></canvas>
+
+
+| Metric | LP | Trading | UI Router | Lending | crvUSD | DAO |
+|--------|----|---------|-----------|---------|---------|----|
+| Gini coefficient | 85.98 | 89.45 | 87.30 | 84.30 | 86.51 | 91.67 |
+| % above 100k | 25.83% | 19.90% | 20.81% | 30.55% | 22.11% | 49.16% |
+| % above 1m | 8.37% | 6.06% | 5.98% | 8.22% | 5.65% | 17.27% |
+| Mean | 631.5k | 495.7k | 392.3k | 649.6k | 414.9k | 4.1m |
+| Min | 0 | 0 | 0 | 0 | 0 | 62.42 |
+| 25% | 1.6k | 515.21 | 91.13 | 1.8k | 193.48 | 22.4k |
+| 50% | 12.4k | 6.1k | 3.4k | 20.4k | 12.6k | 98.1k |
+| 75% | 109.8k | 55.2k | 62.8k | 141.2k | 72.8k | 482.8k |
+| Max | 106.3m | 82.3m | 114.7m | 75m | 62.2m | 1.1b |
+
+%age of net worth on ethereum
+
+<script src="../../js/curve-users/ethworthviolin.js"></script>
+<div>
+    <span>Select a chain: </span><select id="ethWorthChainSelector"></select>
+</div>
+<canvas id="ethWorthViolinChart"></canvas>

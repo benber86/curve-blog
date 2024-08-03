@@ -59,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function () {
             i++;
         });
 
-        console.log(datasets);
         drawDynamicFeesMultiplierChart(datasets);
     }
 
