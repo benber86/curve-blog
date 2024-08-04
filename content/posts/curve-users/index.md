@@ -163,17 +163,16 @@ While such a metric is hard to quantify, we can use each user's wallet age as a 
 <canvas id="wealthViolinChart"></canvas>
 
 
-| Metric | LP | Trading | UI Router | Lending | crvUSD | DAO |
-|--------|----|---------|-----------|---------|---------|----|
+| Metric           | LP | Trading | UI Router | Lending | crvUSD | DAO |
+|------------------|----|---------|-----------|---------|---------|----|
+| Mean             | 631.5k | 495.7k | 392.3k | 649.6k | 414.9k | 4.1m |
+| Q1 (25%)         | 1.6k | 515.21 | 91.13 | 1.8k | 193.48 | 22.4k |
+| Median           | 12.4k | 6.1k | 3.4k | 20.4k | 12.6k | 98.1k |
+| Q2 (75%)         | 109.8k | 55.2k | 62.8k | 141.2k | 72.8k | 482.8k |
+| Max              | 106.3m | 82.3m | 114.7m | 75m | 62.2m | 1.1b |
 | Gini coefficient | 85.98 | 89.45 | 87.30 | 84.30 | 86.51 | 91.67 |
-| % above 100k | 25.83% | 19.90% | 20.81% | 30.55% | 22.11% | 49.16% |
-| % above 1m | 8.37% | 6.06% | 5.98% | 8.22% | 5.65% | 17.27% |
-| Mean | 631.5k | 495.7k | 392.3k | 649.6k | 414.9k | 4.1m |
-| Min | 0 | 0 | 0 | 0 | 0 | 62.42 |
-| 25% | 1.6k | 515.21 | 91.13 | 1.8k | 193.48 | 22.4k |
-| 50% | 12.4k | 6.1k | 3.4k | 20.4k | 12.6k | 98.1k |
-| 75% | 109.8k | 55.2k | 62.8k | 141.2k | 72.8k | 482.8k |
-| Max | 106.3m | 82.3m | 114.7m | 75m | 62.2m | 1.1b |
+| % above 100k     | 25.83% | 19.90% | 20.81% | 30.55% | 22.11% | 49.16% |
+| % above 1m       | 8.37% | 6.06% | 5.98% | 8.22% | 5.65% | 17.27% |
 
 %age of net worth on ethereum
 
@@ -182,3 +181,14 @@ While such a metric is hard to quantify, we can use each user's wallet age as a 
     <span>Select a chain: </span><select id="ethWorthChainSelector"></select>
 </div>
 <canvas id="ethWorthViolinChart"></canvas>
+
+Hour glass shape overall really shows that most users keep their wealth on the chain on which they interact with Curve
+
+## Gateway
+
+movethis and protocols to under products
+
+## Other protocols used
+
+
+## Profiles

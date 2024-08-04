@@ -56,7 +56,7 @@ function ethWorthCreateViolinChart(selectedChain) {
                 },
                 title: {
                     display: true,
-                    text: `Distribution of wallets' net worth per product for < $100k worth wallets (${selectedChain})`
+                    text: `Distribution of the proportion of users' net worth kept on Ethereum mainnet vs other chains (${selectedChain})`
                 },
                 tooltip: {
                     callbacks: {
@@ -92,7 +92,7 @@ function ethWorthCreateViolinChart(selectedChain) {
                 y: {
                     title: {
                         display: true,
-                        text: 'Wallet net worth in months'
+                        text: '%age of wallet net worth held on ethereum mainnet'
                     }
                 }
             }
