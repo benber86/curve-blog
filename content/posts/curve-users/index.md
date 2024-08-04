@@ -184,11 +184,20 @@ While such a metric is hard to quantify, we can use each user's wallet age as a 
 
 Hour glass shape overall really shows that most users keep their wealth on the chain on which they interact with Curve
 
-## Gateway
+## Gateway Products
 
 movethis and protocols to under products
 
 ## Other protocols used
 
+Based on their positions in early August 2024 as reported by Debank. Positions on other protocols worth less than $100 were filtered out.
+What's interesting is also what's not there (or insignificant): for instance Curve LPs very rarely LP on other DEXes such as Uniswap or Velodrome
+
+<script src="../../js/curve-users/protoverlap.js"></script>
+<div>
+    <span>Select a chain: </span><select id="chainSelectOverlap"></select>
+<span>Select a product: </span><select id="productSelectOverlap"></select>
+</div>
+<canvas id="overlapBarChart" style="height: 200px;"></canvas>
 
 ## Profiles
