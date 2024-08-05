@@ -30,7 +30,7 @@ function createTransitionsHeatmap(data, selectedChain) {
         },
         colors: ["#FFB3BA"],
         title: {
-            text: `Transitions Between Curve Products (%) on ${selectedChain === 'all' ? 'all chains' : selectedChain}`
+            text: `Transitions Between Curve Products on ${selectedChain === 'all' ? 'all chains' : selectedChain}`
         },
         xaxis: {
             type: 'category',

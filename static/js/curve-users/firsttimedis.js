@@ -1,58 +1,57 @@
 const firstTimeUsersData = {
-    'all': {
-        'DAO': 83.69,
-        'LP': 56.36,
-        'Lending': 83.69,
-        'Trading': 34.56,
-        'UI Router': 43.51,
-        'crvUSD': 80.29
+    "all": {
+        "DAO": 0.8369,
+        "LP": 0.5636,
+        "Lending": 0.8369,
+        "Trading": 0.3456,
+        "UI Router": 0.4351,
+        "crvUSD": 0.8029000000000001
     },
-    'ethereum': {
-        'DAO': 83.69,
-        'LP': 58.37,
-        'Lending': 75.15,
-        'Trading': 34.43,
-        'UI Router': 34.14,
-        'crvUSD': 80.29
+    "ethereum": {
+        "DAO": 0.8369,
+        "LP": 0.5837,
+        "Lending": 0.7515000000000001,
+        "Trading": 0.3443,
+        "UI Router": 0.3414,
+        "crvUSD": 0.8029000000000001
     },
-    'polygon': {
-        'LP': 35.19,
-        'Trading': 18.58,
-        'UI Router': 35.69
+    "polygon": {
+        "LP": 0.3519,
+        "Trading": 0.1858,
+        "UI Router": 0.3569
     },
-    'arbitrum': {
-        'LP': 59.78,
-        'Lending': 89.90,
-        'Trading': 28.47,
-        'UI Router': 38.21
+    "arbitrum": {
+        "LP": 0.5978,
+        "Lending": 0.899,
+        "Trading": 0.2847,
+        "UI Router": 0.3821
     },
-    'optimism': {
-        'LP': 38.66,
-        'Trading': 55.50,
-        'UI Router': 32.00
+    "optimism": {
+        "LP": 0.38659999999999994,
+        "Trading": 0.555,
+        "UI Router": 0.32
     },
-    'base': {
-        'LP': 52.02,
-        'Trading': 64.51,
-        'UI Router': 34.68
+    "base": {
+        "LP": 0.5202,
+        "Trading": 0.6451,
+        "UI Router": 0.3468
     },
-    'fantom': {
-        'LP': 38.41,
-        'Trading': 27.47,
-        'UI Router': 44.53
+    "fantom": {
+        "LP": 0.38409999999999994,
+        "Trading": 0.2747,
+        "UI Router": 0.44530000000000003
     },
-    'fraxtal': {
-        'LP': 61.86,
-        'Trading': 60.00,
-        'UI Router': 66.58
+    "fraxtal": {
+        "LP": 0.6186,
+        "Trading": 0.6,
+        "UI Router": 0.6658
     },
-    'xdai': {
-        'LP': 47.15,
-        'Trading': 19.19,
-        'UI Router': 49.80
+    "xdai": {
+        "LP": 0.4715,
+        "Trading": 0.19190000000000002,
+        "UI Router": 0.498
     }
 };
-
 
 const percentageData = {
     'all': {'UI Router': 50.871259649501845,

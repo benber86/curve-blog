@@ -149,8 +149,6 @@ Fraxtal is the exception for L2s with 74% of returning users.
 </div>
 <canvas id="transactionHistogramChart"></canvas>
 
-Liquidity providers and lending/crvUSD users are more likely than traders to do 2 transactions - but that's because closing a position requires another transaction.
-LPs or lending/crvUSD users with a single transactions still have a position open
 
 ## Gateway Products
 
@@ -160,11 +158,7 @@ It also accounts for more first-time transactions compared to other products.
 But does it manage to turn those first time users into long-term users of the protocols?
 Does it lead first-time users to try out other Curve products?
 
-But are some products better at retaining users than others?
-Do some products lead their users to try out more of Curve's products?
-To try to answer this, we can look at the survival rate of users depending on what product they first interacted with.
-Will they stop using Curve, or go on to make 1 or more, 2 or more, etc. transactions?
-
+The data shows that the UI router is, in fact, not much of a gateway product:
 
 <script src="../../js/curve-users/firsttimedis.js"></script>
 <div style="margin-bottom: 20px;">
@@ -181,15 +175,33 @@ Will they stop using Curve, or go on to make 1 or more, 2 or more, etc. transact
     </div>
 </div>
 
+Users who start using Curve by trading through the UI are often less likely to keep on using the protocol.
+On the other hand, crvUSD and Lending users and -- to a lesser extent -- liquidity providers are much more likely to come back and do more transactions.
 
+One could argue that liquidity providers and lending/crvUSD users are more likely than traders to do 2 transactions because closing a position requires another transaction.
+To see if users of these products really are stickier, we can plot the user survival rate over a longer time period.
+We calculate the probability that a user who started using Curve with a certain product will go on to stop using the product or do 1 or more, 2 or more, etc. transactions:
+<script src="../../js/curve-users/survival.js"></script>
+
+<div style="margin-bottom: 20px;">
+
+<select id="survivalChainSelector"></select>
+</div>
+<div style="margin-bottom: 20px;">
+<canvas id="survivalChart"></canvas>
+</div>
+
+From the chart, it's clear that this phenomenon applies to LP.
+There's a higher probability that an LP will make a second transaction rather than stop using the product, but after the second transaction, probabilities plummet to levels similar to Trading and UI Router.
+Lending and crvUSD users, are much more likely to continue performing more transactions over the long term.
 
 Instead of simply tracking repeat users, we can also look for products whose first-time users are more likely to later try out other products.
 We can compute the probability that users who first interact with Curve through a certain product will go on to try a different product:
 
-Traders who use the UI are less likely to return to Curve to use other products.
-Overall the main gateway products are Trading and Lending, but there are differences between chains.
+Overall when considering cross-product adoption, the main gateways are Trading and Lending, but there are differences between chains.
 On Ethereum mainnet, a user who first start trading on Curve via the contracts or aggregators is hihgly likely to use another product in the future.
 On L2s, the main gateway product is providing liquidity, although the probability of switching to another product are relatively lower.
+
 
 We can further break this down by product:
 
