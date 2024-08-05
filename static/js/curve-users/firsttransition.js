@@ -44,7 +44,7 @@ function createTransitionsHeatmap(data, selectedChain) {
                 formatter: function (value, {seriesIndex, dataPointIndex, w}) {
                     let x = w.config.xaxis.categories[dataPointIndex];
                     let y = w.config.series[seriesIndex].name;
-                    return `${value}% of ${y} users transition to ${x} ${selectedChain === 'all' ? '' : 'on ' + selectedChain}`;
+                    return `${value}% of users starting with ${x} go on to use ${y} ${selectedChain === 'all' ? '' : 'on ' + selectedChain}`;
                 },
                 title: {
                     formatter: () => ''
