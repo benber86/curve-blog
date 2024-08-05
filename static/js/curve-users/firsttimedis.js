@@ -1,25 +1,74 @@
 const firstTimeUsersData = {
-    'all': {'UI Router': 61220, 'Trading': 28706, 'LP': 28372, 'crvUSD': 1478, 'Lending': 374, 'DAO': 193},
-    'ethereum': {'UI Router': 21179, 'Trading': 20904, 'LP': 19615, 'crvUSD': 1478, 'DAO': 193, 'Lending': 122},
-    'polygon': {'UI Router': 12005, 'LP': 2684, 'Trading': 1427},
-    'arbitrum': {'UI Router': 8078, 'Trading': 3872, 'LP': 3262, 'Lending': 252},
-    'optimism': {'UI Router': 2987, 'Trading': 1211, 'LP': 1136},
-    'base': {'UI Router': 16316, 'LP': 1343, 'Trading': 287},
-    'fantom': {'Trading': 421, 'UI Router': 344, 'LP': 200},
-    'fraxtal': {'UI Router': 147, 'LP': 60, 'Trading': 46},
-    'xdai': {'Trading': 538, 'UI Router': 164, 'LP': 72}
+    'all': {
+        'DAO': 83.69,
+        'LP': 56.36,
+        'Lending': 83.69,
+        'Trading': 34.56,
+        'UI Router': 43.51,
+        'crvUSD': 80.29
+    },
+    'ethereum': {
+        'DAO': 83.69,
+        'LP': 58.37,
+        'Lending': 75.15,
+        'Trading': 34.43,
+        'UI Router': 34.14,
+        'crvUSD': 80.29
+    },
+    'polygon': {
+        'LP': 35.19,
+        'Trading': 18.58,
+        'UI Router': 35.69
+    },
+    'arbitrum': {
+        'LP': 59.78,
+        'Lending': 89.90,
+        'Trading': 28.47,
+        'UI Router': 38.21
+    },
+    'optimism': {
+        'LP': 38.66,
+        'Trading': 55.50,
+        'UI Router': 32.00
+    },
+    'base': {
+        'LP': 52.02,
+        'Trading': 64.51,
+        'UI Router': 34.68
+    },
+    'fantom': {
+        'LP': 38.41,
+        'Trading': 27.47,
+        'UI Router': 44.53
+    },
+    'fraxtal': {
+        'LP': 61.86,
+        'Trading': 60.00,
+        'UI Router': 66.58
+    },
+    'xdai': {
+        'LP': 47.15,
+        'Trading': 19.19,
+        'UI Router': 49.80
+    }
 };
 
+
 const percentageData = {
-    'all': {'DAO': 5.57, 'LP': 4.70, 'Lending': 4.34, 'Trading': 1.24, 'UI Router': 28.41, 'crvUSD': 8.77},
-    'ethereum': {'DAO': 5.57, 'LP': 3.25, 'Lending': 1.42, 'Trading': 0.91, 'UI Router': 9.83, 'crvUSD': 8.77},
-    'polygon': {'LP': 0.44, 'Trading': 0.06, 'UI Router': 5.57},
-    'arbitrum': {'LP': 0.54, 'Lending': 2.92, 'Trading': 0.17, 'UI Router': 3.75},
-    'optimism': {'LP': 0.19, 'Trading': 0.05, 'UI Router': 1.39},
-    'base': {'LP': 0.22, 'Trading': 0.01, 'UI Router': 7.57},
-    'fantom': {'LP': 0.03, 'Trading': 0.02, 'UI Router': 0.16},
-    'fraxtal': {'LP': 0.01, 'Trading': 0.00, 'UI Router': 0.07},
-    'xdai': {'LP': 0.01, 'Trading': 0.02, 'UI Router': 0.08}
+    'all': {'UI Router': 50.871259649501845,
+        'Trading': 23.8534854540771,
+        'LP': 23.575945422666877,
+        'crvUSD': 1.2281561868991133,
+        'Lending': 0.3107783585252154,
+        'DAO': 0.16037492832985717},
+    'ethereum': {'UI Router': 33.35748373785261, 'Trading': 32.92435148288734, 'LP': 30.894142476886486, 'crvUSD': 2.3278889921406183, 'DAO': 0.30398009166653545, 'Lending': 0.192153218566411},
+    'polygon': {'UI Router': 74.49118888061554, 'LP': 16.654256639364608, 'Trading': 8.854554480019857},
+    'arbitrum': {'UI Router': 52.23745473357475, 'Trading': 25.038799793067774, 'LP': 21.09415416451112, 'Lending': 1.6295913088463527},
+    'optimism': {'UI Router': 55.99925009373828, 'Trading': 22.703412073490814, 'LP': 21.297337832770904},
+    'base': {'UI Router': 90.91719603254207, 'LP': 7.483561796500612, 'Trading': 1.5992421709573164},
+    'fantom': {'Trading': 43.626943005181346, 'UI Router': 35.64766839378238, 'LP': 20.72538860103627},
+    'fraxtal':  {'UI Router': 58.10276679841897, 'LP': 23.715415019762844, 'Trading': 18.181818181818183},
+    'xdai': {'Trading': 69.50904392764858, 'UI Router': 21.188630490956072, 'LP': 9.30232558139535}
 };
 
 function createChart(chartId, data, title) {
@@ -48,9 +97,18 @@ function createChart(chartId, data, title) {
                 }]
             },
             options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text:  title,
+                    }
+                },
                 indexAxis: 'y',
                 responsive: true,
-                aspectRatio: 1.25,
+                aspectRatio: 1.15,
                 scales: {
                     x: {
                         beginAtZero: true
@@ -77,8 +135,8 @@ function updateCharts(chain) {
         return;
     }
 
-    window.firstTimeUsersChart = createChart('firstTimeUsersChart', firstTimeUsersData[chain], 'First Time Users');
-    window.percentageChart = createChart('percentageChart', percentageData[chain], '%age of First Transactions');
+    window.firstTimeUsersChart = createChart('firstTimeUsersChart', firstTimeUsersData[chain], ['Probability of making a second transaction', 'per product used first']);
+    window.percentageChart = createChart('percentageChart', percentageData[chain], ['Percentage of all first time transactions', 'per product']);
 }
 
 function initCharts() {
