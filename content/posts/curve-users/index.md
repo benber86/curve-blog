@@ -1,5 +1,5 @@
 ---
-title: "Who are Curve's Users?"
+title: "Who are Curve Users?"
 draft: false
 date: 2024-07-29T09:25:45.000Z
 ogimage: "https://blog.curvemonitor.com/images/exchange-received/img.png"
