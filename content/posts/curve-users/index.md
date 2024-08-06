@@ -244,6 +244,9 @@ The chart gives us some interesting insights:
 
 ## Wealth
 
+To look at Curve user's wealth, we cross reference our data with data from the Debank API to get the total USD value of each user's wallet across all supported chains as of July 31st, 2024.
+**User wealth uniformly correlates positively with volume across all products.** The distribution of wealth across users, however, differs between products and chains: 
+
 <style>
 
 .axis path,
@@ -283,8 +286,13 @@ The chart gives us some interesting insights:
 </div>
 <div id="wealthTableContainer"></div>
 
+With [Gini coefficients](https://en.wikipedia.org/wiki/Gini_coefficient) in the 80 to 100 range, there is a great deal of wealth difference between Curve users' wealth (by comparison, the most inequal nations have a coefficient below 70).
+DAO users are by far the wealthiest on average, as poorer users can not afford gas or to afford the minimum veCRV amount to be active and can instead turn to liquid lockers.
+**Lending and crvUSD users tend to be wealthier** but the difference may be explained by leverage on one hand and tradifromng accounts with no "inventory" on the other. 
+UI Router users tend to be poorer overall, although that situation differs significantly between chains. 
 
-%age of net worth on ethereum
+Breaking down wealth numbers into the proportion held on Ethereum mainnet vs other chains, we find that **users use Curve on the chain on which they also keep most of their assets**.
+Mainnet users have most of their wealth on L1, L2 users hold theirs on L2s:
 
 <script src="../../js/curve-users/ethworthviolin.js"></script>
 <div style="margin-bottom: 20px;">
@@ -295,13 +303,11 @@ The chart gives us some interesting insights:
 <canvas id="ethWorthViolinChart"></canvas>
 </div>
 
-Hour glass shape overall really shows that most users keep their wealth on the chain on which they interact with Curve
-
 
 ## Other protocols used
 
-Based on their positions in early August 2024 as reported by Debank. Positions on other protocols worth less than $100 were filtered out.
-What's interesting is also what's not there (or insignificant): for instance Curve LPs very rarely LP on other DEXes such as Uniswap or Velodrome
+Cross referencing with DeBank data again, we can also look at the other DeFi protocols used by Curve users. 
+Positions worth less than $100 were filtered out.
 
 <script src="../../js/curve-users/protoverlap.js"></script>
 <div>
@@ -309,6 +315,10 @@ What's interesting is also what's not there (or insignificant): for instance Cur
 <span>Select a product: </span><select id="productSelectOverlap"></select>
 </div>
 <canvas id="overlapBarChart" style="height: 200px;"></canvas>
+
+Aave is a very popular protocol among Curve users, even those taking crvUSD or LlammaLend loans, indicating that the two protocols are more complementary than competiting against one another.
+The popularity of protocols like Pendle, ether.fi and Eigenlayer shows that the restaking narrative has been very positive for Curve.
+Finally, what's interesting is also what's not (or less significantly) there: for instance **Curve LPs very rarely LP on other competing DEXes such as Uniswap or Velodrome**.
 
 
 ## Cross-chain behavior
@@ -327,7 +337,7 @@ However when users do use multiple chains, they tend to favor the same clusters 
 
 On Polygon, Arbitrum and Optimism make up one such cluster in which users on one chain also often use either of the two others.
 Only a small fraction of Ethereum Mainnet users use other chains.
-For Lending, however, almost 10% of Ethereum users also have a loan on Arbitrum.
+However, **for Lending almost 10% of Ethereum users also have a loan on Arbitrum**.
 
 
 ## Profiles

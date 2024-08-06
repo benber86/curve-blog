@@ -122,7 +122,7 @@ function createWealthViolin(selectedChain = 'all') {
     // Add x-axis
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(x))
+        .call(d3.axisBottom(x).tickFormat(d => d))
         .selectAll("text")
         .attr("y", 10)
         .attr("x", 0)
@@ -153,4 +153,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     createWealthViolin(initialChain);
     updateWealthTable(initialChain);
+    setTimeout(() => {
+        createWealthViolin(initialChain);
+        updateWealthTable(initialChain);
+    }, 100);
 });
