@@ -244,20 +244,45 @@ The chart gives us some interesting insights:
 
 ## Wealth
 
+<style>
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.grid-line {
+  stroke: #e0e0e0;
+  stroke-width: 1px;
+}
+
+#wealtChart {
+    display: flex;
+    justify-content: center;
+    width: 100%; /* Ensures the div takes full width */
+  }
+
+.tooltip {
+  position: absolute;
+  padding: 8px;
+  font: 12px sans-serif;
+  background: lightsteelblue;
+  border: 0px;
+  pointer-events: none;
+}</style>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="../../js/curve-users/statchain.js"></script>
 <script src="../../js/curve-users/wealthviolin.js"></script>
-<canvas id="wealthViolinChart"></canvas>
+<div>
+    <span>Select a chain: </span><select id="chainWealthViolinSelector"></select>
+</div>
+<div style="text-align: center; padding-bottom: 10px">
+<div id="wealtChart"></div>
+</div>
+<div id="wealthTableContainer"></div>
 
-
-| Metric           | LP | Trading | UI Router | Lending | crvUSD | DAO |
-|------------------|----|---------|-----------|---------|---------|----|
-| Mean             | 631.5k | 495.7k | 392.3k | 649.6k | 414.9k | 4.1m |
-| Q1 (25%)         | 1.6k | 515.21 | 91.13 | 1.8k | 193.48 | 22.4k |
-| Median           | 12.4k | 6.1k | 3.4k | 20.4k | 12.6k | 98.1k |
-| Q2 (75%)         | 109.8k | 55.2k | 62.8k | 141.2k | 72.8k | 482.8k |
-| Max              | 106.3m | 82.3m | 114.7m | 75m | 62.2m | 1.1b |
-| Gini coefficient | 85.98 | 89.45 | 87.30 | 84.30 | 86.51 | 91.67 |
-| % above 100k     | 25.83% | 19.90% | 20.81% | 30.55% | 22.11% | 49.16% |
-| % above 1m       | 8.37% | 6.06% | 5.98% | 8.22% | 5.65% | 17.27% |
 
 %age of net worth on ethereum
 
