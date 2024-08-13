@@ -1,8 +1,8 @@
 ---
 title: "Who are Curve's Users?"
 draft: false
-date: 2024-07-29T09:25:45.000Z
-ogimage: "https://blog.curvemonitor.com/images/exchange-received/img.png"
+date: 2024-08-09T09:25:45.000Z
+ogimage: "https://blog.curvemonitor.com/images/curve-users/img.png"
 description: "A look at how different types of users use Curve's products"
 categories:
   - Users
@@ -21,7 +21,7 @@ _Authors:_ [benny](https://warpcast.com/bennylada)
 
 ## Summary
 
-- One third of users trade via the UI, but UI traders are less experienced, have a lower net worth, generate less volume and are less likely to engage with other Curve products.
+- Most traders trade via the UI, but UI traders are less experienced, have a lower net worth, generate less volume and are less likely to engage with other Curve products.
 - Lending products (LlammaLend and crvUSD) users are the stickiest -- the ones most likely to keep using the protocol
 - LlammaLend and trading (via the contracts/aggregators) are the products most likely to get users to try other Curve products
 - Very few (< 5%) of Curve LPs provide liquidity on other DEXes such as Uniswap, Ambient or Velo/Aero
