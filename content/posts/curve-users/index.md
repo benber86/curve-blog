@@ -1,7 +1,7 @@
 ---
 title: "Who are Curve's Users?"
 draft: false
-date: 2024-08-09T09:25:45.000Z
+date: 2024-08-14T06:25:45.000Z
 ogimage: "https://blog.curvemonitor.com/images/curve-users/img.png"
 description: "A look at the differences between users of Curve's products"
 categories:
