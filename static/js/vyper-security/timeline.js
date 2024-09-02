@@ -1,19 +1,21 @@
 
 const data = [
     ['9/14/2023', '11/4/2023', 'CodeHawks', 'Competitive Audit', 2, 7, 22, 'https://github.com/vyperlang/audits/blob/master/audits/CodeHawks_Vyper_September_2023_competitive_audit.md'],
-    ['9/22/2023', '10/6/2023', 'OtterSec', 'Release v0.3.10rc1', 2, 0, 4, 'https://github.com/vyperlang/audits/blob/master/audits/OtterSec_Vyper_September_2023_audit.pdf'],
-    ['9/7/2023', '9/13/2023', 'ChainSecurity', 'Semantic analysis, codegen', 3, 2, 9, 'https://github.com/vyperlang/audits/blob/master/audits/ChainSecurity_Vyper_September_2023_limited_review.pdf'],
-    ['11/26/2023', '11/30/2023', 'OtterSec', 'Built-ins', 0, 1, 4, 'https://github.com/vyperlang/audits/blob/master/audits/OtterSec_Vyper_November_2023_audit.pdf'],
-    ['12/1/2023', '12/13/2023', 'ChainSecurity', 'Built-ins, bytecode gen', 0, 1, 17, 'https://github.com/vyperlang/audits/blob/master/audits/ChainSecurity_Vyper_December_2023_limited_review.pdf'],
-    ['1/29/2024', '3/8/2024', 'Statemind', 'Storage layout', 0, 0, 4, 'https://github.com/vyperlang/audits/blob/master/audits/Statemind_Vyper_January_2024_audit.pdf'],
-    ['2/14/2024', '2/28/2024', 'ChainSecurity', 'Modules, v0.4.0', 1, 4, 19, 'https://github.com/vyperlang/audits/blob/master/audits/ChainSecurity_Vyper_February_2024_limited_review.pdf'],
+    ['9/15/2023', '10/13/2023', 'OtterSec', 'Release v0.3.10rc1', 2, 0, 4, 'https://github.com/vyperlang/audits/blob/master/audits/OtterSec_Vyper_September_2023_audit.pdf'],
+    ['8/24/2023', '9/27/2023', 'ChainSecurity', 'Semantic analysis, codegen', 3, 2, 9, 'https://github.com/vyperlang/audits/blob/master/audits/ChainSecurity_Vyper_September_2023_limited_review.pdf'],
+    ['8/24/2023', '7/27/2024', 'ChainSecurity', 'Security advisory', 0, 0, 0, 'Continuous review'],
+    ['11/1/2023', '12/14/2023', 'OtterSec', 'Built-ins', 0, 1, 4, 'https://github.com/vyperlang/audits/blob/master/audits/OtterSec_Vyper_November_2023_audit.pdf'],
+    ['11/14/2023', '12/27/2023', 'ChainSecurity', 'Built-ins, bytecode gen', 0, 1, 17, 'https://github.com/vyperlang/audits/blob/master/audits/ChainSecurity_Vyper_December_2023_limited_review.pdf'],
+    ['12/1/2023', '7/15/2024', 'Cyberthirst', 'Continuous review', 0, 0, 0, 'Continuous review'],
+    ['1/15/2024', '3/22/2024', 'Statemind', 'Storage layout', 0, 0, 4, 'https://github.com/vyperlang/audits/blob/master/audits/Statemind_Vyper_January_2024_audit.pdf'],
+    ['2/1/2024', '3/13/2024', 'ChainSecurity', 'Modules, v0.4.0', 1, 4, 19, 'https://github.com/vyperlang/audits/blob/master/audits/ChainSecurity_Vyper_February_2024_limited_review.pdf'],
     ['3/11/2024', '5/23/2024', 'Statemind', 'Storage layout, modules', 0, 4, 10, 'https://github.com/vyperlang/audits/blob/master/audits/Statemind_Vyper_June_2024_audit.pdf'],
-    ['6/2/2024', '6/21/2024', 'ChainSecurity', 'ABI decoder, v0.4.0', 0, 0, 7, 'https://github.com/vyperlang/audits/blob/master/audits/ChainSecurity_Vyper_June_2024_limited_review.pdf']
+    ['5/22/2024', '6/31/2024', 'ChainSecurity', 'ABI decoder, v0.4.0', 0, 0, 7, 'https://github.com/vyperlang/audits/blob/master/audits/ChainSecurity_Vyper_June_2024_limited_review.pdf']
 ];
 
-const margin = {top: 40, right: 40, bottom: 40, left: 170};
+const margin = {top: 80, right: 40, bottom: 40, left: 170};
 const width = 700 - margin.left - margin.right;
-const height = 450 - margin.top - margin.bottom;
+const height = 500 - margin.top - margin.bottom;
 const barHeight = 15;
 
 const parseDate = d3.timeParse("%m/%d/%Y");
@@ -75,6 +77,11 @@ svg.selectAll(".bar")
     .attr("height", barHeight)
     .attr("rx", 5)
     .attr("ry", 5)
+    .attr("fill", function(d) {
+        if (d.auditor === "Cyberthirst") return "rgba(159, 76, 242, 0.6)"; // Different color for Cyberthirst
+        if (d.target === "Security advisory") return "rgba(159, 76, 242, 0.6)"; // Different color for long ChainSecurity audits
+        return "rgba(159, 76, 242, 0.9)"; // Default color
+    })
     .on("mouseover", showTooltip)
     .on("mouseout", scheduleHideTooltip);
 
@@ -82,12 +89,15 @@ let hideTooltipTimer;
 
 function showTooltip(event, d) {
     clearTimeout(hideTooltipTimer);
-    tooltip.html(`
-                <div><span class="tooltip-dot" style="background-color: #FF0000;"></span><strong>High:</strong> ${d.high}</div>
-                <div><span class="tooltip-dot" style="background-color: #FFA500;"></span>Medium: ${d.medium}</div>
-                <div><span class="tooltip-dot" style="background-color: #008000;"></span>Low: ${d.low}</div>
-                <a href="${d.link}" target="_blank">Read full audit</a>
-            `)
+    let tooltipContent = (d.link !== "Continuous review") ? `
+            <div><span class="tooltip-dot" style="background-color: #FF0000;"></span><strong>High:</strong> ${d.high}</div>
+            <div><span class="tooltip-dot" style="background-color: #FFA500;"></span>Medium: ${d.medium}</div>
+            <div><span class="tooltip-dot" style="background-color: #008000;"></span>Low: ${d.low}</div>
+            <a href="${d.link}" target="_blank">Read full audit</a>
+        ` : `<div>${d.link}</div>`;
+    
+
+        tooltip.html(tooltipContent)
         .style("left", (event.pageX + 10) + "px")
         .style("top", (event.pageY - 28) + "px")
         .attr("class", "tooltip active")
@@ -158,3 +168,10 @@ svg.append("text")
     .style("font-weight", "bold")
     .text("Vyper Audit Timeline 2023-24");
 
+svg.append("text")
+    .attr("x", width / 2)
+    .attr("y", -margin.top / 2 + 20) // Position this slightly below the title
+    .attr("text-anchor", "middle")
+    .style("font-size", "10px")
+    .style("font-style", "italic")
+    .text("(Retainer engagements marked with lighter colored bars)");

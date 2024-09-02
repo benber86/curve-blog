@@ -32,7 +32,6 @@ _Authors:_ [benny](https://warpcast.com/bennylada)
     .chart { font-family: "JetBrains Mono", sans-serif; margin: 0; padding: 20px; }
     .tooltip { font-family: "JetBrains Mono", sans-serif; margin: 0; padding: 20px; }
     .chart { width: 100%; overflow-x: auto; }
-    .bar { fill: rgba(159, 76, 242, 0.7); transition: fill 0.3s; }
     .bar:hover { fill: rgba(159, 76, 242, 0.5); }
     .axis-label { font-size: 14px; }
     .target-label { font-size: 13px; }
