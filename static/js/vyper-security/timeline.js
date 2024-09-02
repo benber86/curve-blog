@@ -63,7 +63,7 @@ svg.selectAll(".background-rect")
     .attr("y", d => y(d.id))
     .attr("width", width)
     .attr("height", y.bandwidth())
-    .attr("fill", (d, i) => i % 2 === 0 ? "#f0f0f0" : "white");
+    .attr("fill", (d, i) => i % 2 === 0 ? "var(--alt-background-color)" : "var(--background-color)");
 
 // Add bars
 svg.selectAll(".bar")
@@ -95,7 +95,7 @@ function showTooltip(event, d) {
             <div><span class="tooltip-dot" style="background-color: #008000;"></span>Low: ${d.low}</div>
             <a href="${d.link}" target="_blank">Read full audit</a>
         ` : `<div>${d.link}</div>`;
-    
+
 
         tooltip.html(tooltipContent)
         .style("left", (event.pageX + 10) + "px")
@@ -134,6 +134,7 @@ svg.selectAll(".auditor-label")
     .attr("text-anchor", "end")
     .attr("dominant-baseline", "middle")
     .text(d => d.auditor)
+    .style("fill", "var(--text-color)")
     .style("font-weight", "bold")
     .style("font-size", "16px");
 
@@ -148,11 +149,13 @@ svg.selectAll(".target-label")
     .attr("text-anchor", "end")
     .attr("dominant-baseline", "hanging")
     .text(d => d.target)
+    .style("fill", "var(--text-color)")
     .style("font-style", "italic")
     .style("font-size", "10px");
 
 // Add x-axis
 svg.append("g")
+    .attr("class", "x-axis")
     .attr("transform", `translate(0,${height})`)
     .call(d3.axisBottom(x).ticks(d3.timeMonth.every(2)).tickFormat(formatDate))
     .style("font-size", "14px")
@@ -166,6 +169,7 @@ svg.append("text")
     .attr("text-anchor", "middle")
     .style("font-size", "16px")
     .style("font-weight", "bold")
+    .style("fill", "var(--text-color)")
     .text("Vyper Audit Timeline 2023-24");
 
 svg.append("text")
@@ -174,4 +178,9 @@ svg.append("text")
     .attr("text-anchor", "middle")
     .style("font-size", "10px")
     .style("font-style", "italic")
+    .style("fill", "var(--text-color)")
     .text("(Retainer engagements marked with lighter colored bars)");
+
+svg.select(".x-axis")
+    .selectAll("line, path")
+    .style("stroke", "var(--text-color)");

@@ -29,15 +29,37 @@ _Authors:_ [benny](https://warpcast.com/bennylada)
 <script src="../../js/vyper-security/timeline.js"></script>
 
 <style>
-    .chart { font-family: "JetBrains Mono", sans-serif; margin: 0; padding: 20px; }
-    .tooltip { font-family: "JetBrains Mono", sans-serif; margin: 0; padding: 20px; }
+    :root {
+        --background-color: None;
+        --tooltip-background-color: white;
+        --alt-background-color: #f0f0f0;
+        --text-color: black;
+        --bar-color: rgba(159, 76, 242, 0.9);
+        --bar-color-light: rgba(159, 76, 242, 0.6);
+    }
+
+    html.dark {
+        --background-color: None;
+        --tooltip-background-color: #202020;
+        --alt-background-color: rgba(50, 50, 50, 0.3);
+        --text-color: #e0e0e0;
+        --bar-color: rgba(159, 76, 242, 0.7);
+        --bar-color-light: rgba(159, 76, 242, 0.4);
+    }
+
+    .chart, .tooltip {
+        font-family: "JetBrains Mono", sans-serif;
+        color: var(--text-color);
+        background-color: var(--background-color);
+        overflow-x: auto;
+    }
     .chart { width: 100%; overflow-x: auto; }
     .bar:hover { fill: rgba(159, 76, 242, 0.5); }
     .axis-label { font-size: 14px; }
     .target-label { font-size: 13px; }
     .tooltip {
         position: absolute;
-        background-color: white;
+        background-color: var(--tooltip-background-color);
         border: 1px solid #ddd;
         border-radius: 5px;
         padding: 10px;
