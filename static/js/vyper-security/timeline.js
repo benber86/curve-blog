@@ -1,4 +1,4 @@
-
+(function() {
 const data = [
     ['9/14/2023', '11/4/2023', 'CodeHawks', 'Competitive Audit', 2, 7, 22, 'https://github.com/vyperlang/audits/blob/master/audits/CodeHawks_Vyper_September_2023_competitive_audit.md'],
     ['9/15/2023', '10/13/2023', 'OtterSec', 'Release v0.3.10rc1', 2, 0, 4, 'https://github.com/vyperlang/audits/blob/master/audits/OtterSec_Vyper_September_2023_audit.pdf'],
@@ -13,9 +13,9 @@ const data = [
     ['5/22/2024', '6/31/2024', 'ChainSecurity', 'ABI decoder, v0.4.0', 0, 0, 7, 'https://github.com/vyperlang/audits/blob/master/audits/ChainSecurity_Vyper_June_2024_limited_review.pdf']
 ];
 
-const margin = {top: 80, right: 40, bottom: 40, left: 170};
-const width = 700 - margin.left - margin.right;
-const height = 500 - margin.top - margin.bottom;
+const margin = {top: 80, right: 10, bottom: 60, left: 170};
+const width = 720 - margin.left - margin.right;
+const height = 520 - margin.top - margin.bottom;
 const barHeight = 15;
 
 const parseDate = d3.timeParse("%m/%d/%Y");
@@ -184,3 +184,4 @@ svg.append("text")
 svg.select(".x-axis")
     .selectAll("line, path")
     .style("stroke", "var(--text-color)");
+})();
