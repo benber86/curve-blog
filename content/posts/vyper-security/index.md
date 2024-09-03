@@ -19,7 +19,7 @@ _Authors:_ [benny](https://warpcast.com/bennylada)
 A year ago, a [vulnerability](https://hackmd.io/@vyperlang/HJUgNMhs2) in older versions of the Vyper compiler led to an [exploit](https://hackmd.io/@LlamaRisk/BJzSKHNjn) that affected multiple liquidity pools on [Curve Finance](https://www.curve.fi).
 Since then the team has been working constantly to ensure the compiler's safety and robustness while delivering new features and optimization.
 Thanks to generous contributions from Curve, [Lido](https://lido.fi/) and [Optimism](https://retrofunding.optimism.io/) we were able to significantly increase Vyper's security budget for 2023-2024. 
-The result has been 9 audits, 2 security experts on retainer, 1 contest and over 100 findings addressed.
+The result has been 9 audits, 2 security experts on retainer, 1 contest, 1 dedicated security group and over 100 findings addressed.
 
 
 <div id="chart" class="chart"></div>
@@ -110,9 +110,21 @@ Among the highest severity issues, auditors identified an [integer overflow](htt
 
 The contest also proved to be a recruiting ground for Vyper as [cyberthirst](https://github.com/cyberthirst) who finished in third position, was then hired to perform a continuous review of the codebase and will soon be implementing new measures to ensure the correctness of the compiler.
 
+# Vyper Security Taskforce
+
+- Who's in it? (Doesn't have to be comprehensive)
+- Goals?
+- Some war room stories / example of what the group has done?
+- Some stats on the repo of Vyper contracts (can add a chart based on it)
+
 # Audits
 
-From 2023 to early 2024 audits were focused on the 
+For the last months of 2023, audits focused on the existing codebase and the 0.3.10 version released in early October. 
+Ottersec performed a [full review](https://github.com/vyperlang/audits/blob/master/audits/OtterSec_Vyper_September_2023_audit.pdf) of the first release candidate for v0.3.10 finding two high severity vulnerabilities.
+One was a memory overflow as some memory allocation did not always enforce Ethereum's $2^{256}$ limit. 
+Another was in an optimization pass merging concurrent memory operations (`mload` and `mstore`), which, in some cases could have resulted in incorrect merges and unexpected behavior. 
+In a later audit, Ottersec also reviewed [Vyper's built-ins](https://github.com/vyperlang/audits/blob/master/audits/OtterSec_Vyper_November_2023_audit.pdf), concurrently with [ChainSecurity](https://github.com/vyperlang/audits/blob/master/audits/ChainSecurity_Vyper_December_2023_limited_review.pdf).
+Finally, in early 2024, Statemind reviewed Vyper's [storage layout](https://github.com/vyperlang/audits/blob/master/audits/Statemind_Vyper_January_2024_audit.pdf) across all releases since v0.1.0b16, finding only informational issues.
 
 <script src="../../js/vyper-security/severity-chart.js"></script>
 <style>
@@ -133,4 +145,31 @@ From 2023 to early 2024 audits were focused on the
 </style>
 
 <div id="severity-chart" class="severity-chart"></div>
-as
+
+With the upcoming release of Vyper 0.4.0 and the major changes it brought to the language, audits since the beginning of the year have naturally focused on this new version.
+Modules and new features were thoroughly audited by [ChainSecurity](https://github.com/vyperlang/audits/blob/master/audits/ChainSecurity_Vyper_February_2024_limited_review.pdf) and [Statemind](https://github.com/vyperlang/audits/blob/master/audits/Statemind_Vyper_June_2024_audit.pdf).
+A single high severity finding was discovered - and quickly patched - in the newly introduced `range()` built-in. 
+A lack of integer signage check on the boundaries specified by the user could have led to incorrect behavior. 
+
+While too numerous to cover in details, medium and low-severity findings are of course also important.
+These findings have uncovered and offered remediation suggestions for a number of bugs in Vyper's front and backend. 
+They have also, among others, highlighted lacking or incorrect documentation and comments, suggested improvements for code clarity and improved error reporting.
+
+Another advantage of working with auditors that is not directly apparent from simply reading reports is the tooling that auditors develop during the audit process.
+Both [OtterSec](https://github.com/otter-sec/vyper-fuzz/tree/main) and [StateMind](https://github.com/statemindio/vyper_fuzzer_backend) developed their own fuzzer with [mutation testing](https://en.wikipedia.org/wiki/Mutation_testing) to enhance test coverage and robustness. 
+
+# What's Next?
+
+The upcoming versions of Vyper will offer new features such as proxy built-ins, traits, storage packing, abstract functions and more optimizations on the backend (Venom). 
+We plan to keep working with our auditing partners to ensure every change is thoroughly reviewed and tested before making it into production.
+
+Another exciting development for Vyper's security is the work that cyberthirst will be undertaking to implement state of the art compiler verification methods.
+As more and more optimizations are added to the backend, it becomes crucial to have a way to ensure that the compiled bytecode maintains semantic equivalence with the original source code.
+The work will focus on two main approaches:
+
+- Differential fuzzing, with a definitional interpreter as a language specification and fuzzing oracle to compare the compiled bytecode and interpreted source code of automatically generated contracts.
+- An abstract analysis framework built on top of the Vyper AST and Venom IR, to verify that inferred abstract properties of contracts align with actual semantics at the compiled Venom IR level.
+
+
+However, the future of Vyper's development and security is ultimately determined by its budget.
+If you would like to help keep the project safe, you can [donate directly](https://etherscan.io/address/0x70CCBE10F980d80b7eBaab7D2E3A73e87D67B775#code), or vote for us during funding rounds on Gitcoin, Octant and Optimism.

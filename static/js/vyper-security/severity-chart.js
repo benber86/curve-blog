@@ -11,9 +11,9 @@ document.addEventListener("DOMContentLoaded", function() {
         {start: '6/2/2024', end: '6/21/2024', auditor: 'ChainSecurity', target: 'ABI decoder and v0.4.0 PRs', high: 0, medium: 0, low: 7}
     ];
 
-    const margin = {top: 60, right: 30, bottom: 60, left: 60};
-    const width = 800 - margin.left - margin.right;
-    const height = 400 - margin.top - margin.bottom;
+    const margin = {top: 120, right: 30, bottom: 60, left: 60};
+    const width = 740 - margin.left - margin.right;
+    const height = 440 - margin.top - margin.bottom;
 
     const svg = d3.select(".severity-chart")
         .append("svg")
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
     const parseDate = d3.timeParse("%m/%d/%Y");
-    const formatDate = d3.timeFormat("%b %Y");
+    const formatDate = d3.timeFormat("%b %y");
 
     // Calculate midpoint dates
     severityData.forEach(d => {
@@ -34,6 +34,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Sort data by midDate
     severityData.sort((a, b) => a.midDate - b.midDate);
+
+    const startDate = d3.min(severityData, d => d.start);
+    const endDate = d3.max(severityData, d => d.end);
 
     const x0 = d3.scaleBand()
         .domain(severityData.map(d => d.midDate))
@@ -71,13 +74,19 @@ document.addEventListener("DOMContentLoaded", function() {
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
         .call(d3.axisBottom(x0).tickFormat(formatDate))
+        .attr("class", "x-axis")
         .selectAll("text")
-        .attr("transform", "rotate(-45)")
-        .style("text-anchor", "end");
+        .style("text-anchor", "end")
+        .style("font-size", "12px")
+        .style("font-family", "'JetBrains Mono', sans-serif")
+        .style("font-weight", "normal");
 
     // Add Y axis
     svg.append("g")
-        .call(d3.axisLeft(y));
+        .call(d3.axisLeft(y))
+        .style("font-size", "14px")
+        .style("font-family", "'JetBrains Mono', sans-serif")
+        .style("font-weight", "normal");
 
     // Add title
     svg.append("text")
@@ -86,11 +95,10 @@ document.addEventListener("DOMContentLoaded", function() {
         .attr("text-anchor", "middle")
         .style("font-size", "16px")
         .style("font-weight", "bold")
-        .text("Severity of Findings over Time");
-
+        .text("Audit Findings over Time");
     // Add legend
     const legend = svg.append("g")
-        .attr("font-family", "sans-serif")
+        .style("font-family", "'JetBrains Mono', sans-serif")
         .attr("font-size", 10)
         .attr("text-anchor", "end")
         .selectAll("g")
