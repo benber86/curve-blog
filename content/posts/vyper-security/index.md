@@ -170,7 +170,6 @@ The work will focus on two main approaches:
 - Differential fuzzing, with a definitional interpreter as a language specification and fuzzing oracle to compare the compiled bytecode and interpreted source code of automatically generated contracts.
 - An abstract analysis framework built on top of the Vyper AST and Venom IR, to verify that inferred abstract properties of contracts align with actual semantics at the compiled Venom IR level.
 
-
 While these security measures and future developments are crucial for Vyper's growth and reliability, they require ongoing financial support. 
 The future of Vyper's development and security ultimately depends on community backing. 
 If you value the work we're doing and want to help keep the project safe , you can [donate directly](https://etherscan.io/address/0x70CCBE10F980d80b7eBaab7D2E3A73e87D67B775#code), or vote for us during funding rounds on Gitcoin, Octant and Optimism.
