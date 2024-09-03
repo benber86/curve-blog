@@ -96,9 +96,9 @@ We continued to work with our long term auditor [ChainSecurity](https://www.chai
 Two new auditors, [Ottersec](https://osec.io/) and [Statemind](https://statemind.io/) were brought on board to provide additional security assessments and bring different perspectives and methods into our review process.
 Shortly after the hack, a [security competition](https://codehawks.cyfrin.io/c/2023-09-vyper-compiler) was also organized on CodeHawks with $160,000 in prizes.
 
-# CodeHawk Competition
+# CodeHawks Competition
 
-Security competition are a great complement to a traditional audit process. 
+Security competitions are a great complement to a traditional audit process. 
 Their large number of participants means more eyeballs on the codebase compared to the small teams of experts conducting regular audits.
 The competitive nature of the event also pushes people to come up with unique, creative ways to break things.
 
@@ -171,5 +171,6 @@ The work will focus on two main approaches:
 - An abstract analysis framework built on top of the Vyper AST and Venom IR, to verify that inferred abstract properties of contracts align with actual semantics at the compiled Venom IR level.
 
 
-However, the future of Vyper's development and security is ultimately determined by its budget.
-If you would like to help keep the project safe, you can [donate directly](https://etherscan.io/address/0x70CCBE10F980d80b7eBaab7D2E3A73e87D67B775#code), or vote for us during funding rounds on Gitcoin, Octant and Optimism.
+While these security measures and future developments are crucial for Vyper's growth and reliability, they require ongoing financial support. 
+The future of Vyper's development and security ultimately depends on community backing. 
+If you value the work we're doing and want to help keep the project safe , you can [donate directly](https://etherscan.io/address/0x70CCBE10F980d80b7eBaab7D2E3A73e87D67B775#code), or vote for us during funding rounds on Gitcoin, Octant and Optimism.
