@@ -26,15 +26,15 @@ The result has been 9 audits, 2 security experts on retainer, 1 contest, 1 dedic
 <script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
 <script src="../../js/gho-users/sankey.js"></script>
 
-<script>
-    d3.json("../../js/gho-users/first_order.json").then(function(firstOrder) {
-        d3.json("../../js/gho-users/second_order.json").then(function(secondOrder) {
-            createSankeyChart(firstOrder, secondOrder);
-        });
-    });
-</script>    <div id="sankey-chart"></div>
+
+<select id="data-type">
+    <option value="volume" selected>Volume</option>
+    <option value="transactions">Number of Transactions</option>
+</select>
+<div id="sankey-chart"></div>
+
 <style>
-     #sankey-chart {
+    #sankey-chart {
         width: 100%;
         height: 600px;
     }
@@ -60,7 +60,7 @@ The result has been 9 audits, 2 security experts on retainer, 1 contest, 1 dedic
     }
 </style>
 
-<div id="chart" class="sankey-chart"></div>
+
 
 We continued to work with our long term auditor [ChainSecurity](https://www.chainsecurity.com/) but extended our engagement to hire a consultant on retainer basis to provide continuous security advice.
 Two new auditors, [Ottersec](https://osec.io/) and [Statemind](https://statemind.io/) were brought on board to provide additional security assessments and bring different perspectives and methods into our review process.

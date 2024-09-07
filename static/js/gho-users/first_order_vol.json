@@ -1,0 +1,132 @@
+[
+  {
+    "from": "Minting",
+    "to": "GhoAToken",
+    "amount": 111223491.78571625
+  },
+  {
+    "from": "Minting",
+    "to": "GHO Staking",
+    "amount": 62748484.38607395
+  },
+  {
+    "from": "Minting",
+    "to": "CowSwap",
+    "amount": 50775019.65455372
+  },
+  {
+    "from": "Minting",
+    "to": "ParaSwap",
+    "amount": 44010357.76625982
+  },
+  {
+    "from": "Minting",
+    "to": "1inch",
+    "amount": 41575884.80412208
+  },
+  {
+    "from": "Minting",
+    "to": "DeFi Saver",
+    "amount": 30647291.484721772
+  },
+  {
+    "from": "Minting",
+    "to": "UniswapV3Pool",
+    "amount": 29530318.18152685
+  },
+  {
+    "from": "Minting",
+    "to": "Balancer",
+    "amount": 27570367.126080755
+  },
+  {
+    "from": "Minting",
+    "to": "Sent to other EOA",
+    "amount": 18760899.259315927
+  },
+  {
+    "from": "Minting",
+    "to": "Maverick",
+    "amount": 14391417.067078952
+  },
+  {
+    "from": "Minting",
+    "to": "MultiSigs",
+    "amount": 8301681.6875084
+  },
+  {
+    "from": "Minting",
+    "to": "Others",
+    "amount": 7507015.841593794
+  },
+  {
+    "from": "Minting",
+    "to": "Burn",
+    "amount": 7501864.433658
+  },
+  {
+    "from": "Minting",
+    "to": "Curve",
+    "amount": 7292122.621455466
+  },
+  {
+    "from": "Minting",
+    "to": "MEV Bots",
+    "amount": 6191507.644309231
+  },
+  {
+    "from": "Minting",
+    "to": "GHO Stability Module",
+    "amount": 5518372.133894113
+  },
+  {
+    "from": "Minting",
+    "to": "GHO CCIP",
+    "amount": 4154473.4420043635
+  },
+  {
+    "from": "Minting",
+    "to": "Odos",
+    "amount": 3729732.0859929645
+  },
+  {
+    "from": "Minting",
+    "to": "Gearbox",
+    "amount": 3255139.3779221135
+  },
+  {
+    "from": "Minting",
+    "to": "0x Exchange",
+    "amount": 2047078.3650805214
+  },
+  {
+    "from": "Minting",
+    "to": "Notional",
+    "amount": 1774541.16056501
+  },
+  {
+    "from": "Minting",
+    "to": "Kyber Network",
+    "amount": 1476648.6760295562
+  },
+  {
+    "from": "Minting",
+    "to": "AirSwap",
+    "amount": 996717.0984085236
+  },
+  {
+    "from": "Minting",
+    "to": "Pendle",
+    "amount": 972462.7839540828
+  },
+  {
+    "from": "Minting",
+    "to": "Li.Fi",
+    "amount": 444525.98319305986
+  },
+  {
+    "from": "Minting",
+    "to": "Held in wallet",
+    "amount": 4989.569460977369
+  }
+]

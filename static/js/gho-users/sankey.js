@@ -1,7 +1,11 @@
-function createSankeyChart(firstOrder, secondOrder) {
+let firstOrderVol, secondOrderVol, firstOrderTx, secondOrderTx;
+
+function createSankeyChart(dataType) {
     const margin = {top: 10, right: 10, bottom: 10, left: 10};
     const width = document.getElementById('sankey-chart').offsetWidth - margin.left - margin.right;
     const height = 600 - margin.top - margin.bottom;
+
+    d3.select("#sankey-chart").html("");
 
     const svg = d3.select("#sankey-chart").append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -20,17 +24,17 @@ function createSankeyChart(firstOrder, secondOrder) {
 
     function addNode(name) {
         if (!nodes.has(name)) {
-            nodes.set(name, {name: name, inLinks: [], outLinks: []});
+            nodes.set(name, {name: name});
         }
         return nodes.get(name);
     }
 
     function addLink(source, target, value) {
-        const link = {source: addNode(source), target: addNode(target), value: value};
-        links.push(link);
-        link.source.outLinks.push(link);
-        link.target.inLinks.push(link);
+        links.push({source: addNode(source), target: addNode(target), value: value});
     }
+
+    const firstOrder = dataType === 'volume' ? firstOrderVol : firstOrderTx;
+    const secondOrder = dataType === 'volume' ? secondOrderVol : secondOrderTx;
 
     firstOrder.forEach(d => addLink(d.from, d.to, d.amount));
     secondOrder.forEach(d => addLink(d.from, d.to, d.amount));
@@ -42,7 +46,7 @@ function createSankeyChart(firstOrder, secondOrder) {
 
     sankey(graph);
 
-    const colorScale = d3.scaleOrdinal(d3.schemePastel1);
+    const colorScale = d3.scaleOrdinal(d3.schemePastel2);
 
     svg.append("g")
         .selectAll("rect")
@@ -103,3 +107,24 @@ function createSankeyChart(firstOrder, secondOrder) {
         .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
         .text(d => d.name);
 }
+
+function loadData() {
+    Promise.all([
+        d3.json("../../js/gho-users/first_order_vol.json"),
+        d3.json("../../js/gho-users/second_order_vol.json"),
+        d3.json("../../js/gho-users/first_order_dup.json"),
+        d3.json("../../js/gho-users/second_order_dup.json")
+    ]).then(function([firstOrderVolData, secondOrderVolData, firstOrderTxData, secondOrderTxData]) {
+        firstOrderVol = firstOrderVolData;
+        secondOrderVol = secondOrderVolData;
+        firstOrderTx = firstOrderTxData;
+        secondOrderTx = secondOrderTxData;
+        createSankeyChart('volume');
+
+        d3.select("#data-type").on("change", function() {
+            createSankeyChart(this.value);
+        });
+    });
+}
+
+loadData();
