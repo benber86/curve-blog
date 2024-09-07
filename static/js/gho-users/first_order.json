@@ -1,0 +1,102 @@
+[
+  {
+    "from": "Minting",
+    "to": "GhoAToken",
+    "amount": 1142
+  },
+  {
+    "from": "Minting",
+    "to": "UniswapV3Pool",
+    "amount": 1089
+  },
+  {
+    "from": "Minting",
+    "to": "1inch",
+    "amount": 542
+  },
+  {
+    "from": "Minting",
+    "to": "GHO Staking",
+    "amount": 449
+  },
+  {
+    "from": "Minting",
+    "to": "Others",
+    "amount": 364
+  },
+  {
+    "from": "Minting",
+    "to": "Sent to other EOA",
+    "amount": 329
+  },
+  {
+    "from": "Minting",
+    "to": "CowSwap",
+    "amount": 298
+  },
+  {
+    "from": "Minting",
+    "to": "ParaSwap",
+    "amount": 267
+  },
+  {
+    "from": "Minting",
+    "to": "Held in wallet",
+    "amount": 148
+  },
+  {
+    "from": "Minting",
+    "to": "Curve",
+    "amount": 147
+  },
+  {
+    "from": "Minting",
+    "to": "Balancer",
+    "amount": 122
+  },
+  {
+    "from": "Minting",
+    "to": "AirSwap",
+    "amount": 100
+  },
+  {
+    "from": "Minting",
+    "to": "Maverick",
+    "amount": 85
+  },
+  {
+    "from": "Minting",
+    "to": "GHO CCIP",
+    "amount": 58
+  },
+  {
+    "from": "Minting",
+    "to": "0x Exchange",
+    "amount": 53
+  },
+  {
+    "from": "Minting",
+    "to": "Aave Collector V2",
+    "amount": 52
+  },
+  {
+    "from": "Minting",
+    "to": "Odos",
+    "amount": 48
+  },
+  {
+    "from": "Minting",
+    "to": "Kyber Network",
+    "amount": 37
+  },
+  {
+    "from": "Minting",
+    "to": "Li.Fi",
+    "amount": 34
+  },
+  {
+    "from": "Minting",
+    "to": "Gearbox",
+    "amount": 34
+  }
+]
