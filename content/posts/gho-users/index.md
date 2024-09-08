@@ -3,7 +3,7 @@ title: "Who are GHO users"
 draft: false
 date: 2024-09-06T09:25:45.000Z
 ogimage: "https://blog.curvemonitor.com/images/ng-mev/thumbnail.png"
-description: "Review of Vyper Security 1 year after hack"
+description: "Analysis of GHO Users"
 categories:
   - Vyper
   - Security
@@ -15,14 +15,42 @@ tags:
 
 _Authors:_ [benny](https://warpcast.com/bennylada)
 
-
-A year ago, a [vulnerability](https://hackmd.io/@vyperlang/HJUgNMhs2) in older versions of the Vyper compiler led to an [exploit](https://hackmd.io/@LlamaRisk/BJzSKHNjn) that affected multiple liquidity pools on [Curve Finance](https://www.curve.fi).
-Since then the team has been working constantly to ensure the compiler's safety and robustness while delivering new features and optimization.
-Thanks to generous contributions from Curve, [Lido](https://lido.fi/) and [Optimism](https://retrofunding.optimism.io/) we were able to significantly increase Vyper's security budget for 2023-2024. 
-The result has been 9 audits, 2 security experts on retainer, 1 contest, 1 dedicated security group and over 100 findings addressed.
-
-
 <script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+
+# Introduction
+
+
+# Growth & User Acquisition
+
+GHO launched about a year ago  
+
+
+<script src="../../js/gho-users/new-users-chart.js"></script>
+<script src="../../js/gho-users/debt-chart.js"></script>
+
+<div style="display: flex; justify-content: space-between;">
+  <div style="width: 48%;">
+    <canvas id="linechart-new-users" width="400" height="400"></canvas>
+  </div>
+  <div style="width: 48%;">
+    <canvas id="linechart-debt" width="400" height="400"></canvas>
+  </div>
+</div>
+
+At first it's many new users, but with the peak it's whales coming in with size and filling in the cap.
+
+Another way to look at this is to plot and compare growth rates.
+We use a weekly sliding window to compute growth to better capture trends and smooth out day to day variations.
+
+<script src="../../js/gho-users/growth-and-utilization-chart.js"></script>
+<div style="width: 100%;">
+    <canvas id="chart-growth-and-utilization" width="800" height="400"></canvas>
+</div>
+
+
+
 <script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
 <script src="../../js/gho-users/sankey.js"></script>
 
