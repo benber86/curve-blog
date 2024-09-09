@@ -24,13 +24,18 @@ _Authors:_ [benny](https://warpcast.com/bennylada)
 
 # Growth & User Acquisition
 
-GHO launched about a year ago  
+GHO launched about a year ago in July 2023. 
+The product gathered over 500 unique users and $20 million of outstanding loans in its first month.
+By September 2023, a [$35 million cap was introduced](https://governance-v2.aave.com/governance/proposal/308/) to better manage the protocol's risk exposure.
+It only took a couple of months for the cap to be filled. 
+As the two charts below demonstrate, the cap strongly tempered user growth. 
+While the crypto market saw strong growth in Q4-23 and Q1-24, that same period saw the number of unique GHO users stall. 
 
 
 <script src="../../js/gho-users/new-users-chart.js"></script>
 <script src="../../js/gho-users/debt-chart.js"></script>
 
-<div style="display: flex; justify-content: space-between;">
+<div style="display: flex; justify-content: space-between; margin-bottom: 20px">
   <div style="width: 48%;">
     <canvas id="linechart-new-users" width="400" height="400"></canvas>
   </div>
@@ -39,16 +44,21 @@ GHO launched about a year ago
   </div>
 </div>
 
-At first it's many new users, but with the peak it's whales coming in with size and filling in the cap.
 
-Another way to look at this is to plot and compare growth rates.
-We use a weekly sliding window to compute growth to better capture trends and smooth out day to day variations.
+By Q2-24, GHO's Risk Stewards [started incrementally raising the cap](https://governance.aave.com/t/arfc-chaos-labs-risk-stewards-increase-gho-minting-cap-03-01-24/16805) and user and debt growth resumed, albeit at different paces.
+Plotting the growth rate of users & debt vs. utilization, we can see that any drop below 100% in the utilization is followed by a much larger surge in debt than in users. 
+This suggests that the gaps are getting filled either by existing users borrowing more or by new users coming in with size.
+
+For instance, on June 1st, user [0xFCC5](https://etherscan.io/address/0xfcc5acd50ae590889d2a53343d35b5fb80d403c2) took out a <span>$3m</span> loan and filled the cap a mere hours after it was raised to <span>$68m</span>. 
+The same user likewise immediately filled the next cap increase to <span>$75m</span> with a [<span>$7m</span> loan](https://etherscan.io/tx/0xac837669efd297ab76c156542bf784d84b4752be5de97a3968ce0b5795cde62f) on June 3rd, and the following one to <span>$82m</span> with an [extra <span>$5m</span> loan](https://etherscan.io/tx/0x5c4c97482ff7e5c19758fd4cebe6ce3a4156315b820820cdd4c8619ca2e65ef7) on June 5th.
+The large average loan sizes also speak to this phenomenon, with an increase from <span>$65k</span> in July-August 2023 to almost <span>$100k</span> in July-August 2024, and almost 3 times more users taking on $1m+ loans in the latter period.
 
 <script src="../../js/gho-users/growth-and-utilization-chart.js"></script>
-<div style="width: 100%;">
+<div style="width: 100%; margin-bottom: 20px">
     <canvas id="chart-growth-and-utilization" width="800" height="400"></canvas>
 </div>
 
+This is 
 
 
 <script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
