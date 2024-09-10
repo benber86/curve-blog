@@ -94,7 +94,6 @@
                             tooltip: {
                                 callbacks: {
                                     title: function(context) {
-                                        console.log(context[0])
                                         return context[0].raw.x.toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' });
                                     },
                                     label: function(context) {
