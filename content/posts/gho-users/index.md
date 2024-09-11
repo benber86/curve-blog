@@ -19,6 +19,10 @@ _Authors:_ [benny](https://warpcast.com/bennylada)
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
 
+# Takeaways
+
+GHO Users are twice more likely to be engaged in other DeFi protocols than regular AAVE v3 users
+
 # Introduction
 
 
@@ -104,24 +108,68 @@ The chart below compares the distribution of users' first actions against some o
 
 One key difference with established assets is that **new GHO users are less likely to borrow other assets**.
 In fact, out of all the assets in the chart above, new GHO users (understood as users who only ever borrowed GHO or started using AAVE by borrowing GHO) are the least likely to borrow other assets after borrowing GHO, although they might borrow more GHO.
-This could be explained by the comparatively young age of the market and the situation may change as it matures.
+This could be explained by the comparatively young age of the market and the situation is likely to change as it matures.
 
+Indeed, GHO users are generally more active on-chain than other AAVE users.
+In fact, **GHO users are twice more likely to use another DeFi protocol.**
+There is further difference between users who started using AAVE through GHO (new users) and existing AAVE users who started borrowing GHO.
+The latter are more active in DeFi and favor protocols like Curve and Convex where new users favor restaking protocols like ether.fi and Eigenlayer.
+
+<script src="../../js/gho-users/protocol-usage-charts.js"></script>
+<style>
+#chartContainer .h4 {
+    color: #ccf !important;
+}
+</style>
+<div id="chartContainer">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; height: 550px; width: 100%; margin-bottom: 60px">
+        <div style="height: 280px;">
+            <canvas id="v3UsersChart"></canvas>
+        </div>
+        <div style="height: 280px;">
+            <canvas id="ghoUsersChart"></canvas>
+        </div>
+        <div style="height: 280px;">
+            <canvas id="newGhoUsersChart"></canvas>
+        </div>
+        <div style="height: 280px;">
+            <canvas id="existingAaveUsersChart"></canvas>
+        </div>
+    </div>
+</div>
+
+Pendle is one of the most commonly used protocols for both categories of GHO users. 
+As we can not track protocol usage prior to opening a GHO loan (all-cross protocol data was drawn from the state of the user wallets as of September 10th via DeBank's API), it is difficult to establish directionality or causality (do GHO users move to Pendle to stake? or are Pendle users coming to AAVE?).
+However, by looking at the assets that GHO users stake on Pendle, it's easy to see that they do not there to get yield on their GHO.
+Instead, the tokens they most often stake on Pendle are USDC, USDe, ETH and LRTs/LSTs.
+
+Likewise on Curve, very few GHO borrowers use the protocol to provide GHO liquidity. 
+Instead they are more likely to provide liquidity in the 3pool (USDC/USDT/DAI) or for ETH pairs.
 
 # Where do GHO users go?
+
+If users are not staking GHO on the most popular yield platforms like Curve and Pendle, what exactly do they do with their GHO?
+The above charts only look at where users currently have assets, which does not capture, for instance, trading activities.
+To have a better look at where GHO flows to, we can collect and parse the token's transfer events. 
+This allows us to see where GHO minters sent their tokens to (first-order flow), and, if they swapped them, what tokens they swapped it for (second-order flow).
+We quantify the flows in USD and in total number of transactions in the chart below:
 
 <script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
 <script src="../../js/gho-users/sankey.js"></script>
 
 
-<select id="data-type">
-    <option value="volume" selected>Volume</option>
-    <option value="transactions">Number of Transactions</option>
-</select>
+<div id="ddownsankey" style="margin-top: 40px; margin-bottom: 40px">
+    <select id="data-type">
+        <option value="volume" selected>USD Volume</option>
+        <option value="transactions">Number of Transactions</option>
+    </select>
+</div>
 <div id="sankey-chart"></div>
 
 <style>
     #sankey-chart {
         width: 100%;
+        margin-bottom: 20px;
         height: 600px;
     }
     
@@ -146,12 +194,18 @@ This could be explained by the comparatively young age of the market and the sit
     }
 </style>
 
+# User Age & Activity
+
+<script src="https://unpkg.com/@sgratzl/chartjs-chart-boxplot@3"></script>
+<script src="../../js/gho-users/age-violin.js"></script>
+<canvas id="violinChart"></canvas>
+
 # User Wealth
 
 <script src="../../js/gho-users/wallet-balance-distribution.js"></script>
 
 
-<div style="display: flex; justify-content: space-between; height: 300px; width: 100%; margin-bottom: 20px">
+<div style="display: flex; justify-content: space-between; height: 300px; width: 100%; margin-bottom: 20px;">
     <div style="width: 48%;">
         <canvas id="walletBalanceDistributionAll"></canvas>
     </div>
