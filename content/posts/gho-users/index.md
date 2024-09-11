@@ -213,7 +213,40 @@ We quantify the flows in USD and in total number of transactions in the chart be
         <canvas id="walletBalanceDistributionGHO"></canvas>
     </div>
 </div>
+<div style="width: 60%; margin: 0 auto; display: flex; justify-content: center; align-items: center; flex-direction: column;">
 
+<div style="width: 100%; justify-content: center">
+
+| Metric     | AAVE v3 Users | GHO Users |
+|------------|---------------|-----------|
+| Mean       | 602,689 | 644,543 |
+| Q1 (25%)   | 171 | 2,572 |
+| Median     | 3,097 | 30,369 |
+| Q3 (75%)   | 52,379 | 164,741 |
+| Max        | 1,334,557,934 | 223,611,758 |
+| Gini coef. | 92.8% | 84.7% |
+
+</div>
+</div>
+
+GHO users are significantly wealthier with the **median wallet value 10 times that of other AAVE v3 users**.
+
+If we breakdown the aggregate value of the users' portfolios we also see a number of differences between GHO users and v3 users.
+GHO users are more likely to store their wealth on L2s like arbitrum or base.
+While the actual distribution and choice of yield source may differ, both categories' portfolios are still strongly weighted towards ETH, BTC and stablecoins. 
+
+<script src="../../js/gho-users/donut-charts-comparison.js"></script>
+
+<div id="portfolioChart">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 20px">
+      <div style="width: 48%; height: 550px;">
+        <canvas id="donutChart10"></canvas>
+      </div>
+      <div style="width: 48%; height: 550px;">
+        <canvas id="donutChart20"></canvas>
+      </div>
+    </div>
+</div>
 
 We continued to work with our long term auditor [ChainSecurity](https://www.chainsecurity.com/) but extended our engagement to hire a consultant on retainer basis to provide continuous security advice.
 Two new auditors, [Ottersec](https://osec.io/) and [Statemind](https://statemind.io/) were brought on board to provide additional security assessments and bring different perspectives and methods into our review process.
