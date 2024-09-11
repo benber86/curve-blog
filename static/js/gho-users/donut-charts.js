@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
         datasets: [{
             data: [95.5, 4.5, 0, 0, 0],
             borderWidth: 0,
-            backgroundColor: ['#FF6384', '#36A2EB', 'rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)'],
+            backgroundColor: ['#FF6384CC', '#36A2EBCC', 'rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)'],
             hoverBackgroundColor: ['#FF6384', '#36A2EB', 'rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)']
         }]
     };
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         datasets: [{
             data: [24.1, 26.7, 13.4, 35.8],
             borderWidth: 0,
-            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
+            backgroundColor: ['#FF6384CC', '#36A2EBCC', '#FFCE56CC', '#4BC0C0CC'],
             hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
         }]
     };

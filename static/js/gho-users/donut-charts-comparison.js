@@ -13,13 +13,11 @@ document.addEventListener('DOMContentLoaded', function() {
             gho: {'stk GHO': 3.2954146349804043, 'Aave Ethereum WETH': 7.747159570062283, 'Aave Ethereum wstETH': 16.220181758667874, 'Staked Aave': 3.754801533979244, 'Aave Ethereum AAVE': 3.524551178270903, 'Aave Ethereum WBTC': 12.048423925840138, 'Aave Ethereum weETH': 5.320052237192876, 'Aave Ethereum sDAI': 2.083814796597568, 'Gnosis Token': 3.9194522222476214, 'Pendle Market': 2.2587878020153522, 'Spark wstETH': 3.6457541807253144, 'Savings Dai': 4.847182147647669, 'Spark WETH': 2.7347295598567842, 'Others': 28.599694451916136}
         }
     };
-
     const colorPalette = [
-        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40',
-        '#C9CBCF', '#83D475', '#F78C6C', '#7B7FEC', '#C284B5', '#F66D44',
-        '#B29868', '#68AACC', '#FF7070', '#9EC2E6', '#E0B3FC', '#FFD700'
+        '#FF6384CC', '#36A2EBCC', '#FFCE56CC', '#4BC0C0CC', '#9966FFCC', '#FF9F40CC',
+        '#C9CBCFCC', '#83D475CC', '#F78C6CCC', '#7B7FECCC', '#C284B5CC', '#F66D44CC',
+        '#B29868CC', '#68AACCCC', '#FF7070CC', '#9EC2E6CC', '#E0B3FCCC', '#FFD700CC'
     ];
-
     const customDataLabels = {
         id: 'customDataLabels',
         afterDraw(chart, args, options) {

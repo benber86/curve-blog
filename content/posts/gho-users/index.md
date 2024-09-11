@@ -30,7 +30,9 @@ GHO Users are twice more likely to be engaged in other DeFi protocols than regul
 
 GHO launched about a year ago in July 2023. 
 The product gathered over 500 unique users and $20 million of outstanding loans in its first month.
-By September 2023, a [$35 million cap was introduced](https://governance-v2.aave.com/governance/proposal/308/) to better manage the protocol's risk exposure.
+A year later, it is in the [top 20 of stablecoins](https://www.coingecko.com/en/categories/stablecoins) by market capitalization and has over 2000 users.
+
+In September 2023, a [$35 million cap was introduced](https://governance-v2.aave.com/governance/proposal/308/) to better manage the protocol's risk exposure.
 It only took a couple of months for the cap to be filled. 
 As the two charts below demonstrate, the cap subsequently strongly tempered user growth. 
 While the crypto market saw strong growth in Q4-23 and Q1-24, that same period saw the number of unique GHO users stall. 
@@ -193,6 +195,22 @@ We quantify the flows in USD and in total number of transactions in the chart be
         pointer-events: none;
     }
 </style>
+
+# Survival Rates
+
+We compute the likelihood that a user who started using AAVE by borrowing a certain asset will continue to interact with the protocol.
+We define continuous interaction as either another borrow or supply event (and exclude liquidations and repayments).
+We only consider users who started interacting with AAVE in the past year to avoid bias towards assets that have been available for longer.
+
+
+<script src="../../js/gho-users/survival-rate.js"></script>
+<div style="height: 380px;width: 100%; ">
+    <canvas id="survivalChart"></canvas>
+</div>
+
+GHO minters are in the bottom range of assets for user stickiness.
+While 8 out 10 users who started by borrowing PYUSD or LUSD continue transacting on AAVE, 40% of GHO minters never interact with the protocol again.
+
 
 # User Age & Activity
 
