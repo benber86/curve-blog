@@ -46,6 +46,8 @@ While the crypto market saw strong growth in Q4-23 and Q1-24, that same period s
 
 <script src="../../js/gho-users/new-users-chart.js"></script>
 <script src="../../js/gho-users/debt-chart.js"></script>
+<script src="../../js/gho-users/peg-chart.js"></script>
+<script src="../../js/gho-users/debt-ceiling-chart.js"></script>
 
 <div style="display: flex; justify-content: space-between; margin-bottom: 20px">
   <div style="width: 48%;">
@@ -53,6 +55,15 @@ While the crypto market saw strong growth in Q4-23 and Q1-24, that same period s
   </div>
   <div style="width: 48%;">
     <canvas id="linechart-debt" width="400" height="400"></canvas>
+  </div>
+</div>
+
+<div style="display: flex; justify-content: space-between; margin-bottom: 20px">
+  <div style="width: 48%;">
+    <canvas id="linechart-peg" width="400" height="400"></canvas>
+  </div>
+  <div style="width: 48%;">
+    <canvas id="linechart-ceiling" width="400" height="400"></canvas>
   </div>
 </div>
 
