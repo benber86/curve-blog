@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
         'rgba(255, 218, 193, 0.5)', // ffdac1
         'rgba(226, 240, 203, 0.5)', // e2f0cb
         'rgba(181, 234, 215, 0.5)', // b5ead7
-        'rgba(199, 206, 234, 0.5)',  // c7ceea
-        'rgba(204, 204, 255, 0.5)',  // ##ccccff
         'rgba(179, 235, 242, 0.5)',  // #b3ebf2
+        'rgba(204, 204, 255, 0.5)',  // ##ccccff
+        'rgba(199, 206, 234, 0.5)',  // c7ceea
     ];
 
     function calculateStats(data) {
