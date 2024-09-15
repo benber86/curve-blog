@@ -1,15 +1,31 @@
 document.addEventListener('DOMContentLoaded', function() {
     const data = {
         chains: {
-            v3: {'Arbitrum': 2.8317737130010325, 'Ethereum': 92.94438520557951, 'Others': 4.223841081419457},
+            v3: {'Arbitrum': 3.6983333096472495, 'Ethereum': 90.77885161649849, 'Others': 5.522815073854312},
             gho: {'Arbitrum': 7.161821318550868, 'Base': 2.02332688079016, 'Ethereum': 84.34180686871849, 'Others': 6.473044931940483}
         },
         protocols: {
-            v3: {'Aave V3': 50.331539165248685, 'LIDO': 5.828553909900142, 'Compound V3': 3.243393698307933, 'ether.fi': 7.053622380593481, 'StakeFish': 5.938833832076734, 'Others': 27.6040570138732},
+            v3: {'Aave V3': 60.04896927344203,
+                'LIDO': 4.198364830771716,
+                'Pendle V2': 1.545914122442896,
+                'StakeFish': 9.226602604310415,
+                'Others': 24.980149169032842},
             gho: {'Aave V3': 47.57423822285428, 'Aave V2': 3.8889807155949736, 'Gnosis Safe': 4.973840929213128, 'Spark': 5.2588929278096685, 'Pendle V2': 2.9756756103735316, 'Maker': 3.739317294872934, 'Others': 31.589054299281074}
         },
         tokens: {
-            v3: {'ETH': 2.699522659547145, 'Aave Ethereum USDT': 3.4377217062545595, 'Tether USD': 2.061395902768851, 'Aave Ethereum USDC': 3.8664322688510366, 'Aave Ethereum WETH': 9.355962728144851, 'Liquid staked Ether 2.0': 2.909949094530358, 'Aave Ethereum WBTC': 7.072219699372286, 'Aave Ethereum wstETH': 7.41539591247186, 'Wrapped Ether': 9.870923956644937, 'Wrapped BTC': 11.870284867109497, 'EtherFi wrapped ETH': 5.347070379752513, 'Aave Ethereum weETH': 5.165400315349687, 'Others': 28.9277205092025},
+            v3:{'Aave Ethereum WETH': 19.674330759156053,
+                'ETH': 3.3060621663240837,
+                'Aave Ethereum WBTC': 15.608530845543388,
+                'Aave Ethereum wstETH': 17.177306540228138,
+                'Aave Ethereum USDC': 1.951515699815715,
+                'Wrapped liquid staked Ether 2.0': 1.1638604411115108,
+                'Tether USD': 1.196803684124159,
+                'Wrapped BTC': 2.119913170719584,
+                'Liquid staked Ether 2.0': 1.3220956622105349,
+                'Aave Ethereum weETH': 12.032266050590886,
+                'Aave Ethereum Lido WETH': 1.8285998786706767,
+                'SifuM': 4.178447425737733,
+                'Others': 18.440267675767675},
             gho: {'stk GHO': 3.2954146349804043, 'Aave Ethereum WETH': 7.747159570062283, 'Aave Ethereum wstETH': 16.220181758667874, 'Staked Aave': 3.754801533979244, 'Aave Ethereum AAVE': 3.524551178270903, 'Aave Ethereum WBTC': 12.048423925840138, 'Aave Ethereum weETH': 5.320052237192876, 'Aave Ethereum sDAI': 2.083814796597568, 'Gnosis Token': 3.9194522222476214, 'Pendle Market': 2.2587878020153522, 'Spark wstETH': 3.6457541807253144, 'Savings Dai': 4.847182147647669, 'Spark WETH': 2.7347295598567842, 'Others': 28.599694451916136}
         }
     };
@@ -133,8 +149,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const ctx2 = document.getElementById('donutChart20').getContext('2d');
 
         updateMainTitle(dataType);
-        chart1 = createDonutChart(ctx1, data[dataType].v3, `V3 Users`);
-        chart2 = createDonutChart(ctx2, data[dataType].gho, `GHO Users`);
+        chart1 = createDonutChart(ctx1, data[dataType].v3, `V3 Borrowers`);
+        chart2 = createDonutChart(ctx2, data[dataType].gho, `GHO Borrowers`);
     }
 
     function updateMainTitle(dataType) {

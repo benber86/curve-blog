@@ -238,10 +238,23 @@ Looking at the present state of the market and the distribution of user health s
 <script src="../../js/gho-users/health-violin.js"></script>
 <canvas id="healthViolinChart" height="200px"></canvas>
 
-Health factor distribution is homogenous across all borrowed assets.
+Overall, health factor distribution is homogenous across all borrowed assets.
 As these are aggregated health scores across all loans, a user's stats can be counted in different asset (if they have concurrently borrowed different assets).
 
 # Collateral Preferences
+
+The types and proportions of collateral supplied are also relatively similar across borrowers, including GHO minters.
+ETH (wrapped or staked) is uniformally the leading choice for collateral.
+USDC and USDT borrowers are somewhat different, with a collateral mix skewed more towards ETH and BTC than other borrowed assets, including other stablecoins.
+
+<script src="../../js/gho-users/collateral-preference.js"></script>
+
+<div style="height: 600px; width: 100%; margin-bottom: 20px">
+    <canvas id="collatPreference"></canvas>
+</div>
+
+The chart displays that a sometimes large proportion of people borrowing a token also supply the token as collateral.
+This can be due to a number of reasons, including multiple positions (sometimes asynchronous if different loans are opened separately over time), arbitrage, leverage or liquidity needs.
 
 # Borrowing Patterns
 

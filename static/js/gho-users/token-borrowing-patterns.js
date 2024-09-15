@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function getColor(index) {
-        const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'];
+        const colors = ['#FF6384CC', '#36A2EBCC', '#FFCE56CC', '#4BC0C0CC'];
         return colors[index % colors.length];
     }
 });
