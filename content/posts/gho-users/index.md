@@ -5,12 +5,17 @@ date: 2024-09-06T09:25:45.000Z
 ogimage: "https://blog.curvemonitor.com/images/ng-mev/thumbnail.png"
 description: "Analysis of GHO Users"
 categories:
-  - Vyper
-  - Security
+  - GHO
+  - AAVE
+  - Users
+  - Analytics
+  - Products
 tags:
-  - Vyper
-  - Security
-  - Audits
+  - GHO
+  - AAVE
+  - Users
+  - Analytics
+  - Products
 ---
 
 _Authors:_ [benny](https://warpcast.com/bennylada)
@@ -272,6 +277,10 @@ This can be due to a number of reasons, including multiple positions (sometimes 
 
 <script src="../../js/gho-users/tx-count.js"></script>
 <canvas id="txCountChart" height="180px"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="../../js/gho-users/borrowed-heatmap.js"></script>
+<div id="borrowedHeatmap"></div>
 
 # Survival Rates
 
