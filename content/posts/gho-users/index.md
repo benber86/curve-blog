@@ -25,6 +25,11 @@ GHO Users are twice more likely to be engaged in other DeFi protocols than regul
 
 # Introduction
 
+Definition of GHO users as users who have borrowed GHO.
+While this may include contracts, they only account for a small fraction (5.6%) of minters.
+Unless otherwise indicated, we do not count holders of the GHO token as users.
+
+Data pulled on Sept. 4th and for ethereum mainnet unless otherwise indicated.
 
 # Growth & User Acquisition
 
@@ -66,7 +71,7 @@ This, too, indicates that **growth in Q2 and Q3 2024 was driven more by capital 
     <canvas id="chart-growth-and-utilization" width="800" height="400"></canvas>
 </div>
 
-However as borrow cap increases become larger, there are larger time windows for new users to borrow GHO.
+However as borrow cap increases become larger, there are larger time windows for new users to mint GHO.
 After the first <span>$35m</span> borrow cap was reached in 2023, any subsequent available borrowing capacity (from either cap raises or loan repayments) was filled within a couple of days, and often in just a few hours.
 But the large increases in summer 2024 (from <span>$75m</span> to <span>$150m</span>) took over a month to fill, and the current cap, at the time of writing, has not been filled for over 2 weeks: 
 
@@ -150,7 +155,7 @@ Instead they are more likely to provide liquidity in the 3pool (USDC/USDT/DAI) o
 
 # Where do GHO users go?
 
-If users are not staking GHO on the most popular yield platforms like Curve and Pendle, what exactly do they do with their GHO?
+If users are not staking GHO on the most popular yield platforms like Curve and Pendle, what do they do with their GHO?
 The above charts only look at where users currently have assets, which does not capture, for instance, trading activities.
 To have a better look at where GHO flows to, we can collect and parse the token's transfer events. 
 This allows us to see where GHO minters sent their tokens to (first-order flow), and, if they swapped them, what tokens they swapped it for (second-order flow).
@@ -196,6 +201,50 @@ We quantify the flows in USD and in total number of transactions in the chart be
     }
 </style>
 
+
+# Liquidations
+
+Liquidations are important to ensure the stability and collaterization of stablecoins like GHO.
+They however present a risk to lending protocols as they might create bad debt and/or discourage liquidated users from borrowing again.
+It is therefore worth investigating the prevalence of liquidations among GHO minters and whether that number is significantly different from that of other collateral assets.
+
+We can look at the total number of liquidations (regardless of the loaned token) by type of users to determine if their overall borrowing behavior exhibits higher or lower risk preference. 
+We can also look at the number of loans of a particular assets that were liquidated to see if the liquidations can be more specifically attributable to something about the asset.
+
+<script src="../../js/gho-users/liquidations.js"></script>
+<script src="../../js/gho-users/liq-prop.js"></script>
+<div style="display: flex; justify-content: space-between; height: 450px; width: 100%; margin-bottom: 20px;">
+    <div style="width: 48%;">
+        <canvas id="liquidationChart"></canvas>
+    </div>
+    <div style="width: 48%;">
+        <canvas id="liqPropChart"></canvas>
+    </div>
+</div>
+
+At first glance, from the chart on the left, it might seem that GHO minters are more likely to experience a liquidation (10%) compared to other AAVE users (8%) and might therefore be less risk averse.
+However, when further breaking down the numbers, we see that most GHO users who experienced liquidations are those who had previously borrowed on AAVE v2 or v3. 
+That they've experienced more liquidations simply reflects the fact that they've spent more time on the platform.
+
+When we look at asset specific loans (right), we see instead that **GHO denominated loans are less likely to be liquidated (6%) compared to other major stablecoins like USDC (8%) and USDT (9%).**
+This number is also lower compared to another CDP stablecoin, crvUSD, where hard liquidations are closer to 10%, with some variation per market. 
+
+That crypto denominated loans have lower liquidation rates overall simply reflects market conditions since the launch of AAVE v3.
+Crypto assets have mostly lost value, making their borrowers less likely to be liquidated compared to users who borrowed stablecoins and most likely used crypto assets as collateral.
+
+Looking at the present state of the market and the distribution of user health scores, GHO users are no different from asset borrowers with an **1.67 median health score** and a similar distribution:
+
+<script src="https://unpkg.com/@sgratzl/chartjs-chart-boxplot@3"></script>
+<script src="../../js/gho-users/health-violin.js"></script>
+<canvas id="healthViolinChart" height="200px"></canvas>
+
+Health factor distribution is homogenous across all borrowed assets.
+As these are aggregated health scores across all loans, a user's stats can be counted in different asset (if they have concurrently borrowed different assets).
+
+# Collateral Preferences
+
+# Borrowing Patterns
+
 # Survival Rates
 
 We compute the likelihood that a user who started using AAVE by borrowing a certain asset will continue to interact with the protocol.
@@ -204,17 +253,16 @@ We only consider users who started interacting with AAVE in the past year to avo
 
 
 <script src="../../js/gho-users/survival-rate.js"></script>
+
 <div style="height: 380px;width: 100%; ">
     <canvas id="survivalChart"></canvas>
 </div>
-
 GHO minters are in the bottom range of assets for user stickiness.
 While 8 out 10 users who started by borrowing PYUSD or LUSD continue transacting on AAVE, 40% of GHO minters never interact with the protocol again.
 
-
 # User Age & Activity
 
-<script src="https://unpkg.com/@sgratzl/chartjs-chart-boxplot@3"></script>
+
 <script src="../../js/gho-users/age-violin.js"></script>
 <canvas id="violinChart"></canvas>
 
