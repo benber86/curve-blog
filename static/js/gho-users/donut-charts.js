@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const data1 = {
         labels: ['Never borrowed GHO', 'Borrowed GHO', '                                                                          ', '                                                                          ', '                                                                           '],
         datasets: [{
-            data: [95.5, 4.5, 0, 0, 0],
+            data: [90.2, 9.8, 0, 0, 0],
             borderWidth: 0,
             backgroundColor: ['#FF6384CC', '#36A2EBCC', 'rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)'],
             hoverBackgroundColor: ['#FF6384', '#36A2EB', 'rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)']
@@ -112,6 +112,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const ctx1 = document.getElementById('donutChart1').getContext('2d');
     const ctx2 = document.getElementById('donutChart2').getContext('2d');
 
-    createDonutChart(ctx1, data1, 'GHO Borrowers Among V3 Users');
+    createDonutChart(ctx1, data1, 'GHO Borrowers Among V3 Borrowers');
     createDonutChart(ctx2, data2, 'First Actions of GHO Borrowers');
 });

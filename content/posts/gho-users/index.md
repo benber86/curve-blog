@@ -26,6 +26,7 @@ GHO Users are twice more likely to be engaged in other DeFi protocols than regul
 # Introduction
 
 Definition of GHO users as users who have borrowed GHO.
+We do not take into account the lifetime of the loan unless otherwise specified, this means that users who minted GHO and repaid their loans are still counted as users.
 While this may include contracts, they only account for a small fraction (5.6%) of minters.
 Unless otherwise indicated, we do not count holders of the GHO token as users.
 
@@ -83,9 +84,9 @@ But the large increases in summer 2024 (from <span>$75m</span> to <span>$150m</s
 
 # Where do GHO users come from?
 
-There are now over 2000 users who borrowed GHO, but that figure remains small in comparison to AAVE's total user base.
-**GHO users represent less than 5% of all AAVE v3 users.** 
-If we include v2, that proportion falls to 1.4% of all time users.
+There are now over 2000 users who borrowed GHO, but that figure remains relatively small in comparison to AAVE's total user base.
+**GHO users represent 10% of all AAVE v3 borrowers,** and around 5% of all users.
+If we include v2 borrowers, that proportion falls to 2.95% of all time borrowers (1.4% of all users).
 But how many of these GHO users are existing AAVE users and how many are new users that the product brought to AAVE?
 
 
@@ -258,6 +259,9 @@ This can be due to a number of reasons, including multiple positions (sometimes 
 
 # Borrowing Patterns
 
+<script src="../../js/gho-users/tx-count.js"></script>
+<canvas id="txCountChart" height="180px"></canvas>
+
 # Survival Rates
 
 We compute the likelihood that a user who started using AAVE by borrowing a certain asset will continue to interact with the protocol.
@@ -267,7 +271,7 @@ We only consider users who started interacting with AAVE in the past year to avo
 
 <script src="../../js/gho-users/survival-rate.js"></script>
 
-<div style="height: 380px;width: 100%; ">
+<div style="height: 380px;width: 100%; margin-bottom: 20px">
     <canvas id="survivalChart"></canvas>
 </div>
 GHO minters are in the bottom range of assets for user stickiness.

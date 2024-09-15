@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Collateral Preference by Borrower Type',
+                    text: 'Collateral Preference by Asset Borrowers',
                     font: { size: 18 }
                 },
 
