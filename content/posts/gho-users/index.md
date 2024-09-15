@@ -218,6 +218,13 @@ We quantify the flows in USD and in total number of transactions in the chart be
     }
 </style>
 
+lalalala: [Merit Program](https://governance.aave.com/t/arfc-merit-a-new-aave-alignment-user-reward-system/16646/47)
+
+<script src="../../js/gho-users/before-after.js"></script>
+
+<div style="height: 300px; margin-bottom: 40px;">
+    <canvas id="beforeAfterChart" style="margin-top: 30px;"></canvas>
+</div>
 
 # Liquidations
 
