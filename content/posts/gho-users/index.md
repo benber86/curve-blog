@@ -26,7 +26,13 @@ _Authors:_ [benny](https://warpcast.com/bennylada)
 
 # Takeaways
 
-GHO Users are twice more likely to be engaged in other DeFi protocols than regular AAVE v3 users
+
+- GHO borrowers make up 10% of AAVE v3's borrowers
+- Half of GHO borrowers are new users who had never interacted with AAVE before
+- Staking incentives reduced outflows to stablecoins by 25% 
+- GHO Users are twice more likely to be engaged in other DeFi protocols than regular AAVE v3 users
+- GHO Users are wealthier and more experienced compared to other borrowers
+
 
 # Introduction
 
@@ -175,7 +181,7 @@ Instead they are more likely to provide liquidity in the 3pool (USDC/USDT/DAI) o
 If users are not staking GHO on the most popular yield platforms like Curve and Pendle, what do they do with their GHO?
 The above charts only look at where users currently have assets, which does not capture, for instance, trading activities.
 To have a better look at where GHO flows to, we can collect and parse the token's transfer events. 
-This allows us to see where GHO minters sent their tokens to (first-order flow), and, if they swapped them, what tokens they swapped it for (second-order flow).
+This allows us to see where GHO minters sent their tokens to (first-order flow), and, if they traded them, what tokens they traded GHO for (second-order flow).
 We quantify the flows in USD and in total number of transactions in the chart below:
 
 <script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
@@ -188,6 +194,8 @@ We quantify the flows in USD and in total number of transactions in the chart be
         <option value="transactions">Number of Transactions</option>
     </select>
 </div>
+<div style="text-align: center; width: 100%; margin-bottom: 20px;">
+<span style="font-size: 16px; color: #666; font-weight: bold">GHO First and Second Order Flows From Mint</span></div>
 <div id="sankey-chart"></div>
 
 <style>
@@ -218,12 +226,50 @@ We quantify the flows in USD and in total number of transactions in the chart be
     }
 </style>
 
-lalalala: [Merit Program](https://governance.aave.com/t/arfc-merit-a-new-aave-alignment-user-reward-system/16646/47)
+The chart lets us see that while a majority of minters traded their GHO for another stablecoin such as USDC, USDT or DAI, GHO staking and liquidity providing on DEXes are important supply sinks for the coin.
+This is, however, an aggregated view over a 1 year period and does not fully capture some of the changes in GHO flow directionality over time.
+
+In particular, 2024 saw the introduction of [GHO staking](https://governance.aave.com/t/arfc-upgrade-safety-module-with-stkgho/15635/10) which offered incentives for minters to hold on to their GHO rather than immediately trading it for other assets.
+Rewards for staking were [increased in February](https://governance.aave.com/t/arfc-amend-safety-module-emissions/16640) and further strengthened by the introduction of the [Merit Program](https://governance.aave.com/t/arfc-merit-a-new-aave-alignment-user-reward-system/16646) in March.
+
+To evaluate the impact of these incentives on flows, we split the data into two different periods using March 15th as the demarcation date:
 
 <script src="../../js/gho-users/before-after.js"></script>
 
-<div style="height: 300px; margin-bottom: 40px;">
+<div style="height: 300px; margin-bottom: 50px; margin-top: 20px;">
     <canvas id="beforeAfterChart" style="margin-top: 30px;"></canvas>
+</div>
+
+The most obvious change is of course the tremendous increase in the proportion of flows going towards staking, from 3.8% to 19.1%. 
+The corollary to this increase is a decrease in the flows towards DEXes such as Uniswap (12.8% to 1.2%) or Balancer (11% to 1.8%).
+This indicates that the staking program was successful at preventing users from dumping GHO for other stablecoins which would have put constant pressure on the peg.
+
+It's true of course that not all users were using DEXes to dump.
+Looking at second-order flows, we can see that in the absence of staking rewards a significant proportion of users were using DEXes to provide liquidity and get yield on their GHO:
+
+
+<script src="../../js/gho-users/sec-order-merit.js"></script>
+
+<div id="merit-charts">
+    <div id="merit-chart-container" style="display: flex; justify-content: space-between; height: 450px; width: 100%; margin-bottom: 20px;">
+    </div>
+</div>
+
+While the incentives reduced flows going towards liquidity pools, particularly on Uniswap v3, they also successfully reduced the outflows towards other stablecoins on the three major mainnet DEXes.
+
+The comparison is, of course, far from perfect.
+Aggregators such as CowSwap or 1inch were not considered as they did not offer an option to LP.
+The two periods are also of different lengths, and the supply of GHO was much larger in the second period than in the first.
+Normalizing for time and supply, and considering all outflows to DEXes, we find that overall **staking incentives reduced outflows to stablecoins by close to 25%**. 
+Concomitantly, staking also drastically reduced outflows towards liquidity pools by 83%.
+
+
+<script src="../../js/gho-users/outflow-change-merit.js"></script>
+
+<div style="display: flex; height: 400px; margin-bottom: 50px; margin-top: 20px; text-align: center;">
+    <div style="width: 50%; margin: 0 auto;">
+        <canvas id="outflowChange" style="margin-top: 30px;"></canvas>
+    </div>
 </div>
 
 # Liquidations

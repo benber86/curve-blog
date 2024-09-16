@@ -52,8 +52,15 @@ function createChart(dataType) {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
+                legend: {
+                    position: 'bottom',
+                },
                 title: {
                     display: true,
+
+                    font: {
+                        size: 16
+                    },
                     text: dataType === 'volume' ? 'First Order Flow Destinations Before and After Merit Program (USD Volume)' : 'First Order Flow Destinations Before and After Merit Program (Transaction Count)'
                 },
                 tooltip: {
