@@ -2,7 +2,7 @@
 title: "Who are GHO users"
 draft: false
 date: 2024-09-06T09:25:45.000Z
-ogimage: "https://blog.curvemonitor.com/images/ng-mev/thumbnail.png"
+ogimage: "https://benber86.github.io/curve-blog/images/gho-users/sankey.jpg"
 description: "Analysis of GHO Users"
 categories:
   - GHO
