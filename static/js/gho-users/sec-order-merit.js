@@ -159,8 +159,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (beforeChart) beforeChart.destroy();
         if (afterChart) afterChart.destroy();
 
-        beforeChart = createBarChart(beforeCanvas.getContext('2d'), beforeMeritData, 'Before Merit', dataType);
-        afterChart = createBarChart(afterCanvas.getContext('2d'), afterMeritData, 'After Merit', dataType);
+        beforeChart = createBarChart(beforeCanvas.getContext('2d'), beforeMeritData, 'Before Incentives', dataType);
+        afterChart = createBarChart(afterCanvas.getContext('2d'), afterMeritData, 'After Incentives', dataType);
     }
 
     updateCharts('absolute');

@@ -3,19 +3,19 @@ document.addEventListener('DOMContentLoaded', function() {
         'GHO': [24.12, 26.69, 13.37, 35.83],
         'USDC': [13.03, 17.72, 24.48, 44.77],
         'USDT': [15.71, 20.77, 17.61, 45.91],
-        'WETH': [17.37, 19.51, 21.27, 41.85],
         'DAI': [27.11, 19.85, 27.86, 25.17],
-        'wstETH': [15.04, 34.46, 17.33, 33.17],
-        'WBTC': [26.73, 25.79, 22.74, 24.74],
         'LUSD': [33.26, 31.81, 19.75, 15.18],
         'PYUSD': [23.23, 45.16, 17.10, 14.52],
+        'crvUSD': [24.66, 45.21, 13.70, 16.44],
+        'WETH': [17.37, 19.51, 21.27, 41.85],
+        'wstETH': [15.04, 34.46, 17.33, 33.17],
+        'WBTC': [26.73, 25.79, 22.74, 24.74],
         'CRV': [42.16, 13.78, 26.76, 17.30],
-        'crvUSD': [24.66, 45.21, 13.70, 16.44]
     };
 
     const labels = [
-        'Started with other token (V2)',
-        'Started with other token (V3)',
+        'Started with other token (V2) then borrowed GHO',
+        'Started with other token (V3) then borrowed GHO',
         'Started by borrowing token then borrowed other tokens',
         'Only ever borrowed token',
     ];

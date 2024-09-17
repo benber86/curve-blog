@@ -44,7 +44,7 @@ function createChart(dataType) {
     chart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Before Merit Program', 'After Merit Program'],
+            labels: ['Before Incentives', 'After Incentives'],
             datasets: datasets
         },
         options: {
@@ -61,7 +61,7 @@ function createChart(dataType) {
                     font: {
                         size: 16
                     },
-                    text: dataType === 'volume' ? 'First Order Flow Destinations Before and After Merit Program (USD Volume)' : 'First Order Flow Destinations Before and After Merit Program (Transaction Count)'
+                    text: dataType === 'volume' ? 'First Order Flow Destinations Before and After Incentives (USD Volume)' : 'First Order Flow Destinations Before and After Incentives (Transaction Count)'
                 },
                 tooltip: {
                     callbacks: {

@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const data2 = {
         labels: [
-            'Started by borrowing other tokens on AAVE v2',
-            'Started by borrowing other tokens on AAVE v3',
+            'Borrowed other tokens on AAVE v2 before borrowing GHO',
+            'Borrowed other tokens on AAVE v3 before borrowing GHO',
             'Started by borrowing GHO then borrowed other tokens',
             'Only ever borrowed GHO'
         ],
@@ -112,6 +112,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const ctx1 = document.getElementById('donutChart1').getContext('2d');
     const ctx2 = document.getElementById('donutChart2').getContext('2d');
 
-    createDonutChart(ctx1, data1, 'GHO Borrowers Among V3 Borrowers');
-    createDonutChart(ctx2, data2, 'First Actions of GHO Borrowers');
+    createDonutChart(ctx1, data1, ['GHO Borrowers', 'Among V3 Borrowers']);
+    createDonutChart(ctx2, data2, ['First Actions of GHO Borrowers', 'on AAVE']);
 });

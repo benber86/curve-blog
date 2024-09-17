@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 title: {
                     display: true,
-                    text: ['Change in Outflows After Merit',],
+                    text: ['Change in Second Order Outflows', 'After Incentives',],
                     font: {
                         size: 16
                     }

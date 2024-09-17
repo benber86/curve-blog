@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         },
                         y: {
                             title: {
-                                display: true,
+                                display: false,
                                 text: 'Assets'
                             }
                         }
