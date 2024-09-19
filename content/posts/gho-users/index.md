@@ -47,11 +47,16 @@ _This article is a collaboration with [Llama Risk](https://www.llamarisk.com/res
 This article looks at the product's growth, the flows of GHO within the DeFi ecosystem, the impact of incentives, and the specificities of GHO users.
 We aim to understand who the GHO users are, how they differ from other AAVE users, and what insights can be drawn about their behavior and impact on the ecosystem.
 
-While GHO is technically minted rather than borrowed, we will nonetheless use the terms "borrow" and "borrowers" when referring to minting and minters.
+While GHO is [technically minted rather than borrowed](https://docs.gho.xyz/concepts/how-gho-works/gho-implementation), we will nonetheless use the terms "borrow" and "borrowers" when referring to minting and minters.
 We define GHO users as individuals or entities who have borrowed GHO at one point.
 We do not take into account the lifetime of the loan unless otherwise specified, this means that users who minted GHO and repaid their loans are still counted as users.
 Our definition of users includes smart contracts, however, they only account for a small fraction (5.6%) of minters.
 We do not count holders of the GHO token who never minted it on AAVE as users.
+
+We also equate one address to one user, as the human unit is not the most relevant for blockchain analytics.
+An individual may own multiple addresses, but if each address' behavior is different there is no practical or analytical advantage in grouping them together (assuming we could possibly know who owns them).
+On the other hand two different individuals may run the same bots and behave the same way on-chain.
+It's therefore more productive to take addresses as the base unit, and then potentially group users together based on their similarities.
 
 Unless otherwise specified, our analysis is solely for the Ethereum mainnet based on data collected on September 4th, 2024.
 Data is sourced from the [AAVE v3 subgraphs](https://github.com/aave/protocol-subgraphs/tree/main/src), a [subgraph tracking GHO transfers](https://github.com/benber86/gho_token_subgraph) built for the purpose of this study, third party data providers ([Debank](https://debank.com/), [Moralis](https://moralis.io/), [Arkham](https://platform.arkhamintelligence.com/)) or directly from a node.
@@ -186,7 +191,7 @@ The latter are more active in DeFi and favor protocols like Curve and Convex whe
 </div>
 
 Pendle is one of the most commonly used protocols for both categories of GHO users. 
-As we cannot track protocol usage prior to opening a GHO loan (all-cross protocol data was drawn from the state of the user wallets as of September 10th via DeBank's API), it is difficult to establish directionality or causality:
+As we cannot track protocol usage prior to opening a GHO loan (all-cross protocol data was drawn from the state of the user's address as of September 10th via DeBank's API), it is difficult to establish directionality or causality:
 Do GHO users move to Pendle to stake? Or are Pendle users coming to AAVE?
 
 By looking at the assets that GHO users stake on Pendle, one can see that they do not go there to get yield on their GHO.
@@ -196,7 +201,7 @@ Instead they are more likely to provide liquidity in the 3pool (USDC/USDT/DAI) o
 
 # Where do GHO users go?
 
-If users are not staking GHO on the most popular yield platforms like Curve and Pendle, what do they do with their GHO?
+If users are not providing liquidity on Curve or depositing on Pendle, what do they do with their GHO?
 The above charts only look at where users currently have assets, which does not capture flows such as trading activities.
 To have a better look at where GHO liquidity moves to, we can collect and parse the token's transfer events. 
 This allows us to see where GHO minters sent their tokens to (first-order flow), and, if they traded them, what tokens they traded GHO for (second-order flow).
@@ -264,7 +269,8 @@ This indicates that the staking program was successful at preventing users from 
 Mitigating selling pressure this way would, in turn, help stabilize the peg.
 
 It's true that not all users might have been using DEXes to sell their GHO.
-Looking at second-order flows on major DEXes, we can see that in the absence of staking rewards a significant proportion of users were using DEXes to provide liquidity and get yield on their GHO:
+Looking at second-order flows on major DEXes, we can see in the chart below that in the absence of staking rewards a significant proportion of users were using DEXes to provide liquidity and get yield on their GHO.
+(_Stablecoins_ means that users traded their GHO for other stables like USDC or USDT while _Crypto assets_ refers to all other, volatile tokens users have traded GHO for):
 
 
 <script src="../../js/gho-users/sec-order-merit.js"></script>
@@ -389,7 +395,7 @@ While 8 out of 10 users who started by borrowing PYUSD or LUSD continue transact
 
 # User Wealth
 
-Using [DeBank data](https://cloud.debank.com/open-api), we collect the USD value and composition of the wallets of a large sample of AAVE v3 users and GHO minters:
+Using [DeBank data](https://cloud.debank.com/open-api), we collect the USD value and composition of the portfolios of a large sample of AAVE v3 users and GHO minters:
 
 <script src="../../js/gho-users/wallet-balance-distribution.js"></script>
 
@@ -418,7 +424,7 @@ Using [DeBank data](https://cloud.debank.com/open-api), we collect the USD value
 </div>
 </div>
 
-GHO users are significantly wealthier with the **median wallet value 10 times that of other AAVE v3 users**.
+GHO users are significantly wealthier with the **median portfolio value 10 times that of other AAVE v3 users**.
 
 If we break down the aggregate value of the users' portfolios, we also see a number of differences between GHO users and v3 users.
 GHO users are more likely to store their wealth on L2s like Arbitrum or Base.
@@ -440,10 +446,10 @@ While the actual distribution and choice of yield source may differ, both catego
 
 # User Age & Activity
 
-Finally, we take a look at the age and level of activity (using the wallet's nonce as a proxy) of users' wallets:
+Finally, we take a look at the age and level of activity (using the account's nonce as a proxy) of Aave v3 and GHO users:
 
 <script src="../../js/gho-users/age-violin.js"></script>
 <canvas id="violinChart"></canvas>
 
-GHO borrowers appear more experienced, with a median wallet age of 2.3 years compared to 1.5 years for other AAVE users.
+GHO borrowers appear more experienced, with a median account age of 2.3 years compared to 1.5 years for other AAVE users.
 They're also much more active on-chain with a median of 121 transactions against 32 for other users.

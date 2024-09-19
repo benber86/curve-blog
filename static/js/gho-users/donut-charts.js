@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
             'Borrowed other tokens on AAVE v2 before borrowing GHO',
             'Borrowed other tokens on AAVE v3 before borrowing GHO',
             'Started by borrowing GHO then borrowed other tokens',
-            'Only ever borrowed GHO'
+            'Started by borrowing GHO and never borrowed other tokens'
         ],
         datasets: [{
             data: [24.1, 26.7, 13.4, 35.8],

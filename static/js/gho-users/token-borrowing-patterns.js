@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'Started with other token (V2) then borrowed GHO',
         'Started with other token (V3) then borrowed GHO',
         'Started by borrowing token then borrowed other tokens',
-        'Only ever borrowed token',
+        'Started by borrowing token and never borrowed other tokens',
     ];
 
     const ctx = document.getElementById('tokenBorrowingPatterns').getContext('2d');
