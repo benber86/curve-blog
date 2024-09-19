@@ -6,16 +6,20 @@ const data = [
     ['8/24/2023', '7/27/2024', 'ChainSecurity', 'Security advisory', 0, 0, 0, 'Continuous review'],
     ['11/1/2023', '12/14/2023', 'OtterSec', 'Built-ins', 0, 1, 4, 'https://github.com/vyperlang/audits/blob/master/audits/OtterSec_Vyper_November_2023_audit.pdf'],
     ['11/14/2023', '12/27/2023', 'ChainSecurity', 'Built-ins, bytecode gen', 0, 1, 17, 'https://github.com/vyperlang/audits/blob/master/audits/ChainSecurity_Vyper_December_2023_limited_review.pdf'],
-    ['12/1/2023', '7/15/2024', 'Cyberthirst', 'Continuous review', 0, 0, 0, 'Continuous review'],
+    ['12/1/2023', '7/30/2024', 'Cyberthirst', 'Continuous review', 0, 0, 0, 'Continuous review'],
+    ['1/8/2024', '6/8/2024', 'OtterSec', 'v0.4.0', 0, 3, 2, 'To be released soon'],
     ['1/15/2024', '3/22/2024', 'Statemind', 'Storage layout', 0, 0, 4, 'https://github.com/vyperlang/audits/blob/master/audits/Statemind_Vyper_January_2024_audit.pdf'],
     ['2/1/2024', '3/13/2024', 'ChainSecurity', 'Modules, v0.4.0', 1, 4, 19, 'https://github.com/vyperlang/audits/blob/master/audits/ChainSecurity_Vyper_February_2024_limited_review.pdf'],
+    ['2/1/2024', '3/13/2024', 'ChainSecurity', 'Modules, v0.4.0', 1, 4, 19, 'https://github.com/vyperlang/audits/blob/master/audits/ChainSecurity_Vyper_February_2024_limited_review.pdf'],
+    ['3/1/2024', '3/20/2024', 'kuro', 'Codegen audit', 0, 0, 0, 'Ad hoc audit'],
     ['3/11/2024', '5/23/2024', 'Statemind', 'Storage layout, modules', 0, 4, 10, 'https://github.com/vyperlang/audits/blob/master/audits/Statemind_Vyper_June_2024_audit.pdf'],
+    ['4/1/2024', '4/31/2024', 'ChainSecurity', 'Codegen', 0, 4, 16, 'To be released soon'],
     ['5/22/2024', '6/31/2024', 'ChainSecurity', 'ABI decoder, v0.4.0', 0, 0, 7, 'https://github.com/vyperlang/audits/blob/master/audits/ChainSecurity_Vyper_June_2024_limited_review.pdf']
 ];
 
 const margin = {top: 80, right: 10, bottom: 60, left: 170};
 const width = 720 - margin.left - margin.right;
-const height = 520 - margin.top - margin.bottom;
+const height = 600 - margin.top - margin.bottom;
 const barHeight = 15;
 
 const parseDate = d3.timeParse("%m/%d/%Y");
@@ -89,12 +93,12 @@ let hideTooltipTimer;
 
 function showTooltip(event, d) {
     clearTimeout(hideTooltipTimer);
-    let tooltipContent = (d.link !== "Continuous review") ? `
+    let tooltipContent = (d.link !== "Continuous review") ? (`
             <div><span class="tooltip-dot" style="background-color: #FF0000;"></span><strong>High:</strong> ${d.high}</div>
             <div><span class="tooltip-dot" style="background-color: #FFA500;"></span>Medium: ${d.medium}</div>
-            <div><span class="tooltip-dot" style="background-color: #008000;"></span>Low: ${d.low}</div>
-            <a href="${d.link}" target="_blank">Read full audit</a>
-        ` : `<div>${d.link}</div>`;
+            <div><span class="tooltip-dot" style="background-color: #008000;"></span>Low: ${d.low}</div>` +
+        ((d.link.startsWith('http')) ? `<a href="${d.link}" target="_blank">Read full audit</a>` : `${d.link}
+        `)) : `<div>${d.link}</div>`;
 
 
         tooltip.html(tooltipContent)

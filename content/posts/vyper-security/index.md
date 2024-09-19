@@ -19,7 +19,7 @@ _Authors:_ [benny](https://warpcast.com/bennylada)
 A year ago, a [vulnerability](https://hackmd.io/@vyperlang/HJUgNMhs2) in older versions of the Vyper compiler led to an [exploit](https://hackmd.io/@LlamaRisk/BJzSKHNjn) that affected multiple liquidity pools on [Curve Finance](https://www.curve.fi).
 Since then the team has been working constantly to ensure the compiler's safety and robustness while delivering new features and optimization.
 Thanks to generous contributions from Curve, [Lido](https://lido.fi/) and [Optimism](https://retrofunding.optimism.io/) we were able to significantly increase Vyper's security budget for 2023-2024. 
-The result has been 9 audits, 2 security experts on retainer, 1 contest, 1 dedicated security group and over 100 findings addressed.
+The result has been 13 audits, 2 security experts on retainer, 2 bug bountry programs, 1 security contest, 1 dedicated security group and over 100 findings addressed.
 
 
 <div id="chart" class="chart"></div>
@@ -108,7 +108,8 @@ In total the contest gathered 13 participants who submitted 38 findings.
 
 Among the highest severity issues, auditors identified an [integer overflow](https://github.com/vyperlang/audits/blob/master/audits/CodeHawks_Vyper_September_2023_competitive_audit.md#h-01-integer-overflow-in-slice) in the slice() code that could cause memory corruption and an issue with the `concat` built-in that could lead to [memory corruption](https://github.com/vyperlang/audits/blob/master/audits/CodeHawks_Vyper_September_2023_competitive_audit.md#h-02-concat-built-in-can-corrupt-memory).
 
-The contest also proved to be a recruiting ground for Vyper as [cyberthirst](https://github.com/cyberthirst) who finished in third position, was then hired to perform a continuous review of the codebase and will soon be implementing new measures to ensure the correctness of the compiler.
+The contest also proved to be a recruiting ground for Vyper as [cyberthirst](https://github.com/cyberthirst) who finished in third position, was then hired to perform a continuous review of the codebase.
+Cyberthirst is now in charge of vyper security and will soon be implementing new measures to ensure the correctness of the compiler.
 
 # Vyper Security Taskforce
 
@@ -116,6 +117,10 @@ The contest also proved to be a recruiting ground for Vyper as [cyberthirst](htt
 - Goals?
 - Some war room stories / example of what the group has done?
 - Some stats on the repo of Vyper contracts (can add a chart based on it)
+
+# Bug Bounty Program
+
+
 
 # Audits
 
@@ -157,6 +162,9 @@ They have also, among others, highlighted lacking or incorrect documentation and
 
 Another advantage of working with auditors that is not directly apparent from simply reading reports is the tooling that auditors develop during the audit process.
 Both [OtterSec](https://github.com/otter-sec/vyper-fuzz/tree/main) and [StateMind](https://github.com/statemindio/vyper_fuzzer_backend) developed their own fuzzer with [mutation testing](https://en.wikipedia.org/wiki/Mutation_testing) to enhance test coverage and robustness. 
+ChainSecurity developed another fuzzer specifically targeting [multiple evaluation issues](https://github.com/vyperlang/vyper/security/advisories/GHSA-5jrj-52x8-m64h).
+
+
 
 # What's Next?
 

@@ -1,14 +1,18 @@
 document.addEventListener("DOMContentLoaded", function() {
     const severityData = [
         {start: '9/14/2023', end: '11/4/2023', auditor: 'CodeHawks', target: 'Competitive Audit', high: 2, medium: 7, low: 22},
-        {start: '9/22/2023', end: '10/6/2023', auditor: 'OtterSec', target: 'Release v0.3.10rc1', high: 2, medium: 0, low: 4},
-        {start: '9/7/2023', end: '9/13/2023', auditor: 'ChainSecurity', target: 'Semantic analysis and Code generation', high: 3, medium: 2, low: 9},
-        {start: '11/26/2023', end: '11/30/2023', auditor: 'OtterSec', target: 'Built-ins', high: 0, medium: 1, low: 4},
-        {start: '12/1/2023', end: '12/13/2023', auditor: 'ChainSecurity', target: 'Built-ins and Bytecode Generation', high: 0, medium: 1, low: 17},
-        {start: '1/29/2024', end: '3/8/2024', auditor: 'Statemind', target: 'Storage layout v0.1.0b16-v0.3.10', high: 0, medium: 0, low: 4},
-        {start: '2/14/2024', end: '2/28/2024', auditor: 'ChainSecurity', target: 'Modules, v0.4.0', high: 1, medium: 4, low: 19},
-        {start: '3/11/2024', end: '5/23/2024', auditor: 'Statemind', target: 'Storage layout and Modules v0.3.10-v0.4.0rc4', high: 0, medium: 4, low: 10},
-        {start: '6/2/2024', end: '6/21/2024', auditor: 'ChainSecurity', target: 'ABI decoder and v0.4.0 PRs', high: 0, medium: 0, low: 7}
+        {start: '9/15/2023', end: '10/13/2023', auditor: 'OtterSec', target: 'Release v0.3.10rc1', high: 2, medium: 0, low: 4},
+        {start: '8/24/2023', end: '9/27/2023', auditor: 'ChainSecurity', target: 'Semantic analysis, codegen', high: 3, medium: 2, low: 9},
+        {start: '8/24/2023', end: '7/27/2024', auditor: 'ChainSecurity', target: 'Security advisory', high: 0, medium: 0, low: 0},
+        {start: '11/1/2023', end: '12/14/2023', auditor: 'OtterSec', target: 'Built-ins', high: 0, medium: 1, low: 4},
+        {start: '11/14/2023', end: '12/27/2023', auditor: 'ChainSecurity', target: 'Built-ins, bytecode gen', high: 0, medium: 1, low: 17},
+        {start: '12/1/2023', end: '7/30/2024', auditor: 'Cyberthirst', target: 'Continuous review', high: 0, medium: 0, low: 0},
+        {start: '1/8/2024', end: '6/8/2024', auditor: 'OtterSec', target: 'v0.4.0', high: 0, medium: 3, low: 2},
+        {start: '1/15/2024', end: '3/22/2024', auditor: 'Statemind', target: 'Storage layout', high: 0, medium: 0, low: 4},
+        {start: '2/1/2024', end: '3/13/2024', auditor: 'ChainSecurity', target: 'Modules, v0.4.0', high: 1, medium: 4, low: 19},
+        {start: '3/11/2024', end: '5/23/2024', auditor: 'Statemind', target: 'Storage layout, modules', high: 0, medium: 4, low: 10},
+        {start: '4/1/2024', end: '4/31/2024', auditor: 'ChainSecurity', target: 'v0.4.0', high: 0, medium: 4, low: 16},
+        {start: '5/22/2024', end: '6/31/2024', auditor: 'ChainSecurity', target: 'ABI decoder, v0.4.0', high: 0, medium: 0, low: 7}
     ];
 
     const margin = {top: 120, right: 30, bottom: 60, left: 60};
@@ -32,11 +36,13 @@ document.addEventListener("DOMContentLoaded", function() {
         d.midDate = new Date((startDate.getTime() + endDate.getTime()) / 2);
     });
 
-    // Sort data by midDate
+    function selectEveryNth(arr, n) {
+        return arr.filter((_, index) => index % n === 0);
+    }
     severityData.sort((a, b) => a.midDate - b.midDate);
 
-    const startDate = d3.min(severityData, d => d.start);
-    const endDate = d3.max(severityData, d => d.end);
+    const N = 3;
+    const selectedDates = selectEveryNth(severityData.map(d => d.midDate), N);
 
     const x0 = d3.scaleBand()
         .domain(severityData.map(d => d.midDate))
@@ -73,10 +79,12 @@ document.addEventListener("DOMContentLoaded", function() {
     // Add X axis
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(x0).tickFormat(formatDate))
+        .call(d3.axisBottom(x0)
+            .tickValues(selectedDates)
+            .tickFormat(formatDate))
         .attr("class", "x-axis")
         .selectAll("text")
-        .style("text-anchor", "end")
+        .style("text-anchor", "middle")
         .style("font-size", "12px")
         .style("font-family", "'JetBrains Mono', sans-serif")
         .style("font-weight", "normal");
