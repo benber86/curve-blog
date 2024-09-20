@@ -453,3 +453,26 @@ Finally, we take a look at the age and level of activity (using the account's no
 
 GHO borrowers appear more experienced, with a median account age of 2.3 years compared to 1.5 years for other AAVE users.
 They're also much more active on-chain with a median of 121 transactions against 32 for other users.
+
+# Arbitrum
+
+The above analysis only looked at Ethereum mainnet, however [GHO has been available on Arbitrum](https://governance.aave.com/t/arfc-gho-cross-chain-launch/17616/14) since July 2024.
+The Arbitrum user base has been growing steadily since -- reaching close to 25% of the number of Ethereum users -- and may be analyzed in a future report.
+
+An interesting feature so far is that Arbitrum users seem to be more risk averse than their Ethereum mainnet counterparts.
+Less than 3% of the GHO loans have been liquidated so far vs 6% on mainnet.
+The median health is higher on Arbitrum, and an (admittedly crude, heuristic) estimation of the prevalence of user leveraging their loans indicates that the practice is more common on Ethereum.
+But of course, this may simply reflect the younger age of the Arbitrum product and the low volatility of the market since the summer.
+
+
+<script src="../../js/gho-users/arbitrum-users.js"></script>
+<script src="../../js/gho-users/new-users-chart-arbi.js"></script>
+
+<div style="display: flex; justify-content: space-between; margin-bottom: 20px">
+  <div style="width: 48%;">
+    <canvas id="linechart-new-users-arb" width="400" height="447"></canvas>
+  </div>
+  <div style="width: 48%;">
+    <canvas id="arbiCompare" width="400" height="500"></canvas>
+  </div>
+</div>
