@@ -1,7 +1,7 @@
 ---
 title: "State of Vyper Security - September 2024"
 draft: false
-date: 2024-09-01T09:25:45.000Z
+date: 2026-09-01T09:25:45.000Z
 ogimage: "https://blog.curvemonitor.com/images/vyper-security/thumbnail.png"
 description: "Review of Vyper Security 1 year after hack"
 categories:
