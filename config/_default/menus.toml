@@ -19,6 +19,14 @@
 # Social Media Configuration
 
 [[social]]
+
+    identifier = "curvemonitor"
+    name = "CurveMonitor"
+    url = "https://www.curvemonitor.com"
+    weight = 1
+
+[[social]]
+
     identifier = "github"
     name = "GitHub"
     url = "https://github.com/curvefi"

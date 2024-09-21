@@ -1,0 +1,922 @@
+[
+  {
+    "from": "CowSwap",
+    "to": "USDC",
+    "amount": 21917382
+  },
+  {
+    "from": "CowSwap",
+    "to": "USDT",
+    "amount": 14836782
+  },
+  {
+    "from": "CowSwap",
+    "to": "BTC",
+    "amount": 5423242
+  },
+  {
+    "from": "CowSwap",
+    "to": "DAI",
+    "amount": 3459588
+  },
+  {
+    "from": "CowSwap",
+    "to": "ETH/LSTs/LRTs",
+    "amount": 1306254
+  },
+  {
+    "from": "CowSwap",
+    "to": "Other crypto",
+    "amount": 760166
+  },
+  {
+    "from": "CowSwap",
+    "to": "FRAX",
+    "amount": 693403
+  },
+  {
+    "from": "CowSwap",
+    "to": "PYUSD",
+    "amount": 657916
+  },
+  {
+    "from": "CowSwap",
+    "to": "LINK",
+    "amount": 601160
+  },
+  {
+    "from": "CowSwap",
+    "to": "Other Stablecoins",
+    "amount": 350800
+  },
+  {
+    "from": "CowSwap",
+    "to": "AAVE",
+    "amount": 297101
+  },
+  {
+    "from": "CowSwap",
+    "to": "crvUSD",
+    "amount": 193993
+  },
+  {
+    "from": "CowSwap",
+    "to": "USDe",
+    "amount": 160245
+  },
+  {
+    "from": "CowSwap",
+    "to": "LUSD",
+    "amount": 98213
+  },
+  {
+    "from": "CowSwap",
+    "to": "aTokens",
+    "amount": 18767
+  },
+  {
+    "from": "CowSwap",
+    "to": "GHO",
+    "amount": 0
+  },
+  {
+    "from": "ParaSwap",
+    "to": "USDC",
+    "amount": 27848070
+  },
+  {
+    "from": "ParaSwap",
+    "to": "USDT",
+    "amount": 8228973
+  },
+  {
+    "from": "ParaSwap",
+    "to": "DAI",
+    "amount": 3229309
+  },
+  {
+    "from": "ParaSwap",
+    "to": "LUSD",
+    "amount": 914572
+  },
+  {
+    "from": "ParaSwap",
+    "to": "USDe",
+    "amount": 887272
+  },
+  {
+    "from": "ParaSwap",
+    "to": "Variable debt tokens",
+    "amount": 880377
+  },
+  {
+    "from": "ParaSwap",
+    "to": "BTC",
+    "amount": 714734
+  },
+  {
+    "from": "ParaSwap",
+    "to": "ETH/LSTs/LRTs",
+    "amount": 266421
+  },
+  {
+    "from": "ParaSwap",
+    "to": "AAVE",
+    "amount": 260093
+  },
+  {
+    "from": "ParaSwap",
+    "to": "crvUSD",
+    "amount": 196361
+  },
+  {
+    "from": "ParaSwap",
+    "to": "FRAX",
+    "amount": 176900
+  },
+  {
+    "from": "ParaSwap",
+    "to": "PYUSD",
+    "amount": 163326
+  },
+  {
+    "from": "ParaSwap",
+    "to": "LINK",
+    "amount": 90323
+  },
+  {
+    "from": "ParaSwap",
+    "to": "Other crypto",
+    "amount": 83623
+  },
+  {
+    "from": "ParaSwap",
+    "to": "aTokens",
+    "amount": 34860
+  },
+  {
+    "from": "ParaSwap",
+    "to": "GHO",
+    "amount": 32762
+  },
+  {
+    "from": "ParaSwap",
+    "to": "Other Stablecoins",
+    "amount": 2373
+  },
+  {
+    "from": "1inch",
+    "to": "USDC",
+    "amount": 15317374
+  },
+  {
+    "from": "1inch",
+    "to": "USDT",
+    "amount": 11761836
+  },
+  {
+    "from": "1inch",
+    "to": "DAI",
+    "amount": 5794694
+  },
+  {
+    "from": "1inch",
+    "to": "ETH/LSTs/LRTs",
+    "amount": 1726706
+  },
+  {
+    "from": "1inch",
+    "to": "Providing Liquidity",
+    "amount": 1244245
+  },
+  {
+    "from": "1inch",
+    "to": "BTC",
+    "amount": 1222769
+  },
+  {
+    "from": "1inch",
+    "to": "Variable debt tokens",
+    "amount": 958062
+  },
+  {
+    "from": "1inch",
+    "to": "Other crypto",
+    "amount": 635217
+  },
+  {
+    "from": "1inch",
+    "to": "LUSD",
+    "amount": 571721
+  },
+  {
+    "from": "1inch",
+    "to": "PYUSD",
+    "amount": 549264
+  },
+  {
+    "from": "1inch",
+    "to": "crvUSD",
+    "amount": 548973
+  },
+  {
+    "from": "1inch",
+    "to": "LINK",
+    "amount": 497552
+  },
+  {
+    "from": "1inch",
+    "to": "FRAX",
+    "amount": 338937
+  },
+  {
+    "from": "1inch",
+    "to": "AAVE",
+    "amount": 185764
+  },
+  {
+    "from": "1inch",
+    "to": "USDe",
+    "amount": 125862
+  },
+  {
+    "from": "1inch",
+    "to": "Other Stablecoins",
+    "amount": 75479
+  },
+  {
+    "from": "1inch",
+    "to": "aTokens",
+    "amount": 21420
+  },
+  {
+    "from": "1inch",
+    "to": "GHO",
+    "amount": 0
+  },
+  {
+    "from": "UniswapV3Pool",
+    "to": "USDC",
+    "amount": 10172793
+  },
+  {
+    "from": "UniswapV3Pool",
+    "to": "Providing Liquidity",
+    "amount": 9051462
+  },
+  {
+    "from": "UniswapV3Pool",
+    "to": "USDT",
+    "amount": 3235326
+  },
+  {
+    "from": "UniswapV3Pool",
+    "to": "BTC",
+    "amount": 1703651
+  },
+  {
+    "from": "UniswapV3Pool",
+    "to": "ETH/LSTs/LRTs",
+    "amount": 1692541
+  },
+  {
+    "from": "UniswapV3Pool",
+    "to": "DAI",
+    "amount": 1306581
+  },
+  {
+    "from": "UniswapV3Pool",
+    "to": "AAVE",
+    "amount": 653416
+  },
+  {
+    "from": "UniswapV3Pool",
+    "to": "LINK",
+    "amount": 573081
+  },
+  {
+    "from": "UniswapV3Pool",
+    "to": "Other crypto",
+    "amount": 536402
+  },
+  {
+    "from": "UniswapV3Pool",
+    "to": "crvUSD",
+    "amount": 216514
+  },
+  {
+    "from": "UniswapV3Pool",
+    "to": "aTokens",
+    "amount": 174114
+  },
+  {
+    "from": "UniswapV3Pool",
+    "to": "LUSD",
+    "amount": 105074
+  },
+  {
+    "from": "UniswapV3Pool",
+    "to": "FRAX",
+    "amount": 52240
+  },
+  {
+    "from": "UniswapV3Pool",
+    "to": "Other Stablecoins",
+    "amount": 49345
+  },
+  {
+    "from": "UniswapV3Pool",
+    "to": "PYUSD",
+    "amount": 7582
+  },
+  {
+    "from": "UniswapV3Pool",
+    "to": "USDe",
+    "amount": 190
+  },
+  {
+    "from": "UniswapV3Pool",
+    "to": "GHO",
+    "amount": 0
+  },
+  {
+    "from": "UniswapV3Pool",
+    "to": "Variable debt tokens",
+    "amount": 0
+  },
+  {
+    "from": "Balancer",
+    "to": "Providing Liquidity",
+    "amount": 14486507
+  },
+  {
+    "from": "Balancer",
+    "to": "Other Stablecoins",
+    "amount": 6113648
+  },
+  {
+    "from": "Balancer",
+    "to": "USDC",
+    "amount": 3560527
+  },
+  {
+    "from": "Balancer",
+    "to": "ETH/LSTs/LRTs",
+    "amount": 2798022
+  },
+  {
+    "from": "Balancer",
+    "to": "USDT",
+    "amount": 365241
+  },
+  {
+    "from": "Balancer",
+    "to": "DAI",
+    "amount": 232208
+  },
+  {
+    "from": "Balancer",
+    "to": "Other crypto",
+    "amount": 14209
+  },
+  {
+    "from": "Balancer",
+    "to": "BTC",
+    "amount": 0
+  },
+  {
+    "from": "Balancer",
+    "to": "GHO",
+    "amount": 0
+  },
+  {
+    "from": "Balancer",
+    "to": "Variable debt tokens",
+    "amount": 0
+  },
+  {
+    "from": "Balancer",
+    "to": "aTokens",
+    "amount": 0
+  },
+  {
+    "from": "Others",
+    "to": "USDC",
+    "amount": 2719693
+  },
+  {
+    "from": "Others",
+    "to": "Variable debt tokens",
+    "amount": 1034536
+  },
+  {
+    "from": "Others",
+    "to": "USDT",
+    "amount": 923945
+  },
+  {
+    "from": "Others",
+    "to": "ETH/LSTs/LRTs",
+    "amount": 754182
+  },
+  {
+    "from": "Others",
+    "to": "Other Stablecoins",
+    "amount": 586091
+  },
+  {
+    "from": "Others",
+    "to": "DAI",
+    "amount": 487227
+  },
+  {
+    "from": "Others",
+    "to": "Providing Liquidity",
+    "amount": 417318
+  },
+  {
+    "from": "Others",
+    "to": "GHO Yield Aggregation",
+    "amount": 299641
+  },
+  {
+    "from": "Others",
+    "to": "BTC",
+    "amount": 133142
+  },
+  {
+    "from": "Others",
+    "to": "LUSD",
+    "amount": 47439
+  },
+  {
+    "from": "Others",
+    "to": "AAVE",
+    "amount": 31152
+  },
+  {
+    "from": "Others",
+    "to": "PYUSD",
+    "amount": 28032
+  },
+  {
+    "from": "Others",
+    "to": "Other crypto",
+    "amount": 22785
+  },
+  {
+    "from": "Others",
+    "to": "crvUSD",
+    "amount": 8704
+  },
+  {
+    "from": "Others",
+    "to": "GHO",
+    "amount": 6876
+  },
+  {
+    "from": "Others",
+    "to": "LINK",
+    "amount": 5911
+  },
+  {
+    "from": "Others",
+    "to": "aTokens",
+    "amount": 333
+  },
+  {
+    "from": "Others",
+    "to": "USDe",
+    "amount": 0
+  },
+  {
+    "from": "Maverick",
+    "to": "Providing Liquidity",
+    "amount": 7296137
+  },
+  {
+    "from": "Maverick",
+    "to": "USDC",
+    "amount": 5881306
+  },
+  {
+    "from": "Maverick",
+    "to": "USDT",
+    "amount": 1017687
+  },
+  {
+    "from": "Maverick",
+    "to": "crvUSD",
+    "amount": 143393
+  },
+  {
+    "from": "Maverick",
+    "to": "Other crypto",
+    "amount": 31919
+  },
+  {
+    "from": "Maverick",
+    "to": "ETH/LSTs/LRTs",
+    "amount": 11084
+  },
+  {
+    "from": "Maverick",
+    "to": "BTC",
+    "amount": 8352
+  },
+  {
+    "from": "Maverick",
+    "to": "AAVE",
+    "amount": 1184
+  },
+  {
+    "from": "Maverick",
+    "to": "DAI",
+    "amount": 351
+  },
+  {
+    "from": "Maverick",
+    "to": "GHO",
+    "amount": 0
+  },
+  {
+    "from": "MultiSigs",
+    "to": "ETH/LSTs/LRTs",
+    "amount": 2475543
+  },
+  {
+    "from": "MultiSigs",
+    "to": "USDC",
+    "amount": 2472602
+  },
+  {
+    "from": "MultiSigs",
+    "to": "USDT",
+    "amount": 1650362
+  },
+  {
+    "from": "MultiSigs",
+    "to": "Variable debt tokens",
+    "amount": 877992
+  },
+  {
+    "from": "MultiSigs",
+    "to": "aTokens",
+    "amount": 825181
+  },
+  {
+    "from": "MultiSigs",
+    "to": "GHO",
+    "amount": 0
+  },
+  {
+    "from": "Curve",
+    "to": "Providing Liquidity",
+    "amount": 2720638
+  },
+  {
+    "from": "Curve",
+    "to": "USDC",
+    "amount": 1224243
+  },
+  {
+    "from": "Curve",
+    "to": "USDT",
+    "amount": 939212
+  },
+  {
+    "from": "Curve",
+    "to": "USDe",
+    "amount": 921182
+  },
+  {
+    "from": "Curve",
+    "to": "DAI",
+    "amount": 585358
+  },
+  {
+    "from": "Curve",
+    "to": "crvUSD",
+    "amount": 340760
+  },
+  {
+    "from": "Curve",
+    "to": "Other Stablecoins",
+    "amount": 268079
+  },
+  {
+    "from": "Curve",
+    "to": "PYUSD",
+    "amount": 95459
+  },
+  {
+    "from": "Curve",
+    "to": "FRAX",
+    "amount": 79935
+  },
+  {
+    "from": "Curve",
+    "to": "GHO",
+    "amount": 39048
+  },
+  {
+    "from": "Curve",
+    "to": "BTC",
+    "amount": 33527
+  },
+  {
+    "from": "Curve",
+    "to": "ETH/LSTs/LRTs",
+    "amount": 21160
+  },
+  {
+    "from": "Curve",
+    "to": "Other crypto",
+    "amount": 12294
+  },
+  {
+    "from": "Curve",
+    "to": "AAVE",
+    "amount": 11221
+  },
+  {
+    "from": "MEV Bots",
+    "to": "USDC",
+    "amount": 3456868
+  },
+  {
+    "from": "MEV Bots",
+    "to": "USDT",
+    "amount": 1223061
+  },
+  {
+    "from": "MEV Bots",
+    "to": "DAI",
+    "amount": 928116
+  },
+  {
+    "from": "MEV Bots",
+    "to": "ETH/LSTs/LRTs",
+    "amount": 387540
+  },
+  {
+    "from": "MEV Bots",
+    "to": "AAVE",
+    "amount": 73472
+  },
+  {
+    "from": "MEV Bots",
+    "to": "Other Stablecoins",
+    "amount": 61577
+  },
+  {
+    "from": "MEV Bots",
+    "to": "PYUSD",
+    "amount": 41320
+  },
+  {
+    "from": "MEV Bots",
+    "to": "USDe",
+    "amount": 10789
+  },
+  {
+    "from": "MEV Bots",
+    "to": "Other crypto",
+    "amount": 4527
+  },
+  {
+    "from": "MEV Bots",
+    "to": "BTC",
+    "amount": 2263
+  },
+  {
+    "from": "MEV Bots",
+    "to": "aTokens",
+    "amount": 1968
+  },
+  {
+    "from": "MEV Bots",
+    "to": "GHO",
+    "amount": 0
+  },
+  {
+    "from": "Odos",
+    "to": "USDC",
+    "amount": 2052079
+  },
+  {
+    "from": "Odos",
+    "to": "ETH/LSTs/LRTs",
+    "amount": 413744
+  },
+  {
+    "from": "Odos",
+    "to": "DAI",
+    "amount": 320137
+  },
+  {
+    "from": "Odos",
+    "to": "USDT",
+    "amount": 317377
+  },
+  {
+    "from": "Odos",
+    "to": "Other Stablecoins",
+    "amount": 298365
+  },
+  {
+    "from": "Odos",
+    "to": "crvUSD",
+    "amount": 178154
+  },
+  {
+    "from": "Odos",
+    "to": "PYUSD",
+    "amount": 119000
+  },
+  {
+    "from": "Odos",
+    "to": "USDe",
+    "amount": 9397
+  },
+  {
+    "from": "Odos",
+    "to": "Other crypto",
+    "amount": 8466
+  },
+  {
+    "from": "Odos",
+    "to": "AAVE",
+    "amount": 7247
+  },
+  {
+    "from": "Odos",
+    "to": "BTC",
+    "amount": 5761
+  },
+  {
+    "from": "Odos",
+    "to": "GHO",
+    "amount": 0
+  },
+  {
+    "from": "Odos",
+    "to": "Variable debt tokens",
+    "amount": 0
+  },
+  {
+    "from": "Odos",
+    "to": "aTokens",
+    "amount": 0
+  },
+  {
+    "from": "0x Exchange",
+    "to": "USDC",
+    "amount": 1277566
+  },
+  {
+    "from": "0x Exchange",
+    "to": "ETH/LSTs/LRTs",
+    "amount": 281800
+  },
+  {
+    "from": "0x Exchange",
+    "to": "BTC",
+    "amount": 154671
+  },
+  {
+    "from": "0x Exchange",
+    "to": "DAI",
+    "amount": 115240
+  },
+  {
+    "from": "0x Exchange",
+    "to": "USDT",
+    "amount": 71377
+  },
+  {
+    "from": "0x Exchange",
+    "to": "LUSD",
+    "amount": 52672
+  },
+  {
+    "from": "0x Exchange",
+    "to": "Other crypto",
+    "amount": 42151
+  },
+  {
+    "from": "0x Exchange",
+    "to": "AAVE",
+    "amount": 30468
+  },
+  {
+    "from": "0x Exchange",
+    "to": "LINK",
+    "amount": 21128
+  },
+  {
+    "from": "0x Exchange",
+    "to": "GHO",
+    "amount": 0
+  },
+  {
+    "from": "0x Exchange",
+    "to": "Variable debt tokens",
+    "amount": 0
+  },
+  {
+    "from": "Kyber Network",
+    "to": "Variable debt tokens",
+    "amount": 350218
+  },
+  {
+    "from": "Kyber Network",
+    "to": "USDC",
+    "amount": 308795
+  },
+  {
+    "from": "Kyber Network",
+    "to": "DAI",
+    "amount": 257905
+  },
+  {
+    "from": "Kyber Network",
+    "to": "USDT",
+    "amount": 249671
+  },
+  {
+    "from": "Kyber Network",
+    "to": "PYUSD",
+    "amount": 222985
+  },
+  {
+    "from": "Kyber Network",
+    "to": "ETH/LSTs/LRTs",
+    "amount": 27747
+  },
+  {
+    "from": "Kyber Network",
+    "to": "BTC",
+    "amount": 24114
+  },
+  {
+    "from": "Kyber Network",
+    "to": "AAVE",
+    "amount": 14160
+  },
+  {
+    "from": "Kyber Network",
+    "to": "Other crypto",
+    "amount": 11313
+  },
+  {
+    "from": "Kyber Network",
+    "to": "Other Stablecoins",
+    "amount": 5268
+  },
+  {
+    "from": "Kyber Network",
+    "to": "LINK",
+    "amount": 4467
+  },
+  {
+    "from": "Kyber Network",
+    "to": "GHO",
+    "amount": 0
+  },
+  {
+    "from": "Kyber Network",
+    "to": "aTokens",
+    "amount": 0
+  },
+  {
+    "from": "Li.Fi",
+    "to": "USDC",
+    "amount": 340182
+  },
+  {
+    "from": "Li.Fi",
+    "to": "AAVE",
+    "amount": 44982
+  },
+  {
+    "from": "Li.Fi",
+    "to": "Other crypto",
+    "amount": 32000
+  },
+  {
+    "from": "Li.Fi",
+    "to": "DAI",
+    "amount": 14741
+  },
+  {
+    "from": "Li.Fi",
+    "to": "USDT",
+    "amount": 9750
+  },
+  {
+    "from": "Li.Fi",
+    "to": "aTokens",
+    "amount": 2867
+  }
+]

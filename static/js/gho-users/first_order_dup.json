@@ -1,0 +1,132 @@
+[
+  {
+    "from": "Minting",
+    "to": "GhoAToken",
+    "amount": 3054
+  },
+  {
+    "from": "Minting",
+    "to": "UniswapV3Pool",
+    "amount": 2574
+  },
+  {
+    "from": "Minting",
+    "to": "ParaSwap",
+    "amount": 1514
+  },
+  {
+    "from": "Minting",
+    "to": "GHO Staking",
+    "amount": 1317
+  },
+  {
+    "from": "Minting",
+    "to": "CowSwap",
+    "amount": 1229
+  },
+  {
+    "from": "Minting",
+    "to": "1inch",
+    "amount": 922
+  },
+  {
+    "from": "Minting",
+    "to": "DeFi Saver",
+    "amount": 852
+  },
+  {
+    "from": "Minting",
+    "to": "Sent to other EOA",
+    "amount": 299
+  },
+  {
+    "from": "Minting",
+    "to": "Curve",
+    "amount": 289
+  },
+  {
+    "from": "Minting",
+    "to": "Balancer",
+    "amount": 260
+  },
+  {
+    "from": "Minting",
+    "to": "AirSwap",
+    "amount": 212
+  },
+  {
+    "from": "Minting",
+    "to": "Maverick",
+    "amount": 189
+  },
+  {
+    "from": "Minting",
+    "to": "Held in wallet",
+    "amount": 141
+  },
+  {
+    "from": "Minting",
+    "to": "Others",
+    "amount": 112
+  },
+  {
+    "from": "Minting",
+    "to": "MEV Bots",
+    "amount": 81
+  },
+  {
+    "from": "Minting",
+    "to": "0x Exchange",
+    "amount": 79
+  },
+  {
+    "from": "Minting",
+    "to": "GHO CCIP",
+    "amount": 70
+  },
+  {
+    "from": "Minting",
+    "to": "Odos",
+    "amount": 64
+  },
+  {
+    "from": "Minting",
+    "to": "Li.Fi",
+    "amount": 62
+  },
+  {
+    "from": "Minting",
+    "to": "Kyber Network",
+    "amount": 58
+  },
+  {
+    "from": "Minting",
+    "to": "Gearbox",
+    "amount": 56
+  },
+  {
+    "from": "Minting",
+    "to": "Burn",
+    "amount": 42
+  },
+  {
+    "from": "Minting",
+    "to": "Pendle",
+    "amount": 26
+  },
+  {
+    "from": "Minting",
+    "to": "Notional",
+    "amount": 21
+  },
+  {
+    "from": "Minting",
+    "to": "MultiSigs",
+    "amount": 18
+  },
+  {
+    "from": "Minting",
+    "to": "GHO Stability Module",
+    "amount": 15
+  }
+]
