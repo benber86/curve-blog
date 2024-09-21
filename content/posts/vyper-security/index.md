@@ -2,7 +2,7 @@
 title: "State of Vyper Security - September 2024"
 draft: false
 date: 2024-09-20T09:25:45.000Z
-ogimage: "https://blog.curvemonitor.com/images/vyper-security/thumbnail.png"
+ogimage: "https://blog.curvemonitor.com/images/vyper-security/thumbnail.jpg"
 description: "A review of Vyper's security upgrades and achievements in 2023-2024"
 categories:
   - Vyper
