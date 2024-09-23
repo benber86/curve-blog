@@ -1,9 +1,9 @@
 ---
-title: "Who are GHO users"
+title: "GHO Users: Interactions & Patterns"
 draft: false
 date: 2024-09-22T09:25:45.000Z
-ogimage: "https://benber86.github.io/curve-blog/images/gho-users/sankey.jpg"
-description: "Analysis of GHO Users"
+ogimage: "https://blog.curvemonitor.com/images/gho-users/sankey.jpg"
+description: "Analysis of GHO Users' On-Chain Behavior"
 categories:
   - GHO
   - AAVE
