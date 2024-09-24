@@ -26,41 +26,35 @@ _Authors:_ [benny](https://warpcast.com/bennylada)
 
 # Takeaways
 
+GHO borrowers currently account for 10% of all Aave v3 borrowers, a noteworthy figure reflecting the stablecoin's growing presence in the DeFi ecosystem. Interestingly, the growth in GHO usage in the second and third quarters of 2024 can be attributed more to capital from existing users than to the influx of new borrowers. Approximately half of GHO borrowers are newcomers to Aave, indicating the stablecoin's potential to attract fresh participants to the platform. However, these new users show a tendency to borrow GHO exclusively and exhibit less engagement with other assets, suggesting a somewhat insular approach to borrowing.
 
-- GHO borrowers make up 10% of AAVE v3's borrowers.
-- GHO growth following the borrow cap increases in Q2-Q3 2024 was driven by capital from existing users more than by new users.
-- Half of GHO borrowers are new users who had never interacted with AAVE before.
-- These new users are less likely to borrow other assets. They are also less sticky than other AAVE borrowers.
-- Half of GHO borrowers go on to borrow GHO again.
-- Staking incentives reduced outflows to stablecoins by 25%. 
-- GHO Users are twice more likely to be engaged in other DeFi protocols than regular AAVE v3 users.
-- Liquidations are slightly less prevalent with GHO loans than with established stablecoins such as USDC and USDT.
-- The health factor of GHO borrowers does not differ significantly compared to borrowers of other assets.
-- GHO Users are wealthier and more experienced compared to other AAVE v3 borrowers.
+The introduction of staking incentives has played a crucial role in stabilizing GHO's peg and reducing outflows to stablecoins by nearly 25%. These incentives have not only encouraged users to hold onto their GHO rather than trading it for other assets but have also made GHO users significantly more active within the broader DeFi space. Notably, GHO users are twice as likely to engage with other DeFi protocols compared to regular Aave v3 users, showcasing their potential as valuable participants in the ecosystem.
+
+Despite these positive trends, GHO users exhibit varying levels of stickiness, with about 40% of those who started by borrowing GHO not returning for further interactions. This points to a significant opportunity for Aave to enhance user retention strategies for new borrowers.
+
+Furthermore, GHO loans have shown lower liquidation rates than established stablecoins like USDC and USDT, indicating that GHO users, despite being wealthier and more experienced, do not present higher risk preferences when it comes to borrowing. This presents a promising landscape for the GHO stablecoin, allowing Aave to potentially capitalize on its unique user base and adapt strategies that foster long-term engagement.
 
 
 # Introduction & Methodology
 
 _This article is a collaboration with [Llama Risk](https://www.llamarisk.com/research/explainer-series-gho-stablecoin) and will provide the basis for a future comparative study of GHO and crvUSD_
 
-[GHO](https://docs.gho.xyz/) is a decentralized and overcollateralized stablecoin launched by AAVE in 2023. 
-This article looks at the product's growth, the flows of GHO within the DeFi ecosystem, the impact of incentives, and the specificities of GHO users.
-We aim to understand who the GHO users are, how they differ from other AAVE users, and what insights can be drawn about their behavior and impact on the ecosystem.
+[GHO](https://docs.gho.xyz/) is a decentralized and overcollateralized stablecoin launched by Aave in July 2023. 
+This article examines the product's growth, the flows of GHO within the DeFi ecosystem, the impact of incentives, and the specificities of GHO users.
+We aim to understand who the GHO users are, how they differ from other Aave users, and what insights can be drawn about their behavior and impact on the ecosystem. This article will also include visualizations and graphs to help intuitively illustrate user behaviors and asset flows.
+In addition to analyzing transactional data, we believe this approach will uncover valuable business insights related to the token's performance, user engagement, and the broader strategic implications for GHO within the DeFi landscape.
 
-While GHO is [technically minted rather than borrowed](https://docs.gho.xyz/concepts/how-gho-works/gho-implementation), we will nonetheless use the terms "borrow" and "borrowers" when referring to minting and minters.
-We define GHO users as individuals or entities who have borrowed GHO at one point.
-We do not take into account the lifetime of the loan unless otherwise specified, this means that users who minted GHO and repaid their loans are still counted as users.
-Our definition of users includes smart contracts, however, they only account for a small fraction (5.6%) of minters.
+We would like to note clarifying details in advance regarding the framework of our analysis:
+
+- While GHO is [technically minted rather than borrowed](https://docs.gho.xyz/concepts/how-gho-works/gho-implementation), we will nonetheless use the terms "borrow" and "borrowers" when referring to minting and minters.
+- We define GHO users as individuals or entities who have borrowed GHO at one point.
+- We do not take into account the lifetime of the loan unless otherwise specified, this means that users who minted GHO and repaid their loans are still counted as users.
+- Our definition of users includes smart contracts, however, they only account for a small fraction (5.6%) of minters.
 We do not count holders of the GHO token who never minted it on AAVE as users.
-
-We also equate one address to one user, as the human unit is not the most relevant for blockchain analytics.
-An individual may own multiple addresses, but if each address' behavior is different there is no practical or analytical advantage in grouping them together (assuming we could possibly know who owns them).
-On the other hand two different individuals may run the same bots and behave the same way on-chain.
-It's therefore more productive to take addresses as the base unit, and then potentially group users together based on their similarities.
+- We also equate one address to one user, as the human unit is not the most relevant for blockchain analytics. An individual may own multiple addresses, but if each address' behavior is different there is no practical or analytical advantage in grouping them together (assuming we could possibly know who owns them). On the other hand two different individuals may run the same bots and behave the same way on-chain. It's therefore more productive to take addresses as the base unit, and then potentially group users together based on their similarities.
 
 Unless otherwise specified, our analysis is solely for the Ethereum mainnet based on data collected on September 4th, 2024.
 Data is sourced from the [AAVE v3 subgraphs](https://github.com/aave/protocol-subgraphs/tree/main/src), a [subgraph tracking GHO transfers](https://github.com/benber86/gho_token_subgraph) built for the purpose of this study, third party data providers ([Debank](https://debank.com/), [Moralis](https://moralis.io/), [Arkham](https://platform.arkhamintelligence.com/)) or directly from a node.
-
 
 # Growth & User Acquisition
 
@@ -104,16 +98,16 @@ By Q2-24, GHO's Risk Stewards [started incrementally raising the cap](https://go
 Plotting the growth rate of users & debt vs. utilization, we can see that any drop below 100% in the utilization is followed by a much larger surge in debt than in users. 
 This suggests that the gaps are getting filled either by existing users borrowing more or by new users coming in with size.
 
-For instance, on June 1st, a mere hours after the cap was raised from 65 to 68 million dollars, user [0xFCC5](https://etherscan.io/address/0xfcc5acd50ae590889d2a53343d35b5fb80d403c2) took out a <span>$3m</span> loan and single handedly filled the cap. 
-The same user likewise immediately filled the next cap increase to <span>$75m</span> with a [<span>$7m</span> loan](https://etherscan.io/tx/0xac837669efd297ab76c156542bf784d84b4752be5de97a3968ce0b5795cde62f) on June 3rd, and the following one to <span>$82m</span> with an [extra <span>$5m</span> loan](https://etherscan.io/tx/0x5c4c97482ff7e5c19758fd4cebe6ce3a4156315b820820cdd4c8619ca2e65ef7) on June 5th.
-
-Borrowed amounts increased in general, from an average <span>$65k</span> in July-August 2023 to almost <span>$100k</span> in July-August 2024, with almost 3 times more users taking on $1m+ loans in the latter period
-This, too, indicates that **growth in Q2 and Q3 2024 was driven more by capital than new users.**
-
 <script src="../../js/gho-users/growth-and-utilization-chart.js"></script>
 <div style="width: 100%; margin-bottom: 20px">
     <canvas id="chart-growth-and-utilization" width="800" height="400"></canvas>
 </div>
+
+For instance, on June 1st, a mere hours after the cap was raised from $65m to $68m, user [0xFCC5](https://etherscan.io/address/0xfcc5acd50ae590889d2a53343d35b5fb80d403c2) took out a <span>$3m</span> loan and single handedly filled the cap. 
+The same user likewise immediately filled the next cap increase to <span>$75m</span> with a [<span>$7m</span> loan](https://etherscan.io/tx/0xac837669efd297ab76c156542bf784d84b4752be5de97a3968ce0b5795cde62f) on June 3rd, and the following one to <span>$82m</span> with an [extra <span>$5m</span> loan](https://etherscan.io/tx/0x5c4c97482ff7e5c19758fd4cebe6ce3a4156315b820820cdd4c8619ca2e65ef7) on June 5th.
+
+Borrowed amounts increased in general, from an average <span>$65k</span> in July-August 2023 to almost <span>$100k</span> in July-August 2024, with almost 3 times more users taking on $1m+ loans in the latter period
+This, too, indicates that **growth in Q2 and Q3 2024 was driven more by capital than new users.**
 
 However, as borrow cap increases become larger, there are now larger time windows for new users to mint GHO.
 After the first <span>$35m</span> borrow cap was reached in 2023, any subsequent available borrowing capacity (from either cap raises or loan repayments) was filled within a couple of days, and often in just a few hours.
@@ -128,9 +122,9 @@ But the large increases in summer 2024 (from <span>$75m</span> to <span>$150m</s
 # Where do GHO users come from?
 
 There are now over 2000 users who borrowed GHO.
-**GHO users represent 10% of all AAVE v3 borrowers,** and around 5% of all users.
+**GHO users represent 10% of all Aave v3 borrowers,** and around 5% of all users.
 If we include v2 borrowers, that proportion falls to 2.95% of all time borrowers (1.4% of all users).
-But how many of these GHO users are existing AAVE users and how many are new users that the product brought to AAVE?
+But how many of these GHO users are existing Aave users and how many are new users that the product brought to Aave?
 
 
 <script src="../../js/gho-users/donut-charts.js"></script>
@@ -144,10 +138,10 @@ But how many of these GHO users are existing AAVE users and how many are new use
   </div>
 </div>
 
-**About half of all GHO borrowers are entirely new users** while the other half had previously used AAVE either via v2 or v3.
+As can be seen above, **about half of all GHO borrowers are entirely new users**, while the other half had previously used Aave either via v2 or v3.
 This means that GHO is better at attracting new users than other stablecoins like LUSD, crvUSD or PYUSD.
-Established stablecoins like USDT or USDC have a much higher rate of new users onboarded, but this merely reflects the fact that they were available on AAVE at a time when there were much fewer assets to choose from.
-The chart below compares the distribution of users' first actions against some of the other most commonly borrowed assets on AAVE:
+Established stablecoins like USDT or USDC have a much higher rate of new users onboarded, but this merely reflects the fact that they were available on Aave at a time when there were much fewer assets to choose from.
+To expand further, the chart below compares the distribution of users' first actions against some of the other most commonly borrowed assets on Aave:
 
 
 
@@ -157,15 +151,11 @@ The chart below compares the distribution of users' first actions against some o
     <canvas id="tokenBorrowingPatterns"></canvas>
 </div>
 
-One key difference with other assets is that **new GHO users are less likely to borrow other assets**.
-In fact, out of all the assets in the chart above, new GHO users (understood as users who only ever borrowed GHO or started using AAVE by borrowing GHO) are the least likely to borrow other assets after borrowing GHO, although they might borrow more GHO.
+One key difference between GHO and other assets borrowers is that **new GHO users are less likely to borrow additional assets**.
+In fact, out of all the assets in the chart above, new GHO users (understood as users who only ever borrowed GHO or started using Aave by borrowing GHO) are the least likely to borrow other assets after initially borrowing GHO. However, they may continue to borrow more GHO.
 This could be explained by the comparatively young age of the market and the situation is likely to change as it matures.
 
-Indeed, GHO users are generally more active on-chain than other AAVE users.
-They should therefore be more amenable to explore the protocol's options.
-In fact, **GHO users are twice more likely to use another DeFi protocol** compared to other AAVE users.
-There is further difference between users who started using AAVE through GHO (new users) and existing AAVE users who borrowed GHO.
-The latter are more active in DeFi and favor protocols like Curve and Convex whereas new users favor restaking protocols like ether.fi and Eigenlayer.
+GHO users tend to be more active on-chain compared to other Aave users, making them more inclined to explore the various options within the protocol. In fact, **GHO users are twice as likely to engage with other DeFi protocols** than non-GHO users on Aave. There's also a noticeable difference between new users, who began using Aave through GHO, and existing Aave users who borrowed GHO. The latter are more active across DeFi and tend to favor protocols like Curve and Convex, while new users gravitate more toward restaking protocols such as ether.fi and Eigenlayer.
 
 <script src="../../js/gho-users/protocol-usage-charts.js"></script>
 <style>
@@ -194,18 +184,15 @@ Pendle is one of the most commonly used protocols for both categories of GHO use
 As we cannot track protocol usage prior to opening a GHO loan (all-cross protocol data was drawn from the state of the user's address as of September 10th via DeBank's API), it is difficult to establish directionality or causality:
 Do GHO users move to Pendle to stake? Or are Pendle users coming to AAVE?
 
-By looking at the assets that GHO users stake on Pendle, one can see that they do not go there to get yield on their GHO.
-Instead, the tokens they most often stake on Pendle are USDC, USDe, ETH and LRTs/LSTs. 
-Likewise on Curve, only a few GHO borrowers use the protocol to provide GHO liquidity. 
-Instead they are more likely to provide liquidity in the 3pool (USDC/USDT/DAI) or for ETH pairs.
+An analysis of the assets that GHO users stake on Pendle reveals that they do not primarily go there to earn yield on their GHO. Instead, the tokens they most frequently stake include USDC, USDe, ETH, and LRTs/LSTs. Similarly, only a small number of GHO borrowers use Curve to provide liquidity for GHO. Instead, they are more inclined to provide liquidity in the 3pool (USDC/USDT/DAI) or for ETH pairs.
 
 # Where do GHO users go?
 
 If users are not providing liquidity on Curve or depositing on Pendle, what do they do with their GHO?
 The above charts only look at where users currently have assets, which does not capture flows such as trading activities.
-To have a better look at where GHO liquidity moves to, we can collect and parse the token's transfer events. 
+To have a better look at where GHO liquidity moves to, we can follow the token's transfer events. 
 This allows us to see where GHO minters sent their tokens to (first-order flow), and, if they traded them, what tokens they traded GHO for (second-order flow).
-We display the flows in USD and in total number of transactions in the chart below:
+We display the flows in USD and in total number of transactions in the following chart:
 
 <script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
 <script src="../../js/gho-users/sankey.js"></script>
@@ -266,7 +253,7 @@ To evaluate the impact of these incentives on flows, we split the data into two 
 The most obvious change is, of course, the tremendous increase in the proportion of flows going towards staking, from 3.8% to 19.1%. 
 The corollary to this increase is a decrease in the flows towards DEXes such as Uniswap (12.8% to 1.2%) or Balancer (11% to 1.8%).
 This indicates that the staking program was successful at preventing users from selling GHO for other stablecoins or crypto assets.
-Mitigating selling pressure this way would, in turn, help stabilize the peg.
+Mitigating selling pressure this way did, in turn, help stabilize the peg.
 
 It's true that not all users might have been using DEXes to sell their GHO.
 Looking at second-order flows on major DEXes, we can see in the chart below that in the absence of staking rewards a significant proportion of users were using DEXes to provide liquidity and get yield on their GHO.
@@ -289,7 +276,7 @@ This comparison is still lacking, as we did not include aggregators such as CowS
 The two periods are also of different lengths, and the supply of GHO was much larger in the second period than in the first.
 
 After normalizing for time and supply, and considering all outflows to DEXes, we find that overall **staking incentives reduced outflows to stablecoins by close to 25%**. 
-Concomitantly, incentives also drastically reduced outflows towards liquidity pools by 83%.
+Concomitantly, incentives also reduced outflows towards liquidity pools drastically by <span>83%</span>.
 
 
 <script src="../../js/gho-users/outflow-change-merit.js"></script>
@@ -307,8 +294,8 @@ They, however, present a risk to lending protocols as they might create bad debt
 It is therefore worth investigating the prevalence of liquidations among GHO minters and check whether it is significantly different from that of other borrowed assets.
 
 There are two things we can look at. 
-First is the total number of liquidations (regardless of the denomination of the liquidated loans) by type of users to determine if GHO users' overall borrowing behavior exhibits higher or lower risk preference. 
-Second is the proportions of loans of a particular asset that were liquidated to see if the liquidations can be more specifically attributable to something about the asset.
+- Total number of liquidations (regardless of the denomination of the liquidated loans) by type of users to determine if GHO users' overall borrowing behavior exhibits higher or lower risk preference. 
+ - Proportions of loans of a particular asset that were liquidated to see if the liquidations can be more specifically attributable to something about the asset.
 
 <script src="../../js/gho-users/liquidations.js"></script>
 <script src="../../js/gho-users/liq-prop.js"></script>
@@ -321,18 +308,16 @@ Second is the proportions of loans of a particular asset that were liquidated to
     </div>
 </div>
 
-At first glance, from the chart on the left, it might seem that GHO minters are more likely to experience a liquidation (10%) compared to other AAVE users (8%) and might therefore be less risk averse.
-However, when further breaking down the numbers, we see that most GHO users who experienced liquidations are those who had previously borrowed on AAVE v2 or v3. 
+At the first glance, from the chart on the left, it might seem that GHO minters are more likely to experience a liquidation (10%) compared to other Aave users (8%) and might therefore be less risk averse.
+However, when further breaking down the numbers, we see that most GHO users who experienced liquidations are those who had previously borrowed on Aave v2 or v3. 
 That they've experienced more liquidations simply reflects the fact that they've spent more time on the platform.
 
 When we look at asset specific loans (right), we see instead that **GHO denominated loans are less likely to be liquidated (6%) compared to other major stablecoins like USDC (8%) and USDT (9%).**
 For comparison, on [Curve's lending platform](https://crvusd.curve.fi/#/ethereum) hard liquidations for crvUSD borrowers are closer to 10%, with some variation per market. 
 
+The lower liquidation rates for crypto-denominated loans can largely be attributed to market conditions since the launch of Aave v3. As crypto assets have generally decreased in value, borrowers of these assets are less likely to face liquidation compared to those who have borrowed stablecoins using volatile assets as collateral.
 
-That crypto denominated loans have lower liquidation rates overall simply reflects market conditions since the launch of AAVE v3.
-Crypto assets have mostly lost value, making their borrowers less likely to be liquidated compared to users who borrowed stablecoins with crypto assets as collateral.
-
-Looking at the present state of the market and the distribution of user health scores, GHO users are not significantly different from other asset borrowers with an **1.67 median health score** and a similar distribution:
+Looking at the present state of the market and the distribution of user health scores, GHO users are not significantly different from other asset borrowers with a **1.67 median health score** and similar distribution:
 
 <script src="https://unpkg.com/@sgratzl/chartjs-chart-boxplot@3"></script>
 <script src="../../js/gho-users/health-violin.js"></script>
@@ -370,7 +355,7 @@ Almost 10% of USDC borrowers also borrow GHO as well as roughly one third of LUS
 <div id="borrowedHeatmap"></div>
 
 GHO users are less likely to borrow other assets, but they are more likely to borrow GHO again compared to crypto assets or stablecoins like LUSD or crvUSD.
-**Slightly less than half of GHO borrowers will go on to borrow GHO again**. 
+**Almost half of all GHO borrowers will go on to borrow GHO again**. 
 Only USDC and USDT do better with 55% of multiple borrows, and 10% of users borrowing more than 7 times. 
 
 <script src="../../js/gho-users/tx-count.js"></script>
@@ -378,9 +363,9 @@ Only USDC and USDT do better with 55% of multiple borrows, and 10% of users borr
 
 # Survival Rates
 
-Expanding beyond repeat borrows of a single asset, we compute the likelihood that a user who started using AAVE by borrowing a certain asset will continue to interact with the protocol.
+Expanding beyond repeat borrows of a single asset, we compute the likelihood that a user who started using Aave by borrowing a certain asset will continue to interact with the protocol.
 We define continuous interaction as either another borrow or supply event (and exclude liquidations and repayments), regardless of the asset.
-We only consider users who started interacting with AAVE in the past year to avoid bias towards assets that have been available for longer.
+We only consider users who started interacting with Aave in the past year to avoid bias towards assets that have been available for longer.
 
 
 <script src="../../js/gho-users/survival-rate.js"></script>
@@ -389,13 +374,12 @@ We only consider users who started interacting with AAVE in the past year to avo
     <canvas id="survivalChart"></canvas>
 </div>
 
-From this perspective, users that started using AAVE by minting GHO are in the bottom range of assets for user stickiness.
-While 8 out of 10 users who started by borrowing PYUSD or LUSD continue transacting on AAVE, 40% of GHO minters never interact with the protocol again.
-
+From this perspective, users that started using Aave by minting GHO are in the bottom range of assets for user stickiness.
+While 8 out of 10 users who started by borrowing PYUSD or LUSD continue transacting on Aave, 40% of GHO minters never interact with the protocol again.
 
 # User Wealth
 
-Using [DeBank data](https://cloud.debank.com/open-api), we collect the USD value and composition of the portfolios of a large sample of AAVE v3 users and GHO minters:
+Using [DeBank data](https://cloud.debank.com/open-api), we collect the USD value and composition of the portfolios of a large sample of Aave v3 users and GHO minters:
 
 <script src="../../js/gho-users/wallet-balance-distribution.js"></script>
 
@@ -412,7 +396,7 @@ Using [DeBank data](https://cloud.debank.com/open-api), we collect the USD value
 
 <div style="width: 100%; justify-content: center">
 
-| Metric     | AAVE v3 Users | GHO Users |
+| Metric     | Aave v3 Users | GHO Users |
 |------------|---------------|-----------|
 | Mean       | 602,689 | 644,543 |
 | Q1 (25%)   | 171 | 2,572 |
@@ -424,9 +408,9 @@ Using [DeBank data](https://cloud.debank.com/open-api), we collect the USD value
 </div>
 </div>
 
-GHO users are significantly wealthier with the **median portfolio value 10 times that of other AAVE v3 users**.
+GHO users are significantly wealthier with the **median portfolio value 10 times that of other Aave v3 users**.
 
-If we break down the aggregate value of the users' portfolios, we also see a number of differences between GHO users and v3 users.
+If we break down the aggregate value of the users' portfolios, we also see a number of differences between GHO users and other v3 users.
 GHO users are more likely to store their wealth on L2s like Arbitrum or Base.
 While the actual distribution and choice of yield source may differ, both categories' portfolios are strongly weighted towards ETH, BTC and stablecoins: 
 
@@ -451,18 +435,18 @@ Finally, we take a look at the age and level of activity (using the account's no
 <script src="../../js/gho-users/age-violin.js"></script>
 <canvas id="violinChart"></canvas>
 
-GHO borrowers appear more experienced, with a median account age of 2.3 years compared to 1.5 years for other AAVE users.
+GHO borrowers appear more experienced, with a median account age of 2.3 years compared to 1.5 years for other Aave users.
 They're also much more active on-chain with a median of 121 transactions against 32 for other users.
 
 # Arbitrum
 
-The above analysis only looked at Ethereum mainnet, however [GHO has been available on Arbitrum](https://governance.aave.com/t/arfc-gho-cross-chain-launch/17616/14) since July 2024.
-The Arbitrum user base has been growing steadily since -- reaching close to 25% of the number of Ethereum users -- and may be analyzed in a future report.
+In previous section we only looked at metrics observed on Ethereum mainnet, however [GHO has been available on Arbitrum](https://governance.aave.com/t/arfc-gho-cross-chain-launch/17616/14) since July 2024.
+The Arbitrum user base has been growing steadily since -- reaching close to 25% of the number of Ethereum users -- and while it is too early to perform in depth analysis, it may be covered in a future iteration.
 
 An interesting feature so far is that Arbitrum users seem to be more risk averse than their Ethereum mainnet counterparts.
 Less than 3% of the GHO loans have been liquidated so far vs 6% on mainnet.
-The median health is higher on Arbitrum, and an (admittedly crude, heuristic) estimation of the prevalence of user leveraging their loans indicates that the practice is more common on Ethereum.
-But of course, this may simply reflect the younger age of the Arbitrum product and the low volatility of the market since the summer.
+Also, the median health is higher on Arbitrum, and an (admittedly crude, heuristic) estimation of the prevalence of user leveraging their loans indicates that the practice is more common on Ethereum.
+But of course, this may simply reflect the younger age of the Arbitrum product (only 2 months at the time of writing) and the low volatility of the market since the summer.
 
 
 <script src="../../js/gho-users/arbitrum-users.js"></script>
@@ -476,3 +460,13 @@ But of course, this may simply reflect the younger age of the Arbitrum product a
     <canvas id="arbiCompare" width="400" height="500"></canvas>
   </div>
 </div>
+
+# Closing Remarks
+
+The analysis of GHO user behavior provides valuable insights into the evolving landscape of DeFi and the role of Aave’s stablecoin in attracting and retaining users. GHO’s ability to draw in new participants, particularly with a noteworthy proportion of first-time borrowers, highlights its appeal and the potential for future growth within the ecosystem. The observed loyalty among returning users, along with a distinct borrowing behavior, sets GHO apart from more established stablecoins, suggesting that users are increasingly finding value in its unique offerings.
+
+Moreover, the trends indicate a vibrant engagement with other DeFi protocols, demonstrating GHO’s capacity to foster a cross-protocol interest that can strengthen the overall DeFi landscape. The lower liquidation rates and the significant wealth of GHO users further underscore the product's attractiveness and the careful risk management strategies employed by borrowers.
+
+As GHO continues to mature, this analysis helps to understand how user behaviors adapt to market changes and the effectiveness of incentive structures. The insights gleaned from this study not only underscore the current state of GHO but could also pave the way for future strategical decisions contributing to scaling of GHO adoption.
+
+In summary, GHO is not just a stablecoin; it represents a pivotal shift in how users engage with Aave protocol, emphasizing the importance of innovation, user experience, and community building to drive the next level of scale for Aave.
