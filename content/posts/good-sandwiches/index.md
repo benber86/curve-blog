@@ -2,7 +2,7 @@
 title: "Can Sandwich Attacks Benefit their Victims?"
 draft: false
 date: 2024-09-23T09:25:45.000Z
-ogimage: "https://blog.curvemonitor.com/images/ng-mev/thumbnail.png"
+ogimage: "https://blog.curvemonitor.com/images/gho-users/sankey.jpg"
 description: "We question the conventional idea that sandwich attacks are always financially detrimental to their victims with empirical examples and theoretical justifications for the contrary."
 categories:
   - MEV
