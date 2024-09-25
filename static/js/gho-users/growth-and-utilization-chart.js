@@ -128,7 +128,7 @@
                                 position: 'left',
                                 title: {
                                     display: true,
-                                    text: 'Growth Rate (%)'
+                                    text: 'Rate (%)'
                                 },
                                 ticks: {
                                     callback: function(value) {
@@ -143,7 +143,6 @@
             .catch(error => console.error('Error loading the growth and utilization data:', error));
     }
 
-    // Ensure the function runs after the DOM is fully loaded
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', createGrowthAndUtilizationChart);
     } else {

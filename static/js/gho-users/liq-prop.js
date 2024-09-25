@@ -4,16 +4,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const data = {
         'USDC': {'Total borrowers': 10076, 'Total liqs': 822, 'Total liqs %:': 8.157999206034141},
         'USDT': {'Total borrowers': 9362, 'Total liqs': 834, 'Total liqs %:': 8.90835291604358},
+        'WETH': {'Total borrowers': 4877, 'Total liqs': 97, 'Total liqs %:': 1.9889276194381793},
         'DAI': {'Total borrowers': 2573, 'Total liqs': 167, 'Total liqs %:': 6.490478041197047},
         'GHO': {'Total borrowers': 2297, 'Total liqs': 152, 'Total liqs %:': 6.617326948193296},
+        'WBTC': {'Total borrowers': 1368, 'Total liqs': 49, 'Total liqs %:': 3.5818713450292394},
+        'wstETH': {'Total borrowers': 1004, 'Total liqs': 16, 'Total liqs %:': 1.593625498007968},
+        'LINK': {'Total borrowers': 513, 'Total liqs': 19, 'Total liqs %:': 3.7037037037037033},
         'LUSD': {'Total borrowers': 418, 'Total liqs': 14, 'Total liqs %:': 3.349282296650718},
         'PYUSD': {'Total borrowers': 310, 'Total liqs': 31, 'Total liqs %:': 10.0},
-        'crvUSD': {'Total borrowers': 146, 'Total liqs': 4, 'Total liqs %:': 2.73972602739726},
-        'WETH': {'Total borrowers': 4877, 'Total liqs': 97, 'Total liqs %:': 1.9889276194381793},
-        'wstETH': {'Total borrowers': 1004, 'Total liqs': 16, 'Total liqs %:': 1.593625498007968},
-        'WBTC': {'Total borrowers': 1368, 'Total liqs': 49, 'Total liqs %:': 3.5818713450292394},
-        'LINK': {'Total borrowers': 513, 'Total liqs': 19, 'Total liqs %:': 3.7037037037037033},
         'CRV': {'Total borrowers': 187, 'Total liqs': 4, 'Total liqs %:': 2.13903743315508},
+        'crvUSD': {'Total borrowers': 146, 'Total liqs': 4, 'Total liqs %:': 2.73972602739726},
     };
 
     const labels = Object.keys(data);

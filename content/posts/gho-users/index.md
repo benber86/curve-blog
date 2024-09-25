@@ -1,7 +1,7 @@
 ---
 title: "GHO Users: Interactions & Patterns"
 draft: false
-date: 2024-09-30T09:25:45.000Z
+date: 2024-09-24T09:25:45.000Z
 ogimage: "https://blog.curvemonitor.com/images/gho-users/sankey.jpg"
 description: "Analysis of GHO Users' On-Chain Behavior"
 categories:
@@ -98,8 +98,6 @@ By Q2-24, GHO's Risk Stewards [started incrementally raising the cap](https://go
 Plotting the growth rate of users & debt vs. utilization, we can see that any drop below 100% in utilization is followed by a much larger surge in debt than in users.
 This suggests that the gaps are getting filled either by existing users borrowing more or by new users coming in with size.
 
-==@todo:change y axis title to rate (%)==
-
 <script src="../../js/gho-users/growth-and-utilization-chart.js"></script>
 <div style="width: 100%; margin-bottom: 20px">
  <canvas id="chart-growth-and-utilization" width="800" height="400"></canvas>
@@ -114,7 +112,6 @@ However, as the borrow cap increases and becomes larger, there are now larger ti
 After the first <span>$35m</span> borrow cap was reached in 2023, any subsequent available borrowing capacity (from either cap raises or loan repayments) was filled within a couple of days, and often in just a few hours.
 But the large increases in summer 2024 (from <span>$75m</span> to <span>$150m</span>) took almost a month to fill, and the current cap, at the time of writing, has not been filled for over 2 weeks:
 
-==@todo:add available borrowing capacity to graph==
 
 <script src="../../js/gho-users/fill-times-chart.js"></script>
 
@@ -141,14 +138,12 @@ But how many of these GHO users are existing Aave users? And how many new users 
  </div>
 </div>
 
-==@todo:why are there 35.8% of people who never borrowed other tokens, check this==
 
 As seen above, **about half of all GHO borrowers are entirely new users**, while the other half had previously used Aave via v2 or v3.
 This means that GHO is better at attracting new users than other stablecoins like LUSD, crvUSD, or PYUSD.
 Established stablecoins like USDT or USDC have a much higher rate of new users onboarded, but this merely reflects that they were available on Aave when there were fewer assets to choose from.
-To expand further, the chart below compares the distribution of users' first actions against some of the other most commonly borrowed assets on Aave:
+To expand further, the chart below compares the distribution of users' borrowing behavior against some of the other most commonly borrowed assets on Aave:
 
-==@todo:revise graph, title should not be first actions if it relates to all borrowed assets, revise legend to match previous graph, and its unclear why there are green bars in other borrowed assets besides GHO==
 
 <script src="../../js/gho-users/token-borrowing-patterns.js"></script>
 
@@ -161,8 +156,6 @@ In fact, out of all the assets in the chart above, new GHO users (understood as 
 The comparatively young market age could explain this, and the situation will likely change as it matures.
 
 GHO users tend to be more active on-chain than other Aave users, making them more inclined to explore the various options within the protocol. **GHO users are twice as likely to engage with other DeFi protocols** than non-GHO users on Aave. There's also a noticeable difference between new users who began using Aave through GHO and existing Aave users who borrowed GHO. The latter are more active across DeFi and tend to favor protocols like Curve and Convex, while new users gravitate more toward restaking protocols such as ether. fi and Eigenlayer.
-
-==@todo:provide more descriptive titles, e.g. All v3 users; make it clear what is the difference between GHO users and new GHO users==
 
 <script src="../../js/gho-users/protocol-usage-charts.js"></script>
 <style>
@@ -186,6 +179,8 @@ GHO users tend to be more active on-chain than other Aave users, making them mor
  </div>
  </div>
 </div>
+
+
 
 Pendle is one of the most commonly used protocols for both categories of GHO users.
 As we cannot track protocol usage before opening a GHO loan (all-cross protocol data was drawn from the state of the user's address as of September 10th via DeBank's API), it is difficult to establish directionality or causality:
@@ -274,7 +269,6 @@ Looking at second-order flows on major DEXes, we can see in the chart below that
  </div>
 </div>
 
-==@todo:Normalize the comparison by month and use the same scale for the y axis==
 Incentives thus successfully reduced the outflows towards other stablecoins on the three major mainnet DEXes.
 They also reduced flows going towards liquidity pools, particularly on Uniswap v3, which may have reduced available liquidity and destabilized the peg.
 However, reducing liquidity providing might also have been necessary to minimize sell pressure on GHO.
@@ -308,7 +302,7 @@ There are two things we can look at.
 <script src="../../js/gho-users/liquidations.js"></script>
 <script src="../../js/gho-users/liq-prop.js"></script>
 <div style="display: flex; justify-content: space-between; height: 450px; width: 100%; margin-bottom: 20px;">
- <div style="width: 48%;">
+ <div style="width: 50%;">
  <canvas id="liquidationChart"></canvas>
  </div>
  <div style="width: 48%;">
@@ -316,8 +310,6 @@ There are two things we can look at.
  </div>
 </div>
 
-==@todo:add to graph on left average time on platform==
-==@todo:order X axis according to liquidation percentage==
 
 At first glance, from the chart on the left, it might seem that GHO minters are more likely to experience a liquidation (10%) compared to other Aave users (8%) and might, therefore, be less risk averse.
 However, when further breaking down the numbers, we see that most GHO users who experienced liquidations had previously borrowed on Aave v2 or v3.
@@ -332,9 +324,7 @@ Looking at the present state of the market and the distribution of user health s
 
 <script src="https://unpkg.com/@sgratzl/chartjs-chart-boxplot@3"></script>
 <script src="../../js/gho-users/health-violin.js"></script>
-<canvas id="healthViolinChart" height="200px"></canvas>
-
-==@todo:use a different type of graph, the general reader will not understand this==
+<canvas id="healthViolinChart" height="240px"></canvas>
 
 Overall, health factor distribution is homogenous across all borrowed assets.
 As these are aggregated health scores across all loans, a user's score can be counted in different assets (if they have concurrently borrowed multiple assets).

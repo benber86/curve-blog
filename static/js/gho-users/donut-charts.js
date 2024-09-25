@@ -113,5 +113,5 @@ document.addEventListener('DOMContentLoaded', function() {
     const ctx2 = document.getElementById('donutChart2').getContext('2d');
 
     createDonutChart(ctx1, data1, ['GHO Borrowers', 'Among V3 Borrowers']);
-    createDonutChart(ctx2, data2, ['First Actions of GHO Borrowers', 'on AAVE']);
+    createDonutChart(ctx2, data2, ['Borrowing Patterns of GHO Borrowers', 'on AAVE']);
 });

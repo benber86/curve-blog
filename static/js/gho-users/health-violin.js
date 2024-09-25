@@ -51,6 +51,19 @@ document.addEventListener('DOMContentLoaded', function() {
                                 size: 18
                             }
                         },
+                        subtitle: {
+                            display: true,
+                            text: ['The box displays the middle 50% of the data, bounded by the 25th and 75th percentiles, with the median marked by a vertical line.',
+                                'Whiskers extend to show the data range, while individual points beyond the whiskers represent outliers that fall outside 1.5 times the interquartile range.',
+                            'Extreme outliers are not displayed.'],
+                            font: {
+                                size: 12,
+                                italic: true
+                            },
+                            padding: {
+                                bottom: 20,
+                            }
+                        },
                         legend: {
                             display: false
                         },

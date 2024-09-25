@@ -108,17 +108,26 @@
         'Aerodrome': 5.218135158254919,
         'GMX': 4.704875962360992}
 
-    function createOverallTitle(text) {
+    function createOverallTitle() {
+        const subTitleElement = document.createElement('div');
+        subTitleElement.textContent = "The v3 Users category comprises all users who either borrowed or supplied on Aave. GHO users are the subset of v3 users who borrowed GHO. New GHO users are the subset of GHO users who made their first transaction on Aave by borrowing GHO, while existing users refers to users who had already used Aave to borrow other tokens prior to borrowing GHO.";
+        subTitleElement.style.textAlign = 'center';
+        // subTitleElement.style.fontStyle = 'italic';
+        subTitleElement.style.color = '#666';
+        subTitleElement.style.marginLeft = '5%';
+        subTitleElement.style.marginRight = '5%';
+        subTitleElement.style.fontSize = '12px';
+        document.getElementById('chartContainer').prepend(subTitleElement);
         const titleElement = document.createElement('h4');
-        titleElement.textContent = text;
+        titleElement.textContent = 'Cross Protocol Usage per User Type';
         titleElement.style.textAlign = 'center';
         titleElement.style.color = '#666';
-        titleElement.style.marginBottom = '12px';
+        titleElement.style.marginBottom = '8px';
         document.getElementById('chartContainer').prepend(titleElement);
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        createOverallTitle('Cross Protocol Usage per User Type');
+        createOverallTitle();
         createHorizontalBarChart(v3UsersData, 'v3UsersChart', 'v3 Users');
         createHorizontalBarChart(ghoUsersData, 'ghoUsersChart', 'GHO Users');
         createHorizontalBarChart(newGhoUsersData, 'newGhoUsersChart', 'New GHO Users');

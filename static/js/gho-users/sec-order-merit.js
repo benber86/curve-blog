@@ -125,8 +125,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const dropdown = document.createElement('select');
     dropdown.id = 'data-type';
     const options = [
-        { value: 'absolute', text: 'USD Volume (Absolute)' },
         { value: 'proportions', text: 'USD Volume (Proportions)' },
+        { value: 'absolute', text: 'USD Volume (Absolute)' },
     ];
     options.forEach(option => {
         const el = document.createElement('option');
@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
         afterChart = createBarChart(afterCanvas.getContext('2d'), afterMeritData, 'After Incentives', dataType);
     }
 
-    updateCharts('absolute');
+    updateCharts('proportions');
 
     dropdown.addEventListener('change', function() {
         updateCharts(this.value);

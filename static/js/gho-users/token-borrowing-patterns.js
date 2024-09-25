@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     const labels = [
-        'Started with other token (V2) then borrowed GHO',
-        'Started with other token (V3) then borrowed GHO',
+        'Started with other token (V2) then borrowed token',
+        'Started with other token (V3) then borrowed token',
         'Started by borrowing token then borrowed other tokens',
         'Started by borrowing token and never borrowed other tokens',
     ];
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
             plugins: {
                 title: {
                     display: true,
-                    text: "Borrowers' First Actions on AAVE per Borrowed Asset",
+                    text: "Users' Borrowing Patterns on AAVE per Borrowed Asset",
                     font: {
                         size: 18
                     }
