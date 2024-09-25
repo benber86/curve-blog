@@ -1,21 +1,21 @@
 ---
-title: "Who are GHO users"
+title: "GHO Users: Interactions & Patterns"
 draft: false
 date: 2024-09-30T09:25:45.000Z
-ogimage: "https://benber86.github.io/curve-blog/images/gho-users/sankey.jpg"
-description: "Analysis of GHO Users"
+ogimage: "https://blog.curvemonitor.com/images/gho-users/sankey.jpg"
+description: "Analysis of GHO Users' On-Chain Behavior"
 categories:
- - GHO
- - AAVE
- - Users
- - Analytics
- - Products
+  - GHO
+  - AAVE
+  - Users
+  - Analytics
+  - Products
 tags:
- - GHO
- - AAVE
- - Users
- - Analytics
- - Products
+  - GHO
+  - AAVE
+  - Users
+  - Analytics
+  - Products
 ---
 
 _Authors:_ [benny](https://warpcast.com/bennylada)
@@ -39,7 +39,7 @@ These findings present a promising landscape for the GHO stablecoin, allowing Aa
 
 # Introduction & Methodology
 
-[GHO](https://docs.gho.xyz/) is a decentralized and overcollateralized stablecoin launched by Aave in July 2023. 
+[GHO](https://docs.gho.xyz/) is a decentralized and overcollateralized stablecoin launched by Aave in July 2023.
 This article examines the product's growth, the flows of GHO within the DeFi ecosystem, the impact of incentives, and the specificities of GHO users.
 We aim to understand who the GHO users are, how they differ from other Aave users, and what insights can be drawn about their behavior and impact on the ecosystem. This article will also include visualizations and graphs to help intuitively illustrate user behaviors and asset flows.
 In addition to analyzing transactional data, this approach will uncover valuable business insights related to the token's performance, user engagement, and the broader strategic implications for GHO within the DeFi landscape.
@@ -58,14 +58,14 @@ Data is sourced from the [AAVE v3 subgraphs](https://github.com/aave/protocol-su
 
 # Growth & User Acquisition
 
-GHO launched a year ago, in July 2023. 
+GHO launched a year ago, in July 2023.
 The product gathered over 500 unique users and $20 million of outstanding loans in its first month.
 A year later, it is in the [top 20 of stablecoins](https://www.coingecko.com/en/categories/stablecoins) by market capitalization and has over 2000 users.
 
 In September 2023, a [$35 million cap was introduced](https://governance-v2.aave.com/governance/proposal/308/) to better manage the protocol's risk exposure.
-It only took a couple of months for the cap to be filled. 
-As the charts below demonstrate, the cap subsequently strongly tempered user growth. 
-While the crypto market saw strong growth in Q4-23 and Q1-24, that same period saw the number of unique GHO users stall. 
+It only took a couple of months for the cap to be filled.
+As the charts below demonstrate, the cap subsequently strongly tempered user growth.
+While the crypto market saw strong growth in Q4-23 and Q1-24, that same period saw the number of unique GHO users stall.
 
 The restraint on growth was seen as necessary to [restore and ensure the stability of the peg](https://www.llamarisk.com/research/explainer-series-gho-stablecoin), which had fallen below $0.98 shortly after the product's launch and remained there until the end of 2023.
 With limited incentives to hold onto GHO, new mints necessarily put downward pressure on the peg.
@@ -95,7 +95,7 @@ With limited incentives to hold onto GHO, new mints necessarily put downward pre
 
 The introduction of the [GHO Stability Module](https://docs.gho.xyz/developer-docs/gho-stability-module) and staking incentives eventually stabilized the peg.
 By Q2-24, GHO's Risk Stewards [started incrementally raising the cap](https://governance.aave.com/t/arfc-chaos-labs-risk-stewards-increase-gho-minting-cap-03-01-24/16805) and user and debt growth resumed, albeit at different paces.
-Plotting the growth rate of users & debt vs. utilization, we can see that any drop below 100% in utilization is followed by a much larger surge in debt than in users. 
+Plotting the growth rate of users & debt vs. utilization, we can see that any drop below 100% in utilization is followed by a much larger surge in debt than in users.
 This suggests that the gaps are getting filled either by existing users borrowing more or by new users coming in with size.
 
 ==@todo:change y axis title to rate (%)==
@@ -105,14 +105,14 @@ This suggests that the gaps are getting filled either by existing users borrowin
  <canvas id="chart-growth-and-utilization" width="800" height="400"></canvas>
 </div>
 
-For instance, on June 1st, a mere hours after the cap was raised from $65m to $68m, user [0xFCC5](https://etherscan.io/address/0xfcc5acd50ae590889d2a53343d35b5fb80d403c2) took out a <span>$3m</span> loan and single-handedly filled the cap. 
+For instance, on June 1st, a mere hours after the cap was raised from $65m to $68m, user [0xFCC5](https://etherscan.io/address/0xfcc5acd50ae590889d2a53343d35b5fb80d403c2) took out a <span>$3m</span> loan and single-handedly filled the cap.
 The same user likewise immediately filled the next cap increase to <span>$75m</span> with a [<span>$7m</span> loan](https://etherscan.io/tx/0xac837669efd297ab76c156542bf784d84b4752be5de97a3968ce0b5795cde62f) on June 3rd, and the following one to <span>$82m</span> with an [extra <span>$5m</span> loan](https://etherscan.io/tx/0x5c4c97482ff7e5c19758fd4cebe6ce3a4156315b820820cdd4c8619ca2e65ef7) on June 5th.
 
 Borrowed amounts increased in general, from an average <span>$65k</span> in July-August 2023 to almost <span>$100k</span> in July-August 2024, with nearly 3 times more users taking on $1m+ loans in the latter period. This, too, indicates that **growth in Q2 and Q3 2024 was driven more by capital than new users.**
 
 However, as the borrow cap increases and becomes larger, there are now larger time windows for new users to mint GHO.
 After the first <span>$35m</span> borrow cap was reached in 2023, any subsequent available borrowing capacity (from either cap raises or loan repayments) was filled within a couple of days, and often in just a few hours.
-But the large increases in summer 2024 (from <span>$75m</span> to <span>$150m</span>) took almost a month to fill, and the current cap, at the time of writing, has not been filled for over 2 weeks: 
+But the large increases in summer 2024 (from <span>$75m</span> to <span>$150m</span>) took almost a month to fill, and the current cap, at the time of writing, has not been filled for over 2 weeks:
 
 ==@todo:add available borrowing capacity to graph==
 
@@ -187,7 +187,7 @@ GHO users tend to be more active on-chain than other Aave users, making them mor
  </div>
 </div>
 
-Pendle is one of the most commonly used protocols for both categories of GHO users. 
+Pendle is one of the most commonly used protocols for both categories of GHO users.
 As we cannot track protocol usage before opening a GHO loan (all-cross protocol data was drawn from the state of the user's address as of September 10th via DeBank's API), it is difficult to establish directionality or causality:
 Do GHO users move to Pendle to stake? Or are Pendle users coming to AAVE?
 
@@ -197,7 +197,7 @@ An analysis of GHO users' assets on Pendle reveals that they do not primarily go
 
 If users do not provide liquidity on Curve or deposit on Pendle, what do they do with their GHO?
 The above charts only look at where users currently have assets, which does not capture flows such as trading activities.
-To better understand where GHO liquidity moves, we can follow the token's transfer events. 
+To better understand where GHO liquidity moves, we can follow the token's transfer events.
 This allows us to see where GHO minters sent their tokens to (first-order flow) and, if they traded them, what tokens they traded GHO for (second-order flow).
 We display the flows in USD and total number of transactions in the following chart:
 
@@ -257,7 +257,7 @@ To evaluate the impact of these incentives on flows, we split the data into two 
  <canvas id="beforeAfterChart" style="margin-top: 30px;"></canvas>
 </div>
 
-The most obvious change is the tremendous increase in the proportion of flows going towards staking, from 3.8% to 19.1%. 
+The most obvious change is the tremendous increase in the proportion of flows going towards staking, from 3.8% to 19.1%.
 The corollary to this increase is a decrease in the flows towards DEXes such as Uniswap (12.8% to 1.2%) or Balancer (11% to 1.8%).
 This indicates that the staking program was successful at preventing users from selling GHO for other stablecoins or crypto assets.
 Mitigating selling pressure this way did, in turn, help stabilize the peg.
@@ -277,13 +277,13 @@ Looking at second-order flows on major DEXes, we can see in the chart below that
 ==@todo:Normalize the comparison by month and use the same scale for the y axis==
 Incentives thus successfully reduced the outflows towards other stablecoins on the three major mainnet DEXes.
 They also reduced flows going towards liquidity pools, particularly on Uniswap v3, which may have reduced available liquidity and destabilized the peg.
-However, reducing liquidity providing might also have been necessary to minimize sell pressure on GHO. 
+However, reducing liquidity providing might also have been necessary to minimize sell pressure on GHO.
 Depositing single sided liquidity on Curve or Balancer is equivalent to a partial sell, and on Uni v3 is akin to a sell order.
 
 This comparison is still lacking, as we did not include aggregators such as CowSwap or 1inch since they did not offer an option to LP.
 The two periods are also of different lengths, and the supply of GHO was much larger in the second period than in the first.
 
-After normalizing for time and supply and considering all outflows to DEXes, we find that overall **staking incentives reduced outflows to stablecoins by close to 25%**. 
+After normalizing for time and supply and considering all outflows to DEXes, we find that overall **staking incentives reduced outflows to stablecoins by close to 25%**.
 Concomitantly, incentives also drastically reduced outflows towards liquidity pools by <span>83%</span>.
 
 
@@ -301,9 +301,9 @@ Liquidations are important to ensure the stability and collateralization of stab
 They, however, present a risk to lending protocols as they might create bad debt and/or discourage liquidated users from borrowing again.
 Therefore, it is worth investigating the prevalence of liquidations among GHO minters and checking whether it is significantly different from other borrowed assets.
 
-There are two things we can look at. 
-- Total number of liquidations (regardless of the denomination of the liquidated loans) by type of user. This shows whether GHO users' overall borrowing behavior exhibits higher or lower risk preference. 
- - Proportion of loans of a particular asset that were liquidated. This shows if liquidations can be related to asset attributes.
+There are two things we can look at.
+- Total number of liquidations (regardless of the denomination of the liquidated loans) by type of user. This shows whether GHO users' overall borrowing behavior exhibits higher or lower risk preference.
+- Proportion of loans of a particular asset that were liquidated. This shows if liquidations can be related to asset attributes.
 
 <script src="../../js/gho-users/liquidations.js"></script>
 <script src="../../js/gho-users/liq-prop.js"></script>
@@ -320,11 +320,11 @@ There are two things we can look at.
 ==@todo:order X axis according to liquidation percentage==
 
 At first glance, from the chart on the left, it might seem that GHO minters are more likely to experience a liquidation (10%) compared to other Aave users (8%) and might, therefore, be less risk averse.
-However, when further breaking down the numbers, we see that most GHO users who experienced liquidations had previously borrowed on Aave v2 or v3. 
+However, when further breaking down the numbers, we see that most GHO users who experienced liquidations had previously borrowed on Aave v2 or v3.
 That they've experienced more liquidations simply reflects the fact that they've spent more time on the platform.
 
 When we look at asset-specific loans (right), we see instead that **GHO denominated loans are less likely to be liquidated (6%) compared to other major stablecoins like USDC (8%) and USDT (9%).**
-For comparison, on [Curve's lending platform](https://crvusd.curve.fi/#/ethereum) hard liquidations for crvUSD borrowers are closer to 10%, with some variation per market. 
+For comparison, on [Curve's lending platform](https://crvusd.curve.fi/#/ethereum) hard liquidations for crvUSD borrowers are closer to 10%, with some variation per market.
 
 The lower liquidation rates for crypto-denominated loans can largely be attributed to market conditions since the launch of Aave v3. As crypto assets have generally decreased in value, borrowers of these assets are less likely to face liquidation than those who have borrowed stablecoins using volatile assets as collateral.
 
@@ -368,8 +368,8 @@ Almost 10% of USDC borrowers also borrow GHO, and roughly one-third of LUSD, PYU
 <div id="borrowedHeatmap"></div>
 
 GHO users are less likely to borrow other assets but more likely to borrow GHO again compared to crypto assets or stablecoins like LUSD or crvUSD.
-**Almost half of all GHO borrowers will go on to borrow GHO again**. 
-Only USDC and USDT do better, with 55% of multiple borrows and 10% of users borrowing more than 7 times. 
+**Almost half of all GHO borrowers will go on to borrow GHO again**.
+Only USDC and USDT do better, with 55% of multiple borrows and 10% of users borrowing more than 7 times.
 
 <script src="../../js/gho-users/tx-count.js"></script>
 <canvas id="txCountChart" height="180px"></canvas>
@@ -425,7 +425,7 @@ GHO users are significantly wealthier, with the **median portfolio value 10 time
 
 If we break down the aggregate value of the users' portfolios, we also see several differences between GHO users and other v3 users.
 GHO users are more likely to store their wealth on L2s like Arbitrum or Base.
-While the actual distribution and choice of yield source may differ, both categories' portfolios are strongly weighted towards ETH, BTC, and stablecoins: 
+While the actual distribution and choice of yield source may differ, both categories' portfolios are strongly weighted towards ETH, BTC, and stablecoins:
 
 <script src="../../js/gho-users/donut-charts-comparison.js"></script>
 
