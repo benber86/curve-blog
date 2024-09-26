@@ -55,6 +55,8 @@ So we just rewrite Stableswap with $A$ as a function:
 
 # Dynamic Curve Stableswap Simulator
 
+Not really the best because non-linear so curve/price impact changes depending on trade size, but you get the idea. 
+
 <div>
     <label for="minA">Min A: </label>
     <input type="range" id="minA" min="1" max="100" value="1">
@@ -124,3 +126,4 @@ So we just rewrite Stableswap with $A$ as a function:
 <link rel="stylesheet" href="https://x3dom.org/release/x3dom.css"/>
 <script src="https://raw.githack.com/jamesleesaunders/d3-x3d/master/dist/d3-x3d.js"></script>
 <script src="../../js/bonding-3d/dynamica.js"></script>
+
