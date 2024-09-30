@@ -25,13 +25,13 @@ Sandwiches are zero sum games, in which **any profit made by the attacker comes 
 
 During a sandwich, the value in a constant function automated market maker (CFAMM) will remain, by definition, constant (or will increase slightly if fees are applied). 
 A searcher will, at least in theory, only execute a sandwich attack if it is profitable to do so. 
-They therefore likewise end up with more value than they started with at the end of the transaction.
+They therefore end up with more value than they started with at the end of the transaction.
 While they must pay fees to the AMM during the front and back-run transactions, this is compensated by the value they extract during the sandwich.
-This leaves the victim has the only dependent variable, which must incur a loss to pay for the fees and the attacker's profit.
+This leaves the victim as the only dependent variable, which must incur a loss to pay for the fees and the attacker's profit.
 
 We can illustrate this with the common scenario in which a liquidity taker attacks another taker on a CFAMM. 
 We'll ignore AMM fees and gas costs for simplicity's sake. 
-The CFAMM is defined by its constant function $f(x, y) = k$ where x and y are the quantities of two tokens in the pool, and k is a constant.
+The CFAMM, whether constant product, stableswap or other, is defined by its constant function $f(x, y) = k$ where x and y are the quantities of two tokens in the pool, and k is a constant.
 Prior to any transactions in our scenario, the AMM's initial state is $(x_0, y_0)$.
 The Victim ($V$) intends to sell $x$ tokens ($\Delta x$) in order to buy $y$ tokens ($\Delta y$).
 
@@ -43,53 +43,52 @@ The goal of the first transaction (front-run) is to manipulate the price of the 
 After the front-run and the Victim's trade have been executed, the Attacker sells back the entirety of their $y$ tokens ($\delta y$) and receives $\delta x'$ tokens in return (back-run).
 Their profit is the difference between their amount of $x$ tokens after the sandwich ($\delta x'$) and their original amount ($\delta x$)
 
-A bit more formally:
+We can write this a bit more formally or move on to the next section:
 
 - **Front-run**: $(x_0, y_0) \longrightarrow (x_1, y_1)$ where $(x_1, y_1) = (x_0 + \delta x, y_0 - \delta y)$
 - **Victim trade**: $(x_1, y_1) \longrightarrow (x_2, y_2)$ where $(x_2, y_2) = (x_1 + \Delta x, y_1 - \Delta y')$
 - **Back-run**: $(x_2, y_2) \longrightarrow (x_3, y_3)$ where $(x_3, y_3) = (x_2 - \delta x', y_2 + \delta y)$
 
-And the Attacker's profit is $\Pi_A = \delta x' - \delta x$  
 
 We also have different prices at each steps (expressing the price of $y$ in units of $x$):
-- **Initial price**: $P_0 = y_0 / x_0$
-- **Front-run price**: $P_1 = \delta y / \delta x = (y_0 - y_1) / (x_1 - x_0)$
-- **Victim price**: $P_2 = \Delta y' / \Delta x = (y_1 - y_2) / (x_2 - x_1)$
-- **Back-run price**: $P_3 = \delta y / \delta x' = (y_3 - y_2) / (x_2 - x_3) $
+- **Initial price**: $P_0 = \frac{x_0}{y_0}$
+- **Victim expected price**: $P_E = \frac{\Delta x}\{\Delta y}$
+- **Front-run price**: $P_1 = \frac{\delta x}{\delta y}  = \frac{(x_1 - x_0)}{(y_0 - y_1)}$
+- **Victim execution price**: $P_2 = \frac{\Delta x}{\Delta y'} =  \frac{(x_2 - x_1)}{(y_1 - y_2)}$
+- **Back-run price**: $P_3 = \frac{\delta x'}{\delta y} = \frac{(x_2 - x_3)}{(y_3 - y_2)} $
+
+We express $P_1$ and $P_3$  in terms of $P_0$ and their respective price impact factors:
+$P_1 = P_0 * (1 + \alpha)$  and $P_3 = P_0 * (1 + \beta)$, where $\alpha$ represents the price increase due to the front-run and $\beta$ represents the price change from $P_0$ after the back-run.
+
+And likewise for the Victim's expected price: $P_E = P_0 * (1 + \gamma)$, where $\gamma$ is the price impact of the Victim's trade based on the size of $\Delta x$ and non-inclusive of slippage.
+
+Finally, the Attacker's profit is the difference between the amount of $x$ tokens obtained in the back-run and the amount of $x$ tokens spent in the front-run, or  $\Pi_A = \delta x' - \delta x$
+$\Leftrightarrow \Pi_A = \delta y * (P_3 - P_1)$
+
+$\Leftrightarrow \Pi_A = \delta y * P_0 * (\beta - \alpha)$
+
+Therefore, the attacker's profit is maximized when they can create the largest gap between $\alpha$ and $\beta$.
 
 
-We know that $\delta x = P_1 * \delta y$ and $\delta x' = P_3 * \delta y$. 
-Since the attack would not be executed unless it was profitable we also know that $\Pi_A =  \delta x' - \delta x > 0$. We can conclude that $\delta x' > \delta x$ and therefore $P_3 > P_1$.
+We know that $P_2$ is limited by the Victim's slippage setting $s$ as the transaction would otherwise revert, so $P_2 ≤ P_E * (1 + s)$.
+We also know that $P_1 > P_0$ (the front-run increases the price), $P_2 > P_1$ (the Victim's trade further increases the price) and $P_3 < P_2$ (the back-run sells $y$ for $x$, bringing the price down), so:
 
-We plug in the values of $P_3$ and $P_1$ from above into this inequality to get:
+$P_3 < P_2 ≤ P_E * (1 + s)$
 
-$\frac{(y_3 - y_2)}{(x_2 - x_3)} > \frac{(y_0 - y_1)}{(x_1 - x_0)}$
+$\Leftrightarrow P_0 * (1 + β) < P_0 * (1 + \gamma) * (1 + s)$
 
-We know that $(x_2 - x_3)$, $(x_1 - x_0)$ and $(y_0 - y_1)$ are all positive. 
-In the back-run, the attacker is selling $y$ tokens to receive $x$ tokens, so $x_2 > x_3$.
-In the front-run, the attacker is buying $y$ tokens by selling $x$ tokens, so $x_1 > x_0$, and $y_0 > y_1$.
+$\Leftrightarrow \beta < \gamma + s + \gamma * s$   
 
-We can therefore rewrite the inequality as:
+We can substitute our inequality for $\beta$ into the profit equation from above:
 
-$(x_2 - x_3) < \frac{(y_3 - y_2)(x_1 - x_0)}{(y_0 - y_1)}$
+$ \Pi_A = \delta y * P_0 * (\beta - \alpha)$
 
-Since:
+$ \Leftrightarrow \Pi_A < \delta y * P_0 * ((\gamma + s + \gamma*s) - \alpha)$
 
-$\Pi_A = \delta x' - \delta x = (x_2 - x_3) - (x_1 - x_0)$
+$ \Leftrightarrow \Pi_A < \delta y * P_0 * ((\gamma + s + \gamma*s))$
 
-We have:
 
-$\Pi_A < \frac{(y_3 - y_2)(x_1 - x_0)}{(y_0 - y_1)} - (x_1 - x_0)$
-
-$\iff \Pi_A < (x_1 - x_0) \left[ \frac{(y_3 - y_2)}{(y_0 - y_1)} - 1 \right]$
-
-$\iff \Pi_A < (x_1 - x_0) \left[ \frac{(y_1 - y_2) - (y_0 - y_3)}{(y_0 - y_1)} \right]$
-
-We know that $(y_0 - y_3) \geq 0$. The Attacker returns as many $y$ tokens during the back-run as they took during the front-run, so only what the Victim bought is taken from the pool's $y$ balance after the sandwich: $y_3 = y_0 - \Delta y' \implies y_3 \leq  y_0 $ . 
-
-Furthermore, $(y_1 - y_2) = \Delta y'$ and $\Delta y' \leq (1-s)\Delta y$, since the transaction would not be executed if the Victim's slippage limit were exceeded. Therefore:
-
-$\Pi_A < \frac{(x_1 - x_0)}{(y_0 - y_1)}((1-s)\Delta y)$
+We know that P_2 is bound by the victim's slippage settings
 
 Which shows that **the Attacker's profit is bounded by Victim's slippage tolerance and the price increase the Attacker can generate from the price impact of the front-run**. 
 AMM fees and gas costs, if we were to account for them, would reduce the upper profit boundary but would not fundamentally alter the inequation.  

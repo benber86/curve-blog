@@ -21,7 +21,9 @@ _Author:_ [benny](https://warpcast.com/bennylada)
 
 What if AMM Bonding Curves adjusted dynamically based on trade size?
 
-## Dynamic StableSwap
+Some users have expressed the need for different $A$ parameter depending on trade size.
+
+## General Idea
 
 Let's recall the StableSwap formula from the [whitepaper](https://curve.fi/files/stableswap-paper.pdf):
 <div style="text-align: center;">
@@ -53,7 +55,13 @@ So we just rewrite Stableswap with $A$ as a function:
 
 </div>
 
-# Dynamic Curve Stableswap Simulator
+## Limitations
+
+- There's no guarantee that $xyk$ type of AMM guarantees better price execution
+- In fact, the advantages are probably unilateral you get more positive price impact when swapping from rare asset to common asset.
+- Better execution also depends on what the competition is doing
+
+## Dynamic Curve Stableswap Simulator
 
 Not really the best because non-linear so curve/price impact changes depending on trade size, but you get the idea. 
 
@@ -101,7 +109,7 @@ Not really the best because non-linear so curve/price impact changes depending o
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="../../js/bonding-3d/dynamic-curve.js"></script>
 
-# 3D View
+## 3D View
 
 <div>
     <label for="minA3d">Min A (3D): </label>
@@ -127,3 +135,67 @@ Not really the best because non-linear so curve/price impact changes depending o
 <script src="https://raw.githack.com/jamesleesaunders/d3-x3d/master/dist/d3-x3d.js"></script>
 <script src="../../js/bonding-3d/dynamica.js"></script>
 
+## Simulation
+
+To compare the dynamic Stableswap's performance with a regular Stableswap pool, we simulate the outcome of a long period of activity on pools of each type.
+
+We take the [stETH pool](https://etherscan.io/address/0xdc24316b9ae028f1497c275eb9192a3ea0f67022#readContract) over the period 04/2024-09/2024 (because $A$ was different before April but constant after).
+We re-run all the trades (excluding liquidity events for now) and see how each parameter combination performs.
+We look at whether the traders have lost or gained vs the regular, static 200-$A$ StableSwap pool, depending on the direction of their trade.
+We also look at the impact of the new formula on LP gains.
+
+<div style="display: flex;">
+    <div style="flex: 1;">
+        <canvas id="dynamicDirectionChart" width="400" height="800"></canvas>
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column;">
+        <div style="flex: 1;">
+            <canvas id="poolRatioChart" width="300" height="350"></canvas>
+        </div>
+        <div style="flex: 1; margin-bottom: 20px">
+            <canvas id="averageMedianAChart" width="300" height="350"></canvas>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="../../js/bonding-3d/dynamic-direction.js"></script>
+<script src="../../js/bonding-3d/pool-ratio.js"></script>
+<script src="../../js/bonding-3d/average-median-a.js"></script>
+
+
+| Parameters | LP Fees Difference |
+|------------|-------------------:|
+| p = 0.05, A_min = 30, A_max = 500 | -0.0008 |
+| p = 0.1, A_min = 30, A_max = 400 | -0.0034 |
+| p = 0.1, A_min = 10, A_max = 500 | -0.0031 |
+| p = 0.2, A_min = 30, A_max = 400 | -0.0099 |
+| p = 0.25, A_min = 30, A_max = 400 | -0.0138 |
+| p = 0.25, A_min = 100, A_max = 800 | -0.0054 |
+| p = 0.3, A_min = 100, A_max = 500 | -0.0069 |
+
+- Not much difference on LP profitability, although in general impact is negative
+- Unsurprisingly, the parameter changes favor one direction over the other, depending on the directionality of the trade and how high A and stiff the ramp up towards high A is.
+- Gains for one direction do not offset losses for the other
+- Some peg-gains
+
+## Directionality
+
+Since the gains of traders going one direction do not offset the losses of the traders going the other, what if we only applied the dynamic A on trades going from rare to abundant asset?
+
+In other terms, this allows us to give positive price impact to small trades selling the rare asset to buy the abundant one.
+Large trades still benefit from the strong peg ensured by a high $A$ factor, but do not get as much price impact.
+
+To do so, the dynamic StableSwap equation defined earlier remains the same but we change $A(\delta)$ to include directionality:
+
+$A(\delta) = A_{min} + (A_{max} - A_{min}) \cdot f(\delta) \cdot I(direction)$
+
+where:
+
+$I(direction) = \max\left(0, \min\left(1, \frac{RB_{in} - RB_{out} + \zeta}{2\zeta}\right)\right)$
+
+with $RB_i = \frac{x_i}{\sum_{j=1}^n x_j}$ and $\zeta = \frac{1}{n}$
+
+$RB_i$ is the relative balance, for the sake of simplicity we use the proportion of the pool balances as is and consider the threshold $\zeta$ at which an asset is imbalanced to be if the token ratios are not all exactly in the same proportion (2 pool coin = 50% of each pool, 3 coins = 33% and so on).
+In practice this should be improved/secured for generalization.
+ 
