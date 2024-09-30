@@ -200,6 +200,11 @@ with $RB_i = \frac{x_i}{\sum_{j=1}^n x_j}$ and $\zeta = \frac{1}{n}$
 
 $RB_i$ is the relative balance, for the sake of simplicity we use the proportion of the pool balances as is and consider the threshold $\zeta$ at which an asset is imbalanced to be if the token ratios are not all exactly in the same proportion (2 pool coin = 50% of each pool, 3 coins = 33% and so on).
 In practice this should be improved/secured for generalization.
+
+- If the asset being sold is the abundant one, we apply the default $A$ ($A_min$)
+- Otherwise we scale $A$ depending on the degree of imbalance and the size of the trade
+- If the pool is perfectly balanced, we just apply $A$ scaling based on trade size
+- (Maybe the gradation is unnecessary and can be binary?)
  
 ## Simulation
 
