@@ -63,7 +63,7 @@ So we just rewrite Stableswap with $A$ as a function:
 - In fact, the advantages are probably unilateral you get more positive price impact when swapping from rare asset to common asset.
 - Better execution also depends on what the competition is doing
 
-## Dynamic Curve Stableswap Simulator
+## Dynamic Curve Stableswap Visualization
 
 Not really the best because non-linear so curve/price impact changes depending on trade size, but you get the idea. 
 
