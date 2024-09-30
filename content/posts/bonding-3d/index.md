@@ -1,5 +1,5 @@
 ---
-title: "Dynamic StableSwap Bonding Curves"
+title: "Directional Dynamic StableSwap"
 draft: false
 date: 2024-09-25T09:16:45.000Z
 ogimage: "https://blog.curvemonitor.com/images/parameter-ramping/img.png"
@@ -19,9 +19,11 @@ _Author:_ [benny](https://warpcast.com/bennylada)
 <script src="../../js/parameters/poolsim.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-What if AMM Bonding Curves adjusted dynamically based on trade size?
+What if AMM bonding curves adjusted dynamically based on trade size?
+Or what if the curve changed based on directionality to incentivize swapping in a certain direction (selling rare asset the buy abundant one or vice-versa) with positive price impact?
+Or combine both.
 
-Some users have expressed the need for different $A$ parameter depending on trade size.
+From recent interviews, several users have expressed their desire for different $A$ parameter depending on trade size.
 
 ## General Idea
 
@@ -179,7 +181,7 @@ We also look at the impact of the new formula on LP gains.
 - Gains for one direction do not offset losses for the other
 - Some peg-gains
 
-## Directionality
+## Adding Directionality
 
 Since the gains of traders going one direction do not offset the losses of the traders going the other, what if we only applied the dynamic A on trades going from rare to abundant asset?
 
@@ -199,3 +201,36 @@ with $RB_i = \frac{x_i}{\sum_{j=1}^n x_j}$ and $\zeta = \frac{1}{n}$
 $RB_i$ is the relative balance, for the sake of simplicity we use the proportion of the pool balances as is and consider the threshold $\zeta$ at which an asset is imbalanced to be if the token ratios are not all exactly in the same proportion (2 pool coin = 50% of each pool, 3 coins = 33% and so on).
 In practice this should be improved/secured for generalization.
  
+## Simulation
+
+<div style="display: flex;">
+    <div style="flex: 1;">
+        <canvas id="dynamicDirectionChartD" width="400" height="800"></canvas>
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column;">
+        <div style="flex: 1;">
+            <canvas id="poolRatioChartD" width="300" height="350"></canvas>
+        </div>
+        <div style="flex: 1; margin-bottom: 20px">
+            <canvas id="averageMedianAChartD" width="300" height="350"></canvas>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="../../js/bonding-3d/dynamic-direction-d.js"></script>
+<script src="../../js/bonding-3d/pool-ratio-d.js"></script>
+<script src="../../js/bonding-3d/average-median-a-d.js"></script>
+
+| Parameters | LP Fees Difference |
+|------------|-------------------:|
+| p = 0.05, A_min = 30, A_max = 500 | 0.2503 |
+| p = 0.1, A_min = 30, A_max = 400 | 0.2573 |
+| p = 0.1, A_min = 10, A_max = 500 | 0.5305 |
+| p = 0.2, A_min = 30, A_max = 400 | 0.2495 |
+| p = 0.25, A_min = 30, A_max = 400 | 0.2394 |
+| p = 0.25, A_min = 100, A_max = 800 | 0.0768 |
+| p = 0.3, A_min = 100, A_max = 500 | 0.0543 |
+
+- Better outcome for traders either way but at the expense of peg/LPs
+- Optimize within constraints for trader / LP outcomes?
