@@ -1,7 +1,7 @@
 ---
 title: "Directional Dynamic StableSwap"
 draft: false
-date: 2024-09-25T09:16:45.000Z
+date: 2024-10-11T09:16:45.000Z
 ogimage: "https://blog.curvemonitor.com/images/parameter-ramping/img.png"
 description: "What if AMM Bonding Curves adjusted dynamically based on trade size?"
 categories:
