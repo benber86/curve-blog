@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     const transactionData = [{'txHash': '0x330f9369a5326e456b7ba0a173231ecb45560332a50f3e3076275c782b8a8cb7',
-        'address': '0x733D40FDB9578c0F22B414E4d89F19c209C54205',
+        'address': '0x4A70493d50675f01143E1DB5396af63e993D0287',
         'sellToken': 'TERMINUS',
         'sellAmount': '18598.377',
         'buyAmount': '0.109564137357421679',
@@ -15,7 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
         'position': 8,
         'positionNoSandwich': 5,
         'price': '5.891059061627887',
-        'priceNoSandwich': '6.013555973867642'},
+        'priceNoSandwich': '6.013555973867642',
+        'tenderly': 'https://dashboard.tenderly.co/explorer/fork/645fbb6a-21ff-4f12-bad7-301879f4ff27/simulation/d08e86d6-de18-42a7-bebd-cd6e359aab4d'},
         {'txHash': '0x9f94a7b750527e8e2c86e90312d9f1ab32638007efd7266ffb8a9d525dd1d046',
             'sellToken': 'TERMINUS',
             'sellAmount': '195033.304364232',
@@ -30,7 +31,8 @@ document.addEventListener('DOMContentLoaded', function() {
             'position': 36,
             'positionNoSandwich': 33,
             'price': '5.598776656038232',
-            'priceNoSandwich': '5.712224790337342'},
+            'priceNoSandwich': '5.712224790337342',
+        'tenderly': 'https://dashboard.tenderly.co/explorer/fork/645fbb6a-21ff-4f12-bad7-301879f4ff27/simulation/9fe6de7e-8528-4575-84b2-324ebcb08ca9'},
         {'txHash': '0xb2b8772dbb596d599cc7cda353b0d8a3c08b1fbd224dd52f575faedd9e5708ad',
             'sellToken': 'TERMINUS',
             'sellAmount': '36485.989172823',
@@ -45,7 +47,8 @@ document.addEventListener('DOMContentLoaded', function() {
             'position': 49,
             'positionNoSandwich': 46,
             'price': '5.299627752958392',
-            'priceNoSandwich': '5.404001056440901'},
+            'priceNoSandwich': '5.404001056440901',
+        'tenderly': 'https://dashboard.tenderly.co/explorer/fork/645fbb6a-21ff-4f12-bad7-301879f4ff27/simulation/cc576a55-7b4a-44c3-b41e-84d70ca0c146'},
         {'txHash': '0xe2ee58ff321b26df0460b07fc83200a8702c63d19f9b8a035082ae387533df69',
             'sellToken': 'WETH',
             'sellAmount': '0.1',
@@ -60,7 +63,8 @@ document.addEventListener('DOMContentLoaded', function() {
             'position': 81,
             'positionNoSandwich': 78,
             'price': '5.309743895045788',
-            'priceNoSandwich': '5.4136375132508325'},
+            'priceNoSandwich': '5.4136375132508325',
+        'tenderly': 'https://dashboard.tenderly.co/explorer/fork/645fbb6a-21ff-4f12-bad7-301879f4ff27/simulation/306278b9-36d5-432c-9a1a-a1c6233e6da3'},
         {'txHash': '0x323497270293b2589caea7627280f19b60d8d5f4bb7aa806084e8da84b177347',
             'sellToken': 'WETH',
             'sellAmount': '0.804619515873722368',
@@ -90,7 +94,8 @@ document.addEventListener('DOMContentLoaded', function() {
             'tag': 'Victim',
             'positionNoSandwich': 79,
             'price': '5.5878536497631',
-            'priceNoSandwich': '5.305770303812801'},
+            'priceNoSandwich': '5.305770303812801',
+        'tenderly': 'https://dashboard.tenderly.co/explorer/fork/645fbb6a-21ff-4f12-bad7-301879f4ff27/simulation/4929d8d4-ae9a-4aef-95b1-4a666a6ffdc7'},
         {'txHash': '0x90062cde40c6dbe81732a95b010371fd9ba1981fa241899c7fcdd331cc960e4f',
             'sellToken': 'TERMINUS',
             'sellAmount': '139766.229303296',
@@ -117,10 +122,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         filteredData.forEach(transaction => {
             const block = document.createElement('div');
-            block.className = `transaction-block ${transaction.tag}`;
+            block.className = `transaction-block-sd ${transaction.tag}`;
 
             const number = document.createElement('div');
-            number.className = 'transaction-number';
+            number.className = 'transaction-number-sd';
             number.textContent = useSandwich ? transaction.position : transaction.positionNoSandwich;
 
             const content = document.createElement('div');
@@ -153,6 +158,9 @@ document.addEventListener('DOMContentLoaded', function() {
             price.className = 'transaction-price';
             price.textContent = `Price: ${parseFloat(useSandwich ? transaction.price : transaction.priceNoSandwich).toFixed(2)}`;
 
+            const gasAndEtherscan = document.createElement('div');
+            gasAndEtherscan.className = 'transaction-gas-etherscan';
+
             const gas = document.createElement('div');
             gas.className = 'transaction-gas';
             gas.innerHTML = `
@@ -161,10 +169,44 @@ document.addEventListener('DOMContentLoaded', function() {
         Max Priority Fee: ${parseFloat(transaction.maxPriority).toFixed(2)}
       `;
 
+            gasAndEtherscan.appendChild(gas);
+
+            if (useSandwich) {
+                const etherscanLink = document.createElement('a');
+                etherscanLink.href = `https://etherscan.io/tx/${transaction.txHash}`;
+                etherscanLink.target = '_blank';
+                etherscanLink.rel = 'noopener noreferrer';
+                etherscanLink.className = 'etherscan-link';
+
+                const etherscanImg = document.createElement('img');
+                etherscanImg.src = '../../images/good-sandwiches/etherscan.png';
+                etherscanImg.alt = 'View on Etherscan';
+                etherscanImg.className = 'etherscan-icon';
+
+                etherscanLink.appendChild(etherscanImg);
+                gasAndEtherscan.appendChild(etherscanLink);
+            }
+            else {
+
+                const etherscanLink = document.createElement('a');
+                etherscanLink.href = `${transaction.tenderly}`;
+                etherscanLink.target = '_blank';
+                etherscanLink.rel = 'noopener noreferrer';
+                etherscanLink.className = 'etherscan-link';
+
+                const etherscanImg = document.createElement('img');
+                etherscanImg.src = '../../images/good-sandwiches/tenderly.png';
+                etherscanImg.alt = 'View on Etherscan';
+                etherscanImg.className = 'etherscan-icon';
+
+                etherscanLink.appendChild(etherscanImg);
+                gasAndEtherscan.appendChild(etherscanLink);
+            }
+
             block.appendChild(number);
             block.appendChild(content);
             block.appendChild(price);
-            block.appendChild(gas);
+            block.appendChild(gasAndEtherscan);
 
             container.appendChild(block);
         });
@@ -172,4 +214,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
     createDiagram(transactionData, 'sandwich-transactions', true);
     createDiagram(transactionData, 'no-sandwich-transactions', false);
-});
+});;

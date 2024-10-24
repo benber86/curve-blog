@@ -69,7 +69,7 @@ An example of such a more specific illustration is given in  [Heimbach and Watte
 
 
 <a id="section2"></a>
-# From Two Players to Multiplayer Games
+# From Duels to Multiplayer Games
 
 From the above, it seems that a sandwich will always result in a financial loss for the victim.
 But the scenario described is schematic and doesn't account for the external factors present in real attack contexts.
@@ -221,15 +221,15 @@ The whale, meanwhile, has tight slippage settings and is not be sandwiched.
 }
 
 .whale:hover {
-  background-color: rgba(230, 243, 255, 0.9);
+  background-color: rgba(230, 243, 255, 1);
 }
 
 .pepe:hover {
-  background-color: rgba(255, 230, 230, 0.9);
+  background-color: rgba(255, 230, 230, 1);
 }
 
 .bot:hover {
-  background-color: rgba(230, 255, 230, 0.9);
+  background-color: rgba(230, 255, 230, 1);
 }
 
 .transaction-number {
@@ -337,14 +337,24 @@ However, the case in which these trades would bring the victim's price below its
 
 # An Example in the Wild
 
+In fact, such slippage preventing, or "execution guaranteeing" sandwiches can be observed in pools with low liquidity and high volatility, such as memecoin pools on Uniswap. 
+On block [20797275](https://etherscan.io/block/20797275) on Ethereum mainnet, on September 21, 2024, for instance, the infamous [jaredfromsubway](https://www.theblock.co/post/312245/jaredfromsubway-eth-is-back-with-a-new-mev-bot-and-new-sandwich-attacks) sandwiched a trader in a [Uniswap v2 pool](https://etherscan.io/address/0x6bcd2862522c0ab45f4f9fe693e36c791ede0a42#code) pairing ETH with [TERMINUS](https://www.bitget.com/price/first-city-in-mars), an Elon Musk related memecoin that had launched a month earlier.
+
+The same block saw four other traders swap in the pool, none of whom got sandwiched.
+By getting sandwiched, the victim's transaction was executed at the top of the block. 
+But without the sandwich, the victim's transaction would instead have appeared last.
+
+We provide below a schematic rendition of what happened in the pool (on the left) and what would have happened (on the right) if the victim had not been sandwiched. 
+Prices are in ETH and have been multiplied by $10^6$ for readibility.
+
 <div class="diagrams-container">
   <div id="sandwich-diagram" class="diagram-container">
     <h4>With Sandwich</h4>
-    <div id="sandwich-transactions" class="transactions"></div>
+    <div id="sandwich-transactions" class="transactions-sd"></div>
   </div>
   <div id="no-sandwich-diagram" class="diagram-container">
     <h4>Without Sandwich</h4>
-    <div id="no-sandwich-transactions" class="transactions"></div>
+    <div id="no-sandwich-transactions" class="transactions-sd"></div>
   </div>
 </div>
 
@@ -355,18 +365,20 @@ However, the case in which these trades would bring the victim's price below its
   font-family: Arial, sans-serif;
   max-width: 820px;
   margin: 0 auto 30px;
+  padding: 4px
 }
 
 .diagram-container {
   width: 400px;
 }
 
-.transactions {
+.transactions-sd {
   display: flex;
   flex-direction: column;
+  margin-right: 20px;
 }
 
-.transaction-block {
+.transaction-block-sd {
   border-radius: 8px;
   padding: 10px;
   margin-bottom: 8px;
@@ -376,29 +388,32 @@ However, the case in which these trades would bring the victim's price below its
   font-size: 12px;
 }
 
-.transaction-block.Frontrun { background-color: rgba(230, 255, 230, 0.7); }
-.transaction-block.Backrun { background-color: rgba(230, 255, 230, 0.7); }
-.transaction-block.Victim { background-color: rgba(255, 230, 230, 0.7); } 
-.transaction-block.Trader { background-color: rgba(230, 243, 255, 0.9); }
+.transaction-block-sd.Frontrun { background-color: rgba(230, 255, 230, 0.7); }
+.transaction-block-sd.Backrun { background-color: rgba(230, 255, 230, 0.7); }
+.transaction-block-sd.Victim { background-color: rgba(255, 230, 230, 0.7); } 
+.transaction-block-sd.Trader { background-color: rgba(230, 243, 255, 0.7); }
 
-.transaction-block:hover {
-  filter: brightness(95%);
-}
+.transaction-block-sd.Frontrun:hover { background-color: rgba(230, 255, 230, 1); }
+.transaction-block-sd.Backrun:hover { background-color: rgba(230, 255, 230, 1); }
+.transaction-block-sd.Victim:hover { background-color: rgba(255, 230, 230, 1); }
+.transaction-block-sd.Trader:hover { background-color: rgba(230, 243, 255, 1); }
 
-.transaction-number {
+
+.transaction-number-sd {
   font-size: 14px;
   font-weight: bold;
   width: 20px;
   text-align: center;
   display: flex;
   align-items: center;
+  margin: 2px;
 }
 
 .transaction-content {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  margin: 0 10px;
+  margin: 0 5px;
 }
 
 .transaction-header {
@@ -423,7 +438,7 @@ However, the case in which these trades would bring the victim's price below its
 .transaction-gas {
   font-size: 10px;
   color: #666;
-  margin-top: 5px;
+  margin-top: 1px;
   width: 100%;
   text-align: left;
   border-top: 1px solid #ddd;
@@ -439,12 +454,56 @@ However, the case in which these trades would bring the victim's price below its
   align-items: center;
   justify-content: flex-end;
 }
+.transaction-gas-etherscan {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 5px;
+  padding-top: 5px;
+}
+
+.transaction-gas {
+  font-size: 10px;
+  color: #666;
+  flex-grow: 1;
+}
+
+.etherscan-link {
+  display: flex;
+  align-items: center;
+}
+
+.etherscan-icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 10px;
+}
 </style>
 
 <script src="../../js/good-sandwiches/sandwich-diagram.js"></script>
 
+Three out of the four traders who swapped in the same block were selling TERMINUS for WETH, each causing significant price drops in a pool that had then a bit over $100k of liquidity.
+By being sandwiched, however, the victim's transaction is moved before all these selling trades and gets executed with a price of 5.59.
+If no sandwich had occured, the victim would instead be placed last due to low gas and priority fee settings.
+The price in this position would then be 5.31, well below the victim's minimum acceptable price of 5.588, resulting in the transaction reverting.
+
+
+
 # Prevalence of Execution Guaranteeing Sandwiches
 
+Curve vs UniV2
+Methodology
+
+# Datasets
+
+Either JSON or sqlite db
+
+- Curve sandwiches
+- UniV2 sandwiches
+
+
+# Draft Notes (to delete)
 ---------------
 
 We also have different prices at each steps (expressing the price of $y$ in units of $x$):
