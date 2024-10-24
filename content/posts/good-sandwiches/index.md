@@ -337,6 +337,112 @@ However, the case in which these trades would bring the victim's price below its
 
 # An Example in the Wild
 
+<div class="diagrams-container">
+  <div id="sandwich-diagram" class="diagram-container">
+    <h4>With Sandwich</h4>
+    <div id="sandwich-transactions" class="transactions"></div>
+  </div>
+  <div id="no-sandwich-diagram" class="diagram-container">
+    <h4>Without Sandwich</h4>
+    <div id="no-sandwich-transactions" class="transactions"></div>
+  </div>
+</div>
+
+<style>
+.diagrams-container {
+  display: flex;
+  justify-content: space-between;
+  font-family: Arial, sans-serif;
+  max-width: 820px;
+  margin: 0 auto 30px;
+}
+
+.diagram-container {
+  width: 400px;
+}
+
+.transactions {
+  display: flex;
+  flex-direction: column;
+}
+
+.transaction-block {
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  transition: background-color 0.3s ease;
+  font-size: 12px;
+}
+
+.transaction-block.Frontrun { background-color: rgba(230, 255, 230, 0.7); }
+.transaction-block.Backrun { background-color: rgba(230, 255, 230, 0.7); }
+.transaction-block.Victim { background-color: rgba(255, 230, 230, 0.7); } 
+.transaction-block.Trader { background-color: rgba(230, 243, 255, 0.9); }
+
+.transaction-block:hover {
+  filter: brightness(95%);
+}
+
+.transaction-number {
+  font-size: 14px;
+  font-weight: bold;
+  width: 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.transaction-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 0 10px;
+}
+
+.transaction-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3px;
+}
+
+.transaction-address {
+  font-weight: bold;
+}
+
+.transaction-tag {
+  font-style: italic;
+  margin-left: 5px;
+}
+
+.transaction-details {
+  font-size: 11px;
+}
+
+.transaction-gas {
+  font-size: 10px;
+  color: #666;
+  margin-top: 5px;
+  width: 100%;
+  text-align: left;
+  border-top: 1px solid #ddd;
+  padding-top: 5px;
+}
+
+.transaction-price {
+  font-weight: bold;
+  width: 80px;
+  text-align: right;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+</style>
+
+<script src="../../js/good-sandwiches/sandwich-diagram.js"></script>
+
 # Prevalence of Execution Guaranteeing Sandwiches
 
 ---------------
