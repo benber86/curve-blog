@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 ...options.plugins,
                 title: {
                     display: true,
-                    text: ['Distribution of Sandwichable Value', 'Left Unextracted']
+                    text: ['Distribution of USD Denominated', 'Sandwichable Value Left Unextracted', '(Curve)']
                 }
             },
             scales: {
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 ...options.plugins,
                 title: {
                     display: true,
-                    text: ['Distribution of Differences Between', 'Frontrun Price and Minimum Acceptable Price']
+                    text: ["Distribution of Differences Between Victim's", 'Execution Price and Minimum Acceptable Price', '(Curve)']
                 }
             },
             scales: {
