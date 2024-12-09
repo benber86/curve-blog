@@ -332,7 +332,27 @@ Or, in other words, to check how close to the victim's minimum acceptable price 
 </div>
 
 As we can see the vast majority (~95%) of sandwich attacks bring the victim's execution price within less than 1% of their minimum acceptable price. 
-The scenario in which random trades prior to the victim's bring the price not only within that range but also lower than the sandwich is extremely unlikely.
+Doing the same analysis on a subset of high volume Uniswap v2 pools yields a very similar distribution, so this MEV-efficiency is not particular to Curve: 
+
+<script src="../../js/good-sandwiches/histogram.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div style="display: flex; justify-content: space-between; height: 400px; margin-bottom: 40px;">
+    <div style="width: 48%;">
+        <canvas id="percentageChart"></canvas>
+    </div>
+    <div style="width: 48%;">
+        <canvas id="absoluteChart"></canvas>
+    </div>  
+</div>
+
+
+The scenario in which a sandwich results in a profit for the victim would therefore need to meet the following conditions:
+- Random trades prior to the victim's bring the price within the very tight range between the victim's minimum acceptable price and the post-frontrun execution price
+- The price after those random trades is not only within this tight range but also worse for the victim compared to the post-frontrun price.
+
+It is therefore extremely unlikely.
+
 However, the case in which these trades would bring the victim's price below its slippage tolerance but a sandwich allows the trade to be executed has a much higher probability, particularly during periods of volatility.
 
 # An Example in the Wild

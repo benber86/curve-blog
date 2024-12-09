@@ -1,0 +1,247 @@
+[
+  {
+    "from": "0x",
+    "to": "EOA ",
+    "amount": 202763.0509849366
+  },
+  {
+    "from": "1inch",
+    "to": "EOA ",
+    "amount": 1264040.3735338112
+  },
+  {
+    "from": "AToken (Aave)",
+    "to": "EOA ",
+    "amount": 860049.4742107872
+  },
+  {
+    "from": "AirSwap",
+    "to": "EOA ",
+    "amount": 3112.8236623577245
+  },
+  {
+    "from": "Bridges",
+    "to": "EOA ",
+    "amount": 904874.4467771146
+  },
+  {
+    "from": "Convex",
+    "to": "EOA ",
+    "amount": 241679.95333418547
+  },
+  {
+    "from": "CowSwap",
+    "to": "1inch ",
+    "amount": 462376.0121856996
+  },
+  {
+    "from": "CowSwap",
+    "to": "EOA ",
+    "amount": 4566324.961958036
+  },
+  {
+    "from": "CowSwap",
+    "to": "GnosisSafe ",
+    "amount": 29554.50146659786
+  },
+  {
+    "from": "CowSwap",
+    "to": "Yearn ",
+    "amount": 10548.919466120064
+  },
+  {
+    "from": "Curve",
+    "to": "1inch ",
+    "amount": 3858512.510393777
+  },
+  {
+    "from": "Curve",
+    "to": "CowSwap ",
+    "amount": 1157257.3235685157
+  },
+  {
+    "from": "Curve",
+    "to": "CurveRouter v1.2 ",
+    "amount": 196654.124940907
+  },
+  {
+    "from": "Curve",
+    "to": "EOA ",
+    "amount": 1886951.77025313
+  },
+  {
+    "from": "Curve",
+    "to": "GnosisSafe ",
+    "amount": 317967.1952220754
+  },
+  {
+    "from": "Curve",
+    "to": "MEV Bots ",
+    "amount": 2498850.9707435146
+  },
+  {
+    "from": "Curve Fee Distribution",
+    "to": "EOA ",
+    "amount": 27158.116499320033
+  },
+  {
+    "from": "EOA",
+    "to": "1inch ",
+    "amount": 407237.3619948724
+  },
+  {
+    "from": "EOA",
+    "to": "CowSwap ",
+    "amount": 924748.9938950671
+  },
+  {
+    "from": "EOA",
+    "to": "CurveRouter v1.2 ",
+    "amount": 510234.8080227743
+  },
+  {
+    "from": "EOA",
+    "to": "Depositor ",
+    "amount": 271444.4203772061
+  },
+  {
+    "from": "EOA",
+    "to": "EOA ",
+    "amount": 462068.854404752
+  },
+  {
+    "from": "EOA",
+    "to": "GnosisSafe ",
+    "amount": 12049.238739683064
+  },
+  {
+    "from": "EOA",
+    "to": "MEV Bots ",
+    "amount": 10040.037272313159
+  },
+  {
+    "from": "EOA",
+    "to": "Pendle ",
+    "amount": 170417.84763622071
+  },
+  {
+    "from": "EOA",
+    "to": "Rewards Handler ",
+    "amount": 100.00000000000001
+  },
+  {
+    "from": "EOA",
+    "to": "Sofa crvUSD Vault ",
+    "amount": 100032.0
+  },
+  {
+    "from": "FeeCollector",
+    "to": "GnosisSafe ",
+    "amount": 0.0
+  },
+  {
+    "from": "FeeSplitter",
+    "to": "Rewards Handler ",
+    "amount": 148113.0187152288
+  },
+  {
+    "from": "Gearbox",
+    "to": "Yearn ",
+    "amount": 1455630.5745115562
+  },
+  {
+    "from": "GnosisSafe",
+    "to": "EOA ",
+    "amount": 6205.0
+  },
+  {
+    "from": "GnosisSafe",
+    "to": "Sofa crvUSD Vault ",
+    "amount": 253855.0
+  },
+  {
+    "from": "LlamaLendLeverageZap",
+    "to": "1inch ",
+    "amount": 694351.9349574
+  },
+  {
+    "from": "MEV Bots",
+    "to": "EOA ",
+    "amount": 20260.27574808613
+  },
+  {
+    "from": "Morpho",
+    "to": "EOA ",
+    "amount": 202540.17908045425
+  },
+  {
+    "from": "Odos",
+    "to": "EOA ",
+    "amount": 1132193.233674212
+  },
+  {
+    "from": "ParaSwap",
+    "to": "EOA ",
+    "amount": 663660.2792979747
+  },
+  {
+    "from": "Pendle",
+    "to": "Pendle ",
+    "amount": 592311.5958270589
+  },
+  {
+    "from": "SquidMulticall",
+    "to": "EOA ",
+    "amount": 9689.083731924233
+  },
+  {
+    "from": "Sturdy",
+    "to": "Yearn ",
+    "amount": 276822.9363955941
+  },
+  {
+    "from": "Uniswap",
+    "to": "EOA ",
+    "amount": 49.8963696800681
+  },
+  {
+    "from": "Votium",
+    "to": "EOA ",
+    "amount": 7.5532697851211665
+  },
+  {
+    "from": "Yearn",
+    "to": "1inch ",
+    "amount": 414517.3451391842
+  },
+  {
+    "from": "Yearn",
+    "to": "EOA ",
+    "amount": 217461.37023386938
+  },
+  {
+    "from": "Yearn",
+    "to": "GnosisSafe ",
+    "amount": 525.5586156014117
+  },
+  {
+    "from": "Yearn",
+    "to": "MEV Bots ",
+    "amount": 16041.974874346182
+  },
+  {
+    "from": "Yearn",
+    "to": "Yearn ",
+    "amount": 713821.175883912
+  },
+  {
+    "from": "Zunami",
+    "to": "Zunami ",
+    "amount": 376433.5407918749
+  },
+  {
+    "from": "crvUSD Controller (Lending)",
+    "to": "EOA ",
+    "amount": 2613826.8133467934
+  }
+]
